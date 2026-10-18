@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Central Hub</title>
+<style>
+:root{--bg:#0f1220;--bg2:#161a2e;--card:rgba(255,255,255,.05);--border:rgba(255,255,255,.09);--text:#e8eaf6;--muted:#9aa0c3;--accent:#7c8cff;--accent2:#4fd1c5;--danger:#ff6b81;--shadow:0 8px 30px rgba(0,0,0,.35);--radius:16px}
+[data-theme="light"]{--bg:#f3f5fb;--bg2:#e6eaf7;--card:#ffffff;--border:rgba(20,30,80,.08);--text:#1c2140;--muted:#6a7193;--accent:#4f5de8;--accent2:#14998b;--shadow:0 6px 24px rgba(30,40,90,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;background:radial-gradient(1200px 600px at 10% -10%,rgba(124,140,255,.18),transparent 60%),radial-gradient(900px 500px at 110% 10%,rgba(79,209,197,.12),transparent 60%),var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 22px 40px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.greet h1{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-.02em}
+.greet h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.greet p{color:var(--muted);margin-top:4px}
+.clock{text-align:right}
+.clock .time{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.clock .date{color:var(--muted)}
+.clock .tz{font-size:.75rem;color:var(--muted);opacity:.8}
+.btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer;font:inherit;font-size:.9rem;transition:.2s}
+.btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.sm{padding:4px 9px;font-size:.8rem}
+.toolbar{display:flex;gap:8px;margin-top:10px;justify-content:flex-end}
+.search{display:flex;gap:8px;margin-bottom:22px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.search select,.search input{background:transparent;border:none;color:var(--text);font:inherit;outline:none}
+.search select{padding:0 8px;border-right:1px solid var(--border);cursor:pointer}
+.search select option{background:var(--bg2);color:var(--text)}
+.search input{flex:1;font-size:1.05rem;padding:10px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(10px);min-width:0}
+.card h2{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.span-8{grid-column:span 8}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-12{grid-column:span 12}
+@media(max-width:980px){.span-8,.span-4,.span-6{grid-column:span 12}}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px}
+.link{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:.2s;font-size:.88rem;text-align:center;word-break:break-word}
+.link:hover{transform:translateY(-3px);border-color:var(--accent)}
+.link .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-weight:700;color:#fff;font-size:1.1rem;overflow:hidden}
+.link .ic img{width:24px;height:24px}
+.link .del{position:absolute;top:4px;right:6px;display:none;background:var(--danger);color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:.75rem;line-height:20px}
+.editing .link .del{display:block}
+.editing .link{animation:wig .3s ease-in-out infinite alternate}
+@keyframes wig{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}
+form.row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.row input,.notes textarea{flex:1;min-width:120px;background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:9px 11px;font:inherit;outline:none}
+.row input:focus,.notes textarea:focus{border-color:var(--accent)}
+.hidden{display:none!important}
+.weather .now{display:flex;align-items:center;gap:14px}
+.weather .big{font-size:3rem;font-weight:700;letter-spacing:-.03em}
+.weather .emoji{font-size:3rem}
+.weather .meta{color:var(--muted);font-size:.9rem;line-height:1.5}
+.forecast{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:16px}
+.fday{text-align:center;padding:8px 2px;background:var(--bg2);border-radius:10px;font-size:.8rem}
+.fday b{display:block;font-size:1.3rem;margin:3px 0}
+.fday small{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.stat{background:var(--bg2);border-radius:12px;padding:14px;border:1px solid var(--border)}
+.stat .lbl{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.stat .val{font-size:1.35rem;font-weight:700;margin-top:6px}
+.stat .sub{font-size:.78rem;color:var(--muted);margin-top:2px}
+.bar{height:6px;border-radius:6px;background:var(--border);margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.tabs{display:flex;gap:6px}
+.tab{background:none;border:1px solid transparent;color:var(--muted);padding:4px 10px;border-radius:8px;cursor:pointer;font:inherit;font-size:.8rem;text-transform:none;letter-spacing:0}
+.tab.active{border-color:var(--border);color:var(--text);background:var(--bg2)}
+.todos{list-style:none;max-height:300px;overflow:auto}
+.todos li{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--border)}
+.todos li span{flex:1;word-break:break-word}
+.todos li.done span{text-decoration:line-through;color:var(--muted)}
+.todos input[type=checkbox]{accent-color:var(--accent);width:17px;height:17px;cursor:pointer}
+.todos .x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
+.todos .x:hover{color:var(--danger)}
+.notes textarea{width:100%;min-height:260px;resize:vertical;line-height:1.5}
+.saved{font-size:.75rem;color:var(--muted);margin-top:6px;text-transform:none;letter-spacing:0}
+.empty{color:var(--muted);font-size:.9rem;padding:10px 0}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="greet">
+      <h1 id="greeting">Hello, <span>Mark</span></h1>
+      <p id="subgreet">Welcome to your Central Hub.</p>
+    </div>
+    <div class="clock">
+      <div class="time" id="time">--:--</div>
+      <div class="date" id="date"></div>
+      <div class="tz">Pacific/Auckland (<span id="tzabbr">NZ</span>)</div>
+      <div class="toolbar"><button class="btn" id="themeBtn" title="Toggle theme">🌙 Dark</button></div>
+    </div>
+  </header>
+
+  <form class="search" id="searchForm">
+    <select id="engine" aria-label="Search engine">
+      <option value="https://www.google.com/search?q=">Google</option>
+      <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+      <option value="https://www.bing.com/search?q=">Bing</option>
+      <option value="https://www.youtube.com/results?search_query=">YouTube</option>
+      <option value="https://github.com/search?q=">GitHub</option>
+    </select>
+    <input id="q" type="search" placeholder="Search the web…  (press / to focus)" autocomplete="off">
+    <button class="btn primary" type="submit">Search</button>
+  </form>
+
+  <div class="grid">
+    <section class="card span-8" id="linksCard">
+      <h2>Quick links <span style="display:flex;gap:6px"><button class="btn sm" id="resetLinks" title="Restore defaults">Reset</button><button class="btn sm" id="editLinks">Edit</button></span></h2>
+      <div class="links" id="links"></div>
+      <form class="row hidden" id="addLink">
+        <input id="lname" placeholder="Name" required>
+        <input id="lurl" placeholder="https://example.com" required>
+        <button class="btn primary" type="submit">Add</button>
+      </form>
+    </section>
+
+    <section class="card span-4 weather">
+      <h2>Weather <span style="display:flex;gap:6px"><button class="btn sm" id="wLoc" title="Change location">📍</button><button class="btn sm" id="wRefresh" title="Refresh">↻</button></span></h2>
+      <div id="weather"><div class="empty">Loading weather…</div></div>
+      <form class="row hidden" id="wForm">
+        <input id="wCity" placeholder="City (e.g. Wellington)" required>
+        <button class="btn primary" type="submit">Set</button>
+        <button class="btn" type="button" id="wGeo">Use my location</button>
+      </form>
+    </section>
+
+    <section class="card span-6">
+      <h2>
+        <span class="tabs"><button class="tab active" data-tab="todo">To-do</button><button class="tab" data-tab="notes">Notes</button></span>
+        <button class="btn sm" id="clearDone">Clear done</button>
+      </h2>
+      <div id="todoPane">
+        <form class="row" id="todoForm" style="margin-top:0;margin-bottom:8px">
+          <input id="todoInput" placeholder="Add a task…" required>
+          <button class="btn primary" type="submit">Add</button>
+        </form>
+        <ul class="todos" id="todos"></ul>
+      </div>
+      <div id="notesPane" class="notes hidden">
+        <textarea id="notes" placeholder="Jot something down… (auto-saved)"></textarea>
+        <div class="saved" id="savedMsg"></div>
+      </div>
+    </section>
+
+    <section class="card span-6">
+      <h2>System <button class="btn sm" id="sysRefresh">↻</button></h2>
+      <div class="stats" id="stats"></div>
+    </section>
+  </div>
+  <footer>Central Hub · data stored locally in this browser · weather by <a href="https://open-meteo.com" target="_blank" rel="noopener" style="color:inherit">Open-Meteo</a></footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s);
+const TZ='Pacific/Auckland';
+const store={get(k,d){try{const v=localStorage.getItem('hub.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('hub.'+k,JSON.stringify(v))}catch(e){}}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* Theme */
+const applyTheme=t=>{document.documentElement.dataset.theme=t;$('#themeBtn').textContent=t==='dark'?'☀️ Light':'🌙 Dark';};
+let theme=store.get('theme',(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark');
+applyTheme(theme);
+$('#themeBtn').onclick=()=>{theme=theme==='dark'?'light':'dark';store.set('theme',theme);applyTheme(theme);};
+
+/* Clock & greeting */
+const fTime=new Intl.DateTimeFormat('en-NZ',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+const fDate=new Intl.DateTimeFormat('en-NZ',{timeZone:TZ,weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const fHour=new Intl.DateTimeFormat('en-NZ',{timeZone:TZ,hour:'numeric',hour12:false});
+let tzAbbr='NZ';
+try{const p=new Intl.DateTimeFormat('en-NZ',{timeZone:TZ,timeZoneName:'short'}).formatToParts(new Date()).find(x=>x.type==='timeZoneName');if(p)tzAbbr=p.value;}catch(e){}
+function tick(){
+  const now=new Date();
+  $('#time').textContent=fTime.format(now);
+  $('#date').textContent=fDate.format(now);
+  $('#tzabbr').textContent=tzAbbr;
+  const h=parseInt(fHour.format(now),10)%24;
+  const g=h<5?'Good night':h<12?'Good morning':h<17?'Good afternoon':h<21?'Good evening':'Good night';
+  $('#greeting').innerHTML=g+', <span>Mark</span>';
+}
+tick();setInterval(tick,1000);
+
+/* Search */
+const eng=$('#engine');eng.value=store.get('engine',eng.value);
+eng.onchange=()=>store.set('engine',eng.value);
+$('#searchForm').onsubmit=e=>{e.preventDefault();const q=$('#q').value.trim();if(!q)return;
+  const url=/^https?:\/\/\S+$/i.test(q)?q:eng.value+encodeURIComponent(q);window.open(url,'_blank','noopener');};
+document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$('#q').focus();}});
+
+/* Quick links */
+const DEFAULT_LINKS=[
+ {n:'Gmail',u:'https://mail.google.com'},{n:'Yahoo Mail',u:'https://mail.yahoo.com'},
+ {n:'Calendar',u:'https://calendar.google.com'},{n:'Google Drive',u:'https://drive.google.com'},
+ {n:'YouTube',u:'https://www.youtube.com'},{n:'GitHub',u:'https://github.com'},{n:'X',u:'https://x.com'}];
+let links=store.get('links',DEFAULT_LINKS);
+const colors=['#ea4335','#6001d2','#4285f4','#0f9d58','#ff0000','#24292f','#111111','#7c8cff','#f59e0b','#14b8a6'];
+const hash=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))|0;return Math.abs(h);};
+function host(u){try{return new URL(u).hostname}catch(e){return ''}}
+function renderLinks(){
+  const el=$('#links');
+  if(!links.length){el.innerHTML='<div class="empty">No links yet — click Edit to add some.</div>';return;}
+  el.innerHTML=links.map((l,i)=>{const h=host(l.u);const c=colors[hash(l.n)%colors.length];
+    return `<a class="link" href="${esc(l.u)}" target="_blank" rel="noopener"><button class="del" data-i="${i}" title="Remove">✕</button>
+    <div class="ic" style="background:${c}"><img alt="" src="https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(h)}" onerror="this.replaceWith(document.createTextNode('${esc(l.n.charAt(0).toUpperCase()).replace(/'/g,'')}'))"></div>${esc(l.n)}</a>`;}).join('');
+}
+$('#links').addEventListener('click',e=>{const b=e.target.closest('.del');if(b){e.preventDefault();e.stopPropagation();links.splice(+b.dataset.i,1);store.set('links',links);renderLinks();}
+  else if($('#linksCard').classList.contains('editing')&&e.target.closest('.link')){e.preventDefault();}});
+$('#editLinks').onclick=()=>{const c=$('#linksCard');const on=c.classList.toggle('editing');$('#addLink').classList.toggle('hidden',!on);$('#editLinks').textContent=on?'Done':'Edit';};
+$('#resetLinks').onclick=()=>{if(confirm('Restore default quick links?')){links=DEFAULT_LINKS.slice();store.set('links',links);renderLinks();}};
+$('#addLink').onsubmit=e=>{e.preventDefault();let u=$('#lurl').value.trim();if(!/^https?:\/\//i.test(u))u='https://'+u;
+  links.push({n:$('#lname').value.trim(),u});store.set('links',links);renderLinks();e.target.reset();};
+renderLinks();
+
+/* To-do & notes */
+let todos=store.get('todos',[]);
+function renderTodos(){const el=$('#todos');
+  if(!todos.length){el.innerHTML='<li class="empty">Nothing to do. Nice! 🎉</li>';return;}
+  el.innerHTML=todos.map((t,i)=>`<li class="${t.d?'done':''}"><input type="checkbox" data-i="${i}" ${t.d?'checked':''}><span>${esc(t.t)}</span><button class="x" data-i="${i}" title="Delete">✕</button></li>`).join('');}
+$('#todoForm').onsubmit=e=>{e.preventDefault();const v=$('#todoInput').value.trim();if(!v)return;todos.push({t:v,d:false});store.set('todos',todos);renderTodos();e.target.reset();};
+$('#todos').addEventListener('click',e=>{const i=e.target.dataset.i;if(i==null)return;
+  if(e.target.type==='checkbox')todos[i].d=e.target.checked;else if(e.target.classList.contains('x'))todos.splice(+i,1);
+  store.set('todos',todos);renderTodos();});
+$('#clearDone').onclick=()=>{todos=todos.filter(t=>!t.d);store.set('todos',todos);renderTodos();};
+renderTodos();
+const notes=$('#notes');notes.value=store.get('notes','');let nt;
+notes.addEventListener('input',()=>{clearTimeout(nt);$('#savedMsg').textContent='Saving…';nt=setTimeout(()=>{store.set('notes',notes.value);$('#savedMsg').textContent='Saved '+fTime.format(new Date());},400);});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));
+  const todo=b.dataset.tab==='todo';$('#todoPane').classList.toggle('hidden',!todo);$('#notesPane').classList.toggle('hidden',todo);$('#clearDone').classList.toggle('hidden',!todo);});
+
+/* Weather */
+const WMO={0:['Clear sky','☀️'],1:['Mainly clear','🌤️'],2:['Partly cloudy','⛅'],3:['Overcast','☁️'],45:['Fog','🌫️'],48:['Rime fog','🌫️'],51:['Light drizzle','🌦️'],53:['Drizzle','🌦️'],55:['Heavy drizzle','🌧️'],56:['Freezing drizzle','🌧️'],57:['Freezing drizzle','🌧️'],61:['Light rain','🌦️'],63:['Rain','🌧️'],65:['Heavy rain','🌧️'],66:['Freezing rain','🌧️'],67:['Freezing rain','🌧️'],71:['Light snow','🌨️'],73:['Snow','🌨️'],75:['Heavy snow','❄️'],77:['Snow grains','🌨️'],80:['Showers','🌦️'],81:['Showers','🌧️'],82:['Violent showers','⛈️'],85:['Snow showers','🌨️'],86:['Snow showers','❄️'],95:['Thunderstorm','⛈️'],96:['Thunderstorm, hail','⛈️'],99:['Thunderstorm, hail','⛈️']};
+const wmo=c=>WMO[c]||['Unknown','🌡️'];
+let loc=store.get('loc',{name:'Auckland',lat:-36.85,lon:174.76});
+async function loadWeather(){
+  const el=$('#weather');el.innerHTML='<div class="empty">Loading weather…</div>';
+  try{
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=${encodeURIComponent(TZ)}&forecast_days=5`;
+    const r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();const c=d.current;const [desc,ico]=wmo(c.weather_code);
+    const days=d.daily.time.map((t,i)=>{const dn=i===0?'Today':new Intl.DateTimeFormat('en-NZ',{weekday:'short',timeZone:'UTC'}).format(new Date(t+'T12:00:00Z'));
+      return `<div class="fday">${dn}<b>${wmo(d.daily.weather_code[i])[1]}</b>${Math.round(d.daily.temperature_2m_max[i])}°<small> / ${Math.round(d.daily.temperature_2m_min[i])}°</small><br><small>💧${d.daily.precipitation_probability_max[i]??'–'}%</small></div>`;}).join('');
+    el.innerHTML=`<div class="now"><div class="emoji">${c.is_day===0&&c.weather_code<=1?'🌙':ico}</div><div><div class="big">${Math.round(c.temperature_2m)}°C</div></div>
+      <div class="meta"><b style="color:var(--text)">${esc(loc.name)}</b><br>${desc}<br>Feels ${Math.round(c.apparent_temperature)}° · 💧${c.relative_humidity_2m}% · 💨${Math.round(c.wind_speed_10m)} km/h</div></div>
+      <div class="forecast">${days}</div><div class="saved">Updated ${fTime.format(new Date()).slice(0,5)} ${tzAbbr}</div>`;
+  }catch(err){el.innerHTML=`<div class="empty">⚠️ Couldn't load weather for ${esc(loc.name)} (${esc(err.message)}). Check your connection and hit ↻.</div>`;}
+}
+$('#wRefresh').onclick=loadWeather;
+$('#wLoc').onclick=()=>$('#wForm').classList.toggle('hidden');
+$('#wForm').onsubmit=async e=>{e.preventDefault();const q=$('#wCity').value.trim();if(!q)return;
+  try{const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?count=1&name='+encodeURIComponent(q));const d=await r.json();
+    if(!d.results||!d.results.length){alert('City not found');return;}const x=d.results[0];
+    loc={name:x.name+(x.country_code?', '+x.country_code:''),lat:x.latitude,lon:x.longitude};store.set('loc',loc);$('#wForm').classList.add('hidden');loadWeather();
+  }catch(err){alert('Lookup failed: '+err.message);}};
+$('#wGeo').onclick=()=>{if(!navigator.geolocation){alert('Geolocation not supported');return;}
+  navigator.geolocation.getCurrentPosition(p=>{loc={name:'My location',lat:+p.coords.latitude.toFixed(3),lon:+p.coords.longitude.toFixed(3)};store.set('loc',loc);$('#wForm').classList.add('hidden');loadWeather();},err=>alert('Location unavailable: '+err.message));};
+loadWeather();setInterval(loadWeather,30*60*1000);
+
+/* System stats */
+const fmtBytes=b=>{if(b==null||isNaN(b))return '–';const u=['B','KB','MB','GB','TB'];let i=0;while(b>=1024&&i<u.length-1){b/=1024;i++;}return b.toFixed(i?1:0)+' '+u[i];};
+const stat=(lbl,val,sub,pct)=>`<div class="stat"><div class="lbl">${lbl}</div><div class="val">${val}</div>${sub?`<div class="sub">${sub}</div>`:''}${pct!=null?`<div class="bar"><i style="width:${Math.max(0,Math.min(100,pct))}%"></i></div>`:''}</div>`;
+let battery=null;
+async function renderStats(){
+  const out=[];const n=navigator;
+  // Battery
+  if(battery){const p=Math.round(battery.level*100);
+    let sub=battery.charging?'⚡ Charging':'On battery';
+    const t=battery.charging?battery.chargingTime:battery.dischargingTime;
+    if(isFinite(t)&&t>0){const h=Math.floor(t/3600),m=Math.round(t%3600/60);sub+=` · ${h}h ${m}m ${battery.charging?'to full':'left'}`;}
+    out.push(stat('🔋 Battery',p+'%',sub,p));}
+  else out.push(stat('🔋 Battery','N/A','Not exposed by this browser'));
+  // Network
+  const on=n.onLine;const c=n.connection||n.mozConnection||n.webkitConnection;
+  let nsub=c?[c.effectiveType&&c.effectiveType.toUpperCase(),c.downlink!=null&&c.downlink+' Mbps',c.rtt!=null&&c.rtt+' ms RTT'].filter(Boolean).join(' · '):'Details not available';
+  out.push(stat('🌐 Network',`<span class="dot" style="background:${on?'#22c55e':'#ef4444'}"></span>${on?'Online':'Offline'}`,nsub));
+  // CPU / memory
+  out.push(stat('🧠 CPU cores',n.hardwareConcurrency||'N/A','Logical processors'));
+  out.push(stat('💾 Device RAM',n.deviceMemory?'≈ '+n.deviceMemory+' GB':'N/A',n.deviceMemory?'Approximate (browser-capped)':'Not exposed by this browser'));
+  if(performance&&performance.memory){const m=performance.memory;out.push(stat('📈 JS heap',fmtBytes(m.usedJSHeapSize),'of '+fmtBytes(m.jsHeapSizeLimit),m.usedJSHeapSize/m.jsHeapSizeLimit*100));}
+  // Storage
+  if(n.storage&&n.storage.estimate){try{const e=await n.storage.estimate();out.push(stat('🗄️ Site storage',fmtBytes(e.usage),'of '+fmtBytes(e.quota)+' quota',e.quota?e.usage/e.quota*100:0));}catch(err){out.push(stat('🗄️ Storage','N/A','Estimate failed'));}}
+  else out.push(stat('🗄️ Storage','N/A','Not supported'));
+  // Screen & platform
+  out.push(stat('🖥️ Screen',`${screen.width}×${screen.height}`,`Viewport ${innerWidth}×${innerHeight} · ${devicePixelRatio||1}x`));
+  const ua=n.userAgentData;const plat=(ua&&ua.platform)||n.platform||'Unknown';
+  const br=ua&&ua.brands?(ua.brands.find(b=>!/Not.?A.?Brand|Chromium/i.test(b.brand))||ua.brands[0]||{}).brand:(/Firefox/.test(n.userAgent)?'Firefox':/Safari/.test(n.userAgent)&&!/Chrome/.test(n.userAgent)?'Safari':'Browser');
+  out.push(stat('💻 Platform',esc(plat),esc(br||'')+' · '+esc(n.language||'')));
+  $('#stats').innerHTML=out.join('');
+}
+if(navigator.getBattery){navigator.getBattery().then(b=>{battery=b;['levelchange','chargingchange','chargingtimechange','dischargingtimechange'].forEach(ev=>b.addEventListener(ev,renderStats));renderStats();}).catch(()=>renderStats());}
+renderStats();
+['online','offline','resize'].forEach(ev=>addEventListener(ev,renderStats));
+const conn=navigator.connection;if(conn&&conn.addEventListener)conn.addEventListener('change',renderStats);
+$('#sysRefresh').onclick=renderStats;setInterval(renderStats,15000);
+})();
+</script>
+</body>
+</html>
