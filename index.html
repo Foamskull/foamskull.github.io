@@ -43,6 +43,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;
   background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);mix-blend-mode:multiply;opacity:.55}
 ::selection{background:var(--accent);color:var(--on-accent)}
 a{color:inherit}
+/* animated background canvas (behind panels) */
+#bgfx{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;opacity:.7;transition:opacity .3s}
+[data-theme="light"] #bgfx{opacity:.75}
 .wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:22px 22px 40px}
 
 /* HUD top strip */
@@ -322,6 +325,7 @@ footer a{color:var(--accent2)}
 </style>
 </head>
 <body>
+<canvas id="bgfx" aria-hidden="true"></canvas>
 <div class="wrap">
   <div class="hudbar" aria-hidden="true">
     <span><b>SYS://</b>CENTRAL_HUB v2.077</span>
@@ -577,6 +581,99 @@ renderStats();
 ['online','offline','resize'].forEach(ev=>addEventListener(ev,renderStats));
 const conn=navigator.connection;if(conn&&conn.addEventListener)conn.addEventListener('change',renderStats);
 $('#sysRefresh').onclick=renderStats;setInterval(renderStats,15000);
+})();
+</script>
+<script>
+/* ===== animated cyberpunk background: perspective grid + digital rain ===== */
+(function(){
+  const cv=document.getElementById('bgfx'); if(!cv||!cv.getContext) return;
+  const ctx=cv.getContext('2d',{alpha:true}); if(!ctx) return;
+  const mq=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  const CY='0,240,255', MG='255,0,170', YL='252,238,10';
+  let W=0,H=0,dpr=1,parts=[],raf=0,last=0,t=0,running=false;
+  const FRAME=1000/30; // cap ~30fps for low CPU
+  function mkPart(init){
+    const rain=Math.random()<.55;
+    return {x:Math.random()*W,y:init?Math.random()*H:-20-Math.random()*H*.3,
+      v:rain?(40+Math.random()*70):(8+Math.random()*18),
+      dx:rain?0:(Math.random()-.5)*8,
+      len:rain?(18+Math.random()*46):0,
+      r:rain?1:(.8+Math.random()*1.6),
+      a:.25+Math.random()*.45,
+      c:Math.random()<.6?CY:YL, rain, ph:Math.random()*6.28};
+  }
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,1.75);
+    W=window.innerWidth; H=window.innerHeight;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n=Math.round(Math.min(110,Math.max(35,W*H/16000)));
+    parts=[]; for(let i=0;i<n;i++) parts.push(mkPart(true));
+    draw(0);
+  }
+  function grid(){
+    const hz=H*.58, cx=W/2, depth=H-hz;
+    // horizon glow
+    let g=ctx.createLinearGradient(0,hz-60,0,hz+40);
+    g.addColorStop(0,'rgba('+MG+',0)'); g.addColorStop(.6,'rgba('+MG+',.10)'); g.addColorStop(1,'rgba('+MG+',0)');
+    ctx.fillStyle=g; ctx.fillRect(0,hz-60,W,100);
+    ctx.lineWidth=1;
+    // converging verticals
+    const N=28, spread=W*2.4;
+    ctx.strokeStyle='rgba('+MG+',.22)';
+    ctx.beginPath();
+    for(let i=0;i<=N;i++){ const bx=cx-spread/2+spread*i/N; ctx.moveTo(cx+(bx-cx)*.04,hz); ctx.lineTo(bx,H); }
+    ctx.stroke();
+    // scrolling horizontals (perspective z)
+    const off=(t*.18)%1;
+    for(let i=0;i<16;i++){
+      const z=(i+1-off)/16; // 0..1 near horizon->viewer
+      const y=hz+depth*z*z;
+      const a=.05+.30*z;
+      ctx.strokeStyle='rgba('+CY+','+a.toFixed(3)+')';
+      ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+    }
+    ctx.strokeStyle='rgba('+CY+',.45)'; ctx.beginPath(); ctx.moveTo(0,hz); ctx.lineTo(W,hz); ctx.stroke();
+    // fade grid toward the horizon
+    g=ctx.createLinearGradient(0,hz,0,hz+depth*.35);
+    g.addColorStop(0,'rgba(0,0,0,.55)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.globalCompositeOperation='destination-out'; ctx.fillStyle=g; ctx.fillRect(0,hz-1,W,depth*.35+1);
+    ctx.globalCompositeOperation='source-over';
+  }
+  function particles(dt){
+    ctx.globalCompositeOperation='lighter';
+    for(const p of parts){
+      if(dt){ p.y+=p.v*dt; p.x+=p.dx*dt; p.ph+=dt*2; if(p.y-p.len>H||p.x<-10||p.x>W+10){ Object.assign(p,mkPart(false)); } }
+      const tw=p.rain?1:(.6+.4*Math.sin(p.ph));
+      if(p.rain){
+        const g=ctx.createLinearGradient(0,p.y-p.len,0,p.y);
+        g.addColorStop(0,'rgba('+p.c+',0)'); g.addColorStop(1,'rgba('+p.c+','+(p.a*.7).toFixed(3)+')');
+        ctx.fillStyle=g; ctx.fillRect(p.x,p.y-p.len,1.2,p.len);
+        ctx.fillStyle='rgba('+p.c+','+p.a.toFixed(3)+')'; ctx.fillRect(p.x-.4,p.y-1.5,2,2.5);
+      }else{
+        const a=p.a*tw;
+        ctx.fillStyle='rgba('+p.c+','+(a*.18).toFixed(3)+')';
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r*3.2,0,6.283); ctx.fill();
+        ctx.fillStyle='rgba('+p.c+','+a.toFixed(3)+')';
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fill();
+      }
+    }
+    ctx.globalCompositeOperation='source-over';
+  }
+  function draw(dt){ ctx.clearRect(0,0,W,H); grid(); particles(dt); }
+  function loop(now){
+    raf=requestAnimationFrame(loop);
+    if(now-last<FRAME) return;
+    const dt=Math.min((now-last)/1000,.1); last=now; t+=dt; draw(dt);
+  }
+  function start(){ if(running||mq.matches||document.hidden) return; running=true; last=performance.now(); raf=requestAnimationFrame(loop); }
+  function stop(){ running=false; cancelAnimationFrame(raf); }
+  let rt=0;
+  window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(resize,120); },{passive:true});
+  document.addEventListener('visibilitychange',()=>{ document.hidden?stop():start(); });
+  const onMq=()=>{ if(mq.matches){ stop(); t=2.2; draw(0); } else start(); };
+  if(mq.addEventListener) mq.addEventListener('change',onMq); else if(mq.addListener) mq.addListener(onMq);
+  resize(); if(mq.matches){ t=2.2; draw(0); } else start();
 })();
 </script>
 </body>
