@@ -165,43 +165,99 @@ header.nframe::after{background:
 .card h2 .hud::before{content:attr(data-id);font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;color:var(--on-accent);background:var(--accent);padding:2px 6px}
 .card h2 .hud::after{content:"";width:28px;height:2px;background:repeating-linear-gradient(90deg,var(--accent3) 0 4px,transparent 4px 7px)}
 
-/* quick links — REVOLVER CYLINDER carousel */
+/* quick links — REVOLVER CYLINDER carousel (true CSS 3D: perspective + preserve-3d) */
 @property --rot{syntax:'<angle>';inherits:true;initial-value:0deg}
 .revolver{position:relative;container-type:inline-size;min-width:0}
 .rv-inner{--d:min(230px,62cqw);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px 14px;height:100%}
 .rv-btn{flex:none;font-size:.9rem!important;padding:10px 9px!important;line-height:1;--c:var(--neon-c)}
-.rv-stage{position:relative;flex:none;width:var(--d);height:var(--d);cursor:pointer;touch-action:pan-y;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.rv-stage{position:relative;flex:none;width:var(--d);height:var(--d);cursor:pointer;touch-action:pan-y;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
+  perspective:calc(var(--d)*2.1);perspective-origin:50% 30%;--depth:calc(var(--d)*.5)}
 .rv-stage[data-side=l]{cursor:w-resize}.rv-stage[data-side=r]{cursor:e-resize}
-.rv-stage::before{content:"";position:absolute;inset:-4%;border-radius:50%;pointer-events:none;
-  background:radial-gradient(closest-side,transparent 86%,color-mix(in srgb,var(--neon-c) 22%,transparent) 93%,transparent 100%)}
-.rv-drum{position:absolute;inset:0;border-radius:50%;transform:rotate(var(--rot));transition:--rot .52s cubic-bezier(.28,1.55,.52,1);
-  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--neon-c) 55%,transparent)) drop-shadow(0 0 14px color-mix(in srgb,var(--neon-y) 18%,transparent))}
+/* neon light spill behind the steel: cyan from the left, yellow from the right, floor shadow */
+.rv-stage::before{content:"";position:absolute;inset:-14% -24% -6%;pointer-events:none;
+  background:radial-gradient(closest-side at 30% 50%,color-mix(in srgb,var(--neon-c) 24%,transparent),transparent),
+    radial-gradient(closest-side at 70% 50%,color-mix(in srgb,var(--neon-y) 18%,transparent),transparent),
+    radial-gradient(28% 6% at 50% 92%,rgba(0,0,0,.8),transparent)}
+.rv-scene{position:absolute;inset:0;transform-style:preserve-3d;transform:translateY(calc(var(--d)*-.1)) scale(.78) rotateX(32deg) rotateY(-4deg)}
+.rv-drum{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateZ(var(--rot));transition:--rot .56s cubic-bezier(.28,1.55,.52,1)}
 .rv-drum.rv-still,.rv-drum.rv-still *{transition:none!important}
-.rv-drum>svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+/* curved outer wall: segments around the circumference; lighting is computed from each
+   segment's world angle (--a + --rot) so the light stays fixed while the steel turns */
+.rv-seg,.rv-flute{position:absolute;left:50%;top:50%;transform-origin:50% 0;backface-visibility:hidden;pointer-events:none;
+  --w:calc(var(--a) + var(--rot));--sx:sin(var(--w));
+  --cy:clamp(0,(-1*var(--sx) - .1)*2.2,1);--yl:clamp(0,(var(--sx) - .1)*2.2,1);--sp:pow(max(0,cos(var(--w) - 186deg)),60);--fl:max(0,cos(var(--w) - 200deg))}
+.rv-seg{width:calc(var(--d)*3.1416/var(--ns)*1.06);height:var(--depth);margin-left:calc(var(--d)*3.1416/var(--ns)*-.53);
+  transform:translateZ(calc(-1*var(--depth))) rotateZ(var(--a)) translateY(calc(var(--d)*-.5)) rotateX(90deg);
+  background-color:#3e4750;
+  background-image:
+    linear-gradient(to bottom,rgb(0 240 255/calc(var(--cy)*var(--cy)*.55)),rgb(0 240 255/calc(var(--cy)*var(--cy)*.95)) 92%,rgb(160 255 255/calc(var(--cy)*var(--cy))) ),
+    linear-gradient(to bottom,rgb(252 238 10/calc(var(--yl)*var(--yl)*.45)),rgb(252 238 10/calc(var(--yl)*var(--yl)*.85)) 92%,rgb(255 250 170/calc(var(--yl)*var(--yl)*.95))),
+    linear-gradient(to bottom,rgb(255 255 255/calc(var(--sp)*.3)),rgb(255 255 255/calc(var(--sp)*.6)) 88%,rgb(255 255 255/calc(var(--sp)*.9))),
+    repeating-linear-gradient(to bottom,rgba(255,255,255,.05) 0 1px,rgba(0,0,0,.12) 1px 2px,transparent 2px 3px),
+    linear-gradient(to bottom,rgb(6 8 10/calc(.9 - var(--fl)*.35)),rgb(14 17 21/calc(.6 - var(--fl)*.35)) 80%,rgba(200,210,220,.45) 95%,rgba(12,14,17,.95))}
+.rv-flute{width:calc(var(--d)*var(--fw));height:calc(var(--depth)*.74);margin-left:calc(var(--d)*var(--fw)/-2);border-radius:0 0 50% 50%/0 0 calc(var(--d)*var(--fw)*.5) calc(var(--d)*var(--fw)*.5);
+  transform:translateZ(calc(-1*var(--depth))) rotateZ(var(--a)) translateY(calc(var(--d)*-.5 - .6px)) rotateX(90deg);
+  background:
+    linear-gradient(90deg,rgb(0 240 255/calc(var(--cy)*.9)) 0 10%,transparent 30% 70%,rgb(252 238 10/calc(var(--yl)*.9)) 90%),
+    linear-gradient(90deg,rgb(230 240 248/calc(.25 + var(--sp)*.6)) 0 7%,#0a0d10 20%,#353d46 50%,#59636e 66%,#0c0f12 84%,rgb(230 240 248/calc(.2 + var(--sp)*.5)) 95%);
+  box-shadow:inset 0 -3px 4px rgba(0,0,0,.8),inset 0 4px 6px rgba(0,0,0,.6)}
+/* front face: turned steel, conic specular counter-rotated so the sheen stays put while the drum spins */
+.rv-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;pointer-events:none;
+  background:
+    conic-gradient(from calc(-1*var(--rot)),rgba(252,238,10,.03) 0deg,rgba(252,238,10,.2) 88deg,rgba(255,255,255,.03) 122deg,rgba(255,255,255,.22) 148deg,rgba(255,255,255,.02) 178deg,rgba(0,240,255,.03) 206deg,rgba(0,240,255,.24) 268deg,rgba(255,255,255,.04) 298deg,rgba(255,255,255,.4) 322deg,rgba(255,255,255,.03) 348deg,rgba(252,238,10,.03) 360deg),
+    repeating-radial-gradient(circle,rgba(255,255,255,.045) 0 1px,rgba(0,0,0,.09) 1px 2px,transparent 2px 3.5px),
+    radial-gradient(circle,#15191e 0 16%,#3a424b 17% 19%,#1f242a 20%,#2b323a 60%,#20262c 86%,#101317 91%);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.7)}
+/* bevelled rim chamfer with neon edge light */
+.rv-face::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from calc(-1*var(--rot)),#4b545e 0deg,#fcee0a 84deg,#fff9b0 92deg,#7d7a3a 118deg,#1a1e23 170deg,#0e1013 190deg,#1c3b42 225deg,#00f0ff 266deg,#c8ffff 276deg,#4ab7c4 296deg,#e8eef3 322deg,#7f8892 346deg,#4b545e 360deg);
+  -webkit-mask:radial-gradient(circle,transparent 90.5%,#000 91.5% 99%,transparent 100%);mask:radial-gradient(circle,transparent 90.5%,#000 91.5% 99%,transparent 100%)}
+/* ratchet / extractor teeth around the hub */
+.rv-face::after{content:"";position:absolute;inset:calc(50% - var(--d)*.155);border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,#7b858f 0 4deg,#c3ccd4 5deg,#1a1f25 9deg 14deg,#0b0d10 15deg 20deg);
+  -webkit-mask:radial-gradient(circle,transparent 71%,#000 73% 98%,transparent 100%);mask:radial-gradient(circle,transparent 71%,#000 73% 98%,transparent 100%);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6)}
+.rv-screw{position:absolute;left:50%;top:50%;width:calc(var(--d)*var(--sz));height:calc(var(--d)*var(--sz));margin:calc(var(--d)*var(--sz)/-2) 0 0 calc(var(--d)*var(--sz)/-2);border-radius:50%;
+  transform:rotate(var(--a)) translateY(calc(var(--d)*var(--sr)*-1)) rotate(calc(-1*(var(--a) + var(--rot))));
+  background:linear-gradient(var(--slot),transparent 42%,#050607 43% 57%,transparent 58%),radial-gradient(circle at 35% 30%,#eef3f7,#7b858f 45%,#262c33 80%);
+  box-shadow:0 0 0 1px #050607,1px 1px 1px rgba(0,0,0,.6)}
+/* fixed light rims at the front and rear edges (do not rotate) */
+.rv-rim{position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  box-shadow:-3px 0 7px -1px color-mix(in srgb,var(--neon-c) 85%,transparent),3px 0 7px -1px color-mix(in srgb,var(--neon-y) 75%,transparent),0 4px 10px rgba(0,0,0,.6)}
+.rv-rim.front{transform:translateZ(-.6px)}
+.rv-rim.back{transform:translateZ(calc(-1*var(--depth) + .5px));background:#0b0d10;
+  box-shadow:-5px 0 12px color-mix(in srgb,var(--neon-c) 70%,transparent),5px 0 12px color-mix(in srgb,var(--neon-y) 55%,transparent),0 10px 18px rgba(0,0,0,.85)}
+/* chambers: bevelled bores, icon upright inside */
 .rv-ch{position:absolute;left:50%;top:50%;width:calc(var(--d)*var(--cf));height:calc(var(--d)*var(--cf));margin:calc(var(--d)*var(--cf)/-2) 0 0 calc(var(--d)*var(--cf)/-2);
-  transform:rotate(var(--a)) translateY(calc(var(--d)*-.335)) rotate(calc(-1*(var(--a) + var(--rot))))}
+  transform:translateZ(.8px) rotate(var(--a)) translateY(calc(var(--d)*-.335)) rotate(calc(-1*(var(--a) + var(--rot))))}
 .rv-link{position:absolute;inset:0;display:grid;place-items:center;border-radius:50%;text-decoration:none;outline:none;
-  background:radial-gradient(circle,#030405 52%,#1b232c 63%,#0b0f14 72%,#2b3540 86%,#0e1217 100%);
-  box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--neon-c) 55%,transparent),0 0 0 1px #000,inset 0 2px 5px rgba(0,0,0,.9);transition:box-shadow .2s,filter .2s}
-.rv-link .ic{width:58%;height:58%;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:var(--c);color:#0a0a0a;
-  font-family:var(--font-display);font-weight:900;font-size:calc(var(--d)*var(--cf)*.3);line-height:1;
-  box-shadow:inset 0 0 0 2px rgba(0,0,0,.4),0 0 6px color-mix(in srgb,var(--c) 60%,transparent);filter:saturate(.6) brightness(.72);transition:filter .2s,transform .2s}
-.rv-link .ic img{width:62%;height:62%;display:block}
+  background:linear-gradient(145deg,#dfe6ec 0%,#7a838d 22%,#2a3037 52%,#0d1013 72%,#4d5660 100%);
+  box-shadow:0 0 0 1px #000,inset 2px 0 2px -1px color-mix(in srgb,var(--neon-c) 80%,transparent),inset -2px 0 2px -1px color-mix(in srgb,var(--neon-y) 70%,transparent);transition:box-shadow .2s,filter .2s}
+.rv-link::before{content:"";position:absolute;inset:11%;border-radius:50%;
+  background:radial-gradient(circle at 58% 62%,#141a20 0,#06080a 55%,#000 100%);
+  box-shadow:inset 3px 4px 6px rgba(0,0,0,.95),inset -1px -2px 2px rgba(190,205,215,.28),0 0 0 1px rgba(0,0,0,.8)}
+.rv-link .ic{position:relative;width:62%;height:62%;border-radius:50%;display:grid;place-items:center;overflow:hidden;color:var(--c);
+  background:radial-gradient(circle at 38% 32%,#3a434d,#12161b 70%);
+  font-family:var(--font-display);font-weight:900;font-size:calc(var(--d)*var(--cf)*.3);line-height:1;text-shadow:0 0 6px color-mix(in srgb,var(--c) 70%,transparent);
+  box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--c) 45%,#000),inset 0 2px 3px rgba(255,255,255,.12),0 2px 4px rgba(0,0,0,.8);filter:saturate(.7) brightness(.75);transition:filter .2s,transform .2s}
+.rv-link .ic img{width:60%;height:60%;display:block}
 .rv-link:hover .ic,.rv-link:focus-visible .ic{filter:none}
-.rv-link:hover,.rv-link:focus-visible{box-shadow:inset 0 0 0 2px var(--neon-c),0 0 0 1px #000,0 0 12px var(--neon-c)}
-.rv-ch.on .rv-link{box-shadow:inset 0 0 0 2px var(--neon-y),0 0 0 1px #000,0 0 14px var(--neon-y),inset 0 0 10px color-mix(in srgb,var(--neon-y) 45%,transparent)}
-.rv-ch.on .rv-link .ic{filter:none;transform:scale(1.08)}
-.rv-ch.on .rv-link:focus-visible{box-shadow:inset 0 0 0 2px var(--neon-y),0 0 0 2px var(--neon-c),0 0 18px var(--neon-c)}
+.rv-link:hover,.rv-link:focus-visible{box-shadow:0 0 0 1px #000,0 0 0 2px var(--neon-c),0 0 12px var(--neon-c)}
+.rv-ch.on .rv-link{box-shadow:0 0 0 1px #000,0 0 0 2px var(--neon-y),0 0 16px var(--neon-y)}
+.rv-ch.on .rv-link::before{box-shadow:inset 3px 4px 6px rgba(0,0,0,.95),inset 0 0 9px color-mix(in srgb,var(--neon-y) 55%,transparent),0 0 0 1px rgba(0,0,0,.8)}
+.rv-ch.on .rv-link .ic{filter:none;transform:scale(1.06)}
+.rv-ch.on .rv-link:focus-visible{box-shadow:0 0 0 1px #000,0 0 0 2px var(--neon-y),0 0 0 4px var(--neon-c),0 0 18px var(--neon-c)}
 .rv-ch .del{position:absolute;top:-5px;right:-7px;display:none;width:17px;height:17px;border:none;background:var(--danger);color:#fff;font-size:.6rem;line-height:16px;cursor:pointer;z-index:2;
   clip-path:polygon(0 0,100% 0,100% 100%,4px 100%,0 calc(100% - 4px));box-shadow:0 0 8px var(--danger)}
 .rv-ch .del:hover,.rv-ch .del:focus-visible{background:#fff;color:var(--danger);outline:none}
 .editing .rv-ch.on .del{display:block}
 .editing .rv-link{outline:1px dashed color-mix(in srgb,var(--accent3) 80%,transparent);outline-offset:1px}
-/* fixed parts: firing marker (top), sight brackets around the active chamber, centre hub */
-.rv-marker{position:absolute;left:50%;top:calc(var(--d)*-.045);width:calc(var(--d)*.11);height:calc(var(--d)*.075);transform:translateX(-50%);pointer-events:none;z-index:3;
-  background:var(--neon-y);clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 0 4px var(--neon-y))}
+/* fixed parts (inside the 3D scene, not rotating): firing marker, sight brackets, raised centre hub */
+.rv-marker{position:absolute;left:50%;top:calc(var(--d)*-.085);width:calc(var(--d)*.12);height:calc(var(--d)*.08);margin-left:calc(var(--d)*-.06);pointer-events:none;
+  transform:translateZ(2px);background:var(--neon-y);clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 0 4px var(--neon-y))}
 .rv-marker::after{content:"";position:absolute;inset:22% 30% 38%;background:#0a0a0a;clip-path:polygon(0 0,100% 0,50% 100%)}
-.rv-sight{position:absolute;left:50%;top:calc(var(--d)*(.5 - .335));width:calc(var(--d)*var(--cf)*1.32);height:calc(var(--d)*var(--cf)*1.32);transform:translate(-50%,-50%);pointer-events:none;z-index:2;
+.rv-sight{position:absolute;left:50%;top:calc(var(--d)*(.5 - .335));width:calc(var(--d)*var(--cf)*1.34);height:calc(var(--d)*var(--cf)*1.34);margin:calc(var(--d)*var(--cf)*-.67) 0 0 calc(var(--d)*var(--cf)*-.67);
+  transform:translateZ(1.6px);pointer-events:none;
   --b:var(--neon-y);--l:28%;
   background:linear-gradient(var(--b),var(--b)) 0 0/var(--l) 2px,linear-gradient(var(--b),var(--b)) 0 0/2px var(--l),
     linear-gradient(var(--b),var(--b)) 100% 0/var(--l) 2px,linear-gradient(var(--b),var(--b)) 100% 0/2px var(--l),
@@ -210,11 +266,19 @@ header.nframe::after{background:
   background-repeat:no-repeat;filter:drop-shadow(0 0 3px var(--neon-y))}
 .rv-stage.kick .rv-marker{animation:rvKick .22s ease-out}
 .rv-stage.kick .rv-sight{animation:rvSight .3s ease-out}
-@keyframes rvKick{0%{transform:translate(-50%,-35%);filter:drop-shadow(0 0 10px var(--neon-y)) brightness(1.6)}100%{transform:translateX(-50%)}}
-@keyframes rvSight{0%{opacity:.25;transform:translate(-50%,-50%) scale(1.18)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-.rv-hub{position:absolute;left:50%;top:50%;width:calc(var(--d)*.22);height:calc(var(--d)*.22);transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;z-index:2;
-  display:grid;place-items:center;background:radial-gradient(circle,#0b0e12 55%,#202832 100%);box-shadow:0 0 0 1.5px var(--neon-y),0 0 10px color-mix(in srgb,var(--neon-y) 50%,transparent),inset 0 0 8px #000;
-  font-family:var(--font-mono);font-size:max(9px,calc(var(--d)*.075));color:var(--neon-y);text-shadow:0 0 6px var(--neon-y);letter-spacing:.04em}
+@keyframes rvKick{0%{translate:0 -35%;filter:drop-shadow(0 0 10px var(--neon-y)) brightness(1.6)}100%{translate:0 0}}
+@keyframes rvSight{0%{opacity:.25;scale:1.18}100%{opacity:1;scale:1}}
+.rv-hub{position:absolute;left:50%;top:50%;width:calc(var(--d)*.2);height:calc(var(--d)*.2);margin:calc(var(--d)*-.1) 0 0 calc(var(--d)*-.1);border-radius:50%;pointer-events:none;
+  transform:translateZ(calc(var(--d)*.045));display:grid;place-items:center;
+  background:repeating-radial-gradient(circle,rgba(255,255,255,.05) 0 1px,transparent 1px 2.5px),
+    conic-gradient(#8b949e,#e6edf2 40deg,#59626c 90deg,#fcee0a 100deg,#3a424b 130deg,#14181c 190deg,#2b5f68 250deg,#00f0ff 268deg,#6f7a84 300deg,#d7dee4 325deg,#8b949e);
+  box-shadow:0 0 0 1px #000,0 3px 6px rgba(0,0,0,.8),0 0 10px color-mix(in srgb,var(--neon-y) 30%,transparent);
+  font-family:var(--font-mono);font-size:max(8px,calc(var(--d)*.07));color:var(--neon-y);text-shadow:0 0 6px var(--neon-y);letter-spacing:.04em}
+.rv-hub::before{content:"";position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#1d2329,#07090b 75%);box-shadow:inset 1px 2px 3px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.18)}
+.rv-hub span{position:relative}
+.rv-collar{position:absolute;left:50%;top:50%;width:calc(var(--d)*.22);height:calc(var(--d)*.22);margin:calc(var(--d)*-.11) 0 0 calc(var(--d)*-.11);border-radius:50%;pointer-events:none;
+  background:#0a0c0f;box-shadow:-2px 0 4px color-mix(in srgb,var(--neon-c) 60%,transparent),2px 0 4px color-mix(in srgb,var(--neon-y) 50%,transparent)}
+.rv-collar.c1{transform:translateZ(calc(var(--d)*.015))}.rv-collar.c2{transform:translateZ(calc(var(--d)*.03))}
 /* readout */
 .rv-read{flex:1 1 100%;min-width:0;max-width:420px;text-align:center;padding:6px 4px 0;border-top:1px dashed var(--line-soft)}
 .rv-tag{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
@@ -424,10 +488,16 @@ footer a{color:var(--accent2)}
         <div class="rv-inner">
           <button class="btn sm rv-btn" id="rvPrev" type="button" aria-label="Rotate to previous link" title="Previous (←)">◀</button>
           <div class="rv-stage" id="rvStage" role="group" aria-roledescription="revolver carousel" aria-label="Quick links cylinder. Arrow keys rotate, Enter opens the active link.">
-            <div class="rv-drum" id="rvDrum"></div>
-            <div class="rv-sight" aria-hidden="true"></div>
-            <div class="rv-marker" aria-hidden="true"></div>
-            <div class="rv-hub" aria-hidden="true"><span id="rvNum">00</span></div>
+            <div class="rv-scene">
+              <div class="rv-rim back" aria-hidden="true"></div>
+              <div class="rv-rim front" aria-hidden="true"></div>
+              <div class="rv-drum" id="rvDrum"></div>
+              <div class="rv-sight" aria-hidden="true"></div>
+              <div class="rv-marker" aria-hidden="true"></div>
+              <div class="rv-collar c1" aria-hidden="true"></div>
+              <div class="rv-collar c2" aria-hidden="true"></div>
+              <div class="rv-hub" aria-hidden="true"><span id="rvNum">00</span></div>
+            </div>
           </div>
           <button class="btn sm rv-btn" id="rvNext" type="button" aria-label="Rotate to next link" title="Next (→)">▶</button>
           <div class="rv-read" id="rvRead">
@@ -563,31 +633,16 @@ const pad=v=>String(v).padStart(2,'0');
 const rv=$('#revolver'),stage=$('#rvStage'),drum=$('#rvDrum');
 let active=+store.get('linkActive',0)||0,turn=0;
 const isEditing=()=>$('#linksCard').classList.contains('editing');
-function drumSVG(n,cf){
-  const st=360/n,cr=cf*100;
-  const fr=Math.max(2.5,Math.min(9,84*Math.sin(Math.PI/n)*.42));
-  let flutes='',notches='',ticks='',star='';
-  for(let i=0;i<n;i++){
-    flutes+=`<ellipse cx="0" cy="-95" rx="${fr.toFixed(2)}" ry="${Math.min(14,fr*1.7).toFixed(2)}" transform="rotate(${(i+.5)*st})"/>`;
-    notches+=`<rect x="-2.2" y="-97.5" width="4.4" height="6" transform="rotate(${i*st})"/>`;
-  }
-  for(let a=0;a<360;a+=7.5)ticks+=`<line x1="0" y1="-${a%45?44:41}" x2="0" y2="-47" transform="rotate(${a})"/>`;
-  const pts=[];for(let i=0;i<n*2;i++){const r=i%2?13:20,t=(i*Math.PI/n)-Math.PI/2+Math.PI/n/2;pts.push((r*Math.cos(t)).toFixed(2)+','+(r*Math.sin(t)).toFixed(2));}
-  star=`<polygon points="${pts.join(' ')}" fill="#1a2028" stroke="var(--neon-y)" stroke-width="1" stroke-opacity=".8"/>`;
-  return `<svg viewBox="-100 -100 200 200" aria-hidden="true" focusable="false"><defs>
-<radialGradient id="rvMetal" cx="40%" cy="32%" r="75%"><stop offset="0" stop-color="#3a444f"/><stop offset=".45" stop-color="#1a2028"/><stop offset=".85" stop-color="#0c0f13"/><stop offset="1" stop-color="#050608"/></radialGradient>
-<linearGradient id="rvRim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--neon-c)"/><stop offset=".5" stop-color="#7ff7ff"/><stop offset="1" stop-color="var(--neon-y)"/></linearGradient>
-<clipPath id="rvClip"><circle r="96.3"/></clipPath><radialGradient id="rvSheen" cx="30%" cy="20%" r="60%"><stop offset="0" stop-color="#9ff9ff" stop-opacity=".18"/><stop offset="1" stop-color="#9ff9ff" stop-opacity="0"/></radialGradient></defs>
-<circle r="95" fill="url(#rvMetal)" stroke="url(#rvRim)" stroke-width="2.6"/>
-<circle r="95" fill="url(#rvSheen)"/>
-<circle r="89.5" fill="none" stroke="var(--neon-c)" stroke-opacity=".28" stroke-width=".8" stroke-dasharray="2 3"/>
-<g fill="#040507" stroke="var(--neon-c)" stroke-opacity=".8" stroke-width="1.2" clip-path="url(#rvClip)">${flutes}</g>
-<g fill="var(--neon-y)" opacity=".9">${notches}</g>
-<circle r="67" fill="none" stroke="var(--neon-c)" stroke-opacity=".22" stroke-width="${(cr*2+6).toFixed(1)}"/>
-<circle r="${(67+cr+3).toFixed(1)}" fill="none" stroke="var(--neon-c)" stroke-opacity=".35" stroke-width=".7"/>
-<circle r="${Math.max(30,67-cr-3).toFixed(1)}" fill="none" stroke="var(--neon-y)" stroke-opacity=".45" stroke-width=".7"/>
-<g stroke="var(--neon-c)" stroke-opacity=".35" stroke-width=".8">${ticks}</g>
-${star}<circle r="5" fill="#000" stroke="var(--neon-c)" stroke-width="1"/></svg>`;
+const NSEG=48;
+function drumParts(n,cf){
+  const st=360/n;let h='';
+  for(let i=0;i<NSEG;i++)h+=`<div class="rv-seg" style="--a:${(i*360/NSEG).toFixed(3)}deg"></div>`;
+  const fw=Math.max(.035,Math.min(.11,Math.PI/n*.3));
+  for(let i=0;i<n;i++)h+=`<div class="rv-flute" style="--a:${((i+.5)*st).toFixed(3)}deg;--fw:${fw.toFixed(4)}"></div>`;
+  h+='<div class="rv-face"></div>';
+  const sr=.335*Math.cos(Math.PI/n),gap=.335*Math.sin(Math.PI/n)-cf/2,sz=Math.min(.045,gap*1.5);
+  if(sz>=.016)for(let i=0;i<n;i++)h+=`<div class="rv-screw" style="--a:${((i+.5)*st).toFixed(3)}deg;--sr:${sr.toFixed(4)};--sz:${sz.toFixed(4)};--slot:${(i*37)%180}deg"></div>`;
+  return h;
 }
 function renderLinks(){
   const n=links.length;
@@ -598,9 +653,9 @@ function renderLinks(){
   active=mod(active,n);turn=active;
   const st=360/n,cf=Math.min(.3,2*.335*Math.sin(Math.PI/n)*.84);
   drum.classList.add('rv-still');
-  drum.style.setProperty('--cf',cf.toFixed(4));stage.style.setProperty('--cf',cf.toFixed(4));
+  drum.style.setProperty('--cf',cf.toFixed(4));stage.style.setProperty('--cf',cf.toFixed(4));stage.style.setProperty('--ns',NSEG);
   drum.style.setProperty('--rot',(-turn*st)+'deg');
-  drum.insertAdjacentHTML('beforeend',drumSVG(n,cf));
+  drum.insertAdjacentHTML('beforeend',drumParts(n,cf));
   links.forEach((l,i)=>{
     const h=host(l.u),c=colors[hash(l.n)%colors.length];
     const ch=document.createElement('div');ch.className='rv-ch';ch.style.setProperty('--a',(i*st)+'deg');
