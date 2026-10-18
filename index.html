@@ -100,6 +100,8 @@ header{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;
 .btn.alt{--c:var(--accent2)}
 .toolbar{display:flex;gap:8px;margin-top:10px;justify-content:flex-end}
 #themeBtn{--c:var(--accent2)}
+#fsBtn{--c:var(--neon-y);display:inline-flex;align-items:center;justify-content:center;gap:6px}
+#fsBtn .fsi{width:1.1em;height:1.1em;flex:none}
 
 /* search */
 .search{display:flex;gap:8px;margin-bottom:24px;padding:10px;--nc:18px}
@@ -115,7 +117,7 @@ header{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;
 /* layout */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
 .span-8{grid-column:span 8}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-12{grid-column:span 12}
-@media(max-width:980px){.span-8,.span-4,.span-6{grid-column:span 12}}
+@media(max-width:899.98px){.span-8,.span-4,.span-6{grid-column:span 12}}
 
 /* NEON FRAMES — angled clip-path panels with a visible cyan/yellow border + glow.
    clip-path would cut off borders/box-shadow, so each frame is layered:
@@ -218,7 +220,7 @@ form.row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
   clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,0 100%)}
 .tab:hover{color:var(--accent);text-shadow:0 0 8px var(--glow)}
 .tab.active{border-color:var(--accent);color:var(--on-accent);background:var(--accent)}
-.todos{list-style:none;max-height:300px;overflow:auto;scrollbar-color:var(--accent) transparent;scrollbar-width:thin}
+.todos{list-style:none;max-height:300px;overflow:auto}
 .todos li{display:flex;align-items:center;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line-soft);transition:background .15s}
 .todos li:not(.empty):hover{background:color-mix(in srgb,var(--accent) 6%,transparent)}
 .todos li span{flex:1;word-break:break-word}
@@ -233,6 +235,80 @@ form.row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 .empty{color:var(--muted);font-family:var(--font-mono);font-size:.88rem;padding:10px 0}
 footer{text-align:center;color:var(--muted);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-top:30px;border-top:1px solid var(--line-soft);padding-top:12px}
 footer a{color:var(--accent2)}
+
+/* thin neon scrollbars (panels that overflow scroll internally) */
+.cbody,.todos,.notes textarea,.links,#stats{scrollbar-width:thin;scrollbar-color:var(--neon-c) transparent}
+.cbody::-webkit-scrollbar,.todos::-webkit-scrollbar,.notes textarea::-webkit-scrollbar{width:6px;height:6px}
+.cbody::-webkit-scrollbar-track,.todos::-webkit-scrollbar-track,.notes textarea::-webkit-scrollbar-track{background:transparent}
+.cbody::-webkit-scrollbar-thumb,.todos::-webkit-scrollbar-thumb,.notes textarea::-webkit-scrollbar-thumb{background:linear-gradient(var(--neon-c),var(--neon-y));box-shadow:0 0 6px var(--neon-c)}
+
+/* ===== DESKTOP FIT: whole hub in one screen, no page scroll (>=900px) ===== */
+@media (min-width:900px){
+  html,body{height:100%;overflow:hidden}
+  body{min-height:0;font-size:clamp(13px,1.75vh,16px)}
+  .wrap{max-width:1680px;height:100vh;height:100dvh;display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;
+    gap:clamp(6px,1.3vh,14px);padding:clamp(8px,1.5vh,16px) clamp(12px,1.6vw,26px) clamp(6px,1vh,10px)}
+  .hudbar{margin:0;padding-bottom:clamp(3px,.6vh,6px);font-size:clamp(.6rem,1.25vh,.72rem)}
+  header{margin:0;padding:clamp(8px,1.5vh,16px) clamp(14px,1.6vw,26px);align-items:center;flex-wrap:nowrap}
+  header.nframe{--nc:clamp(14px,2.4vh,24px)}
+  .brand .tag{font-size:clamp(.55rem,1.15vh,.68rem);margin-bottom:clamp(3px,.7vh,8px);padding:2px 9px 2px 7px}
+  .brand h1{font-size:clamp(1.5rem,min(5.2vh,3vw),3rem)}
+  .greet{margin-top:clamp(3px,.7vh,8px);font-size:clamp(.72rem,1.6vh,.98rem)}
+  .sub{margin-top:2px;font-size:clamp(.62rem,1.3vh,.78rem)}
+  .clock{display:grid;grid-template-columns:auto auto;column-gap:clamp(10px,1.2vw,18px);align-items:center;text-align:right}
+  .clock .label,.clock .time,.clock .date,.clock .tz{grid-column:1}
+  .clock .toolbar{grid-column:2;grid-row:1 / span 4;flex-direction:column;margin:0;align-self:center}
+  .clock .label{font-size:clamp(.55rem,1.1vh,.66rem)}
+  .clock .time{font-size:clamp(1.5rem,min(5.4vh,3.2vw),3.1rem)}
+  .clock .date{font-size:clamp(.62rem,1.35vh,.8rem)}
+  .clock .tz{font-size:clamp(.58rem,1.2vh,.7rem)}
+  .btn{padding:clamp(4px,.8vh,8px) clamp(9px,1vw,14px);font-size:clamp(.6rem,1.25vh,.72rem)}
+  .btn.sm{padding:clamp(3px,.5vh,5px) clamp(7px,.8vw,10px);font-size:clamp(.56rem,1.1vh,.64rem)}
+  .search{margin:0;padding:clamp(4px,.7vh,8px);--nc:clamp(10px,1.8vh,16px)}
+  .search input{padding:clamp(5px,.9vh,9px) 10px;font-size:clamp(.82rem,1.75vh,1rem)}
+  .search .qlabel,.search select{font-size:clamp(.62rem,1.3vh,.74rem)}
+  .grid{gap:clamp(8px,1.4vh,16px);grid-template-rows:minmax(0,auto) minmax(46%,1fr);min-height:0}
+  .card{display:flex;flex-direction:column;min-height:0;padding:clamp(8px,1.5vh,16px) clamp(10px,1.1vw,18px);--nc:clamp(12px,2vh,20px)}
+  .card h2{flex:none;margin-bottom:clamp(6px,1.1vh,12px);padding-bottom:clamp(4px,.8vh,8px);font-size:clamp(.64rem,1.35vh,.78rem)}
+  .card h2 .hud::before{font-size:clamp(.54rem,1.1vh,.62rem)}
+  .cbody{flex:1 1 auto;min-height:0;overflow:auto;padding-right:2px}
+  /* links */
+  .links{grid-template-columns:repeat(auto-fill,minmax(clamp(84px,7.5vw,118px),1fr));gap:clamp(6px,1vh,12px)}
+  .link{gap:clamp(4px,.8vh,8px);padding:clamp(7px,1.4vh,14px) 6px clamp(6px,1.2vh,12px);font-size:clamp(.58rem,1.2vh,.7rem)}
+  .link .ic{width:clamp(28px,4.6vh,42px);height:clamp(28px,4.6vh,42px)}
+  .link .ic img{width:clamp(16px,2.6vh,24px);height:clamp(16px,2.6vh,24px)}
+  form.row{margin-top:clamp(6px,1vh,12px)}
+  .row input{padding:clamp(4px,.8vh,8px) 10px;font-size:clamp(.78rem,1.6vh,.92rem)}
+  /* weather */
+  .weather .now{gap:clamp(6px,1vw,14px)}
+  .weather .big{font-size:clamp(1.6rem,4.6vh,2.6rem);line-height:1}
+  .weather .emoji{font-size:clamp(1.7rem,4.6vh,2.6rem);line-height:1}
+  .weather .meta{font-size:clamp(.72rem,1.5vh,.88rem);line-height:1.35}
+  .forecast{margin-top:clamp(6px,1.2vh,14px);gap:clamp(3px,.4vw,6px)}
+  .fday{padding:clamp(3px,.7vh,8px) 1px;font-size:clamp(.52rem,1.1vh,.62rem)}
+  .fday b{font-size:clamp(.9rem,2.1vh,1.2rem);margin:clamp(1px,.3vh,4px) 0}
+  .saved{margin-top:clamp(3px,.6vh,8px);font-size:clamp(.56rem,1.15vh,.7rem)}
+  /* to-do / notes: input stays put, list or textarea scrolls */
+  #todoCard .cbody{display:flex;flex-direction:column;overflow:hidden}
+  #todoPane,#notesPane{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+  #todoPane.hidden,#notesPane.hidden{display:none!important}
+  #todoForm{flex:none}
+  .todos{flex:1 1 auto;min-height:0;max-height:none}
+  .todos li{padding:clamp(4px,.8vh,8px) 6px;font-size:clamp(.82rem,1.7vh,1rem)}
+  .tab{padding:clamp(3px,.5vh,5px) clamp(8px,.8vw,12px);font-size:clamp(.6rem,1.25vh,.72rem)}
+  .notes textarea{flex:1 1 auto;min-height:0;height:auto;resize:none;font-size:clamp(.8rem,1.65vh,.95rem)}
+  .empty{font-size:clamp(.72rem,1.5vh,.86rem);padding:6px 0}
+  /* stats */
+  .stats{grid-template-columns:repeat(auto-fill,minmax(clamp(120px,10vw,160px),1fr));gap:clamp(5px,.9vh,10px)}
+  .stat{padding:clamp(5px,1vh,11px) clamp(7px,.7vw,12px)}
+  .stat .lbl{font-size:clamp(.56rem,1.15vh,.7rem)}
+  .stat .val{font-size:clamp(.82rem,1.9vh,1.1rem);margin-top:clamp(1px,.4vh,5px)}
+  .stat .sub{font-size:clamp(.6rem,1.25vh,.76rem);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar{margin-top:clamp(3px,.6vh,8px);height:clamp(4px,.6vh,6px)}
+  footer{margin:0;padding-top:clamp(3px,.6vh,8px);font-size:clamp(.55rem,1.1vh,.68rem)}
+}
+/* fullscreen: use the extra room */
+:fullscreen .wrap{max-width:none}
 @media(max-width:640px){
   .wrap{padding:16px 14px 30px}
   header{flex-direction:column;align-items:flex-start}
@@ -265,7 +341,7 @@ footer a{color:var(--accent2)}
       <div class="time glitch" id="time" data-text="--:--">--:--</div>
       <div class="date" id="date"></div>
       <div class="tz">Pacific/Auckland (<span id="tzabbr">NZ</span>)</div>
-      <div class="toolbar"><button class="btn" id="themeBtn" title="Switch palette">◩ Samurai</button></div>
+      <div class="toolbar"><button class="btn" id="themeBtn" title="Switch palette">◩ Samurai</button><button class="btn" id="fsBtn" type="button" title="Toggle fullscreen (F)" aria-label="Toggle fullscreen" aria-pressed="false"><svg class="fsi" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 5V1h4M11 1h4v4M15 11v4h-4M5 15H1v-4" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="fsl">Full</span></button></div>
     </div>
   </header>
 
@@ -287,31 +363,36 @@ footer a{color:var(--accent2)}
     <section class="card nframe span-8" id="linksCard">
       <span class="neon" aria-hidden="true"></span>
       <h2><span class="hud" data-id="01">Quick links</span> <span style="display:flex;gap:6px"><button class="btn sm alt" id="resetLinks" title="Restore defaults">Reset</button><button class="btn sm" id="editLinks">Edit</button></span></h2>
+      <div class="cbody">
       <div class="links" id="links"></div>
       <form class="row hidden" id="addLink">
         <input id="lname" placeholder="Name" required>
         <input id="lurl" placeholder="https://example.com" required>
         <button class="btn primary" type="submit">Add</button>
       </form>
+      </div>
     </section>
 
     <section class="card nframe span-4 weather">
       <span class="neon" aria-hidden="true"></span>
       <h2><span class="hud" data-id="02">Weather</span> <span style="display:flex;gap:6px"><button class="btn sm" id="wLoc" title="Change location">📍</button><button class="btn sm alt" id="wRefresh" title="Refresh">↻</button></span></h2>
+      <div class="cbody">
       <div id="weather"><div class="empty">Loading weather…</div></div>
       <form class="row hidden" id="wForm">
         <input id="wCity" placeholder="City (e.g. Wellington)" required>
         <button class="btn primary" type="submit">Set</button>
         <button class="btn" type="button" id="wGeo">Use my location</button>
       </form>
+      </div>
     </section>
 
-    <section class="card nframe span-6">
+    <section class="card nframe span-6" id="todoCard">
       <span class="neon" aria-hidden="true"></span>
       <h2>
         <span class="hud" data-id="03"><span class="tabs"><button class="tab active" data-tab="todo">To-do</button><button class="tab" data-tab="notes">Notes</button></span></span>
         <button class="btn sm" id="clearDone">Clear done</button>
       </h2>
+      <div class="cbody">
       <div id="todoPane">
         <form class="row" id="todoForm" style="margin-top:0;margin-bottom:8px">
           <input id="todoInput" placeholder="New gig…" required>
@@ -323,12 +404,13 @@ footer a{color:var(--accent2)}
         <textarea id="notes" placeholder="Jot something down… (auto-saved)"></textarea>
         <div class="saved" id="savedMsg"></div>
       </div>
+      </div>
     </section>
 
     <section class="card nframe span-6">
       <span class="neon" aria-hidden="true"></span>
       <h2><span class="hud" data-id="04">System diagnostics</span> <button class="btn sm alt" id="sysRefresh" title="Refresh">↻</button></h2>
-      <div class="stats" id="stats"></div>
+      <div class="cbody"><div class="stats" id="stats"></div></div>
     </section>
   </div>
   <footer>FOAMSKULL // HUB · data stored locally in this browser · weather by <a href="https://open-meteo.com" target="_blank" rel="noopener" style="color:inherit">Open-Meteo</a></footer>
@@ -373,6 +455,23 @@ const eng=$('#engine');eng.value=store.get('engine',eng.value);
 eng.onchange=()=>store.set('engine',eng.value);
 $('#searchForm').onsubmit=e=>{e.preventDefault();const q=$('#q').value.trim();if(!q)return;
   const url=/^https?:\/\/\S+$/i.test(q)?q:eng.value+encodeURIComponent(q);window.open(url,'_blank','noopener');};
+
+/* Fullscreen (button + F key) */
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+const fsBtn=$('#fsBtn');
+const fsCan=!!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen);
+if(!fsCan)fsBtn.classList.add('hidden');
+function toggleFS(){
+  try{
+    if(fsEl()){(document.exitFullscreen||document.webkitExitFullscreen).call(document);}
+    else{const r=document.documentElement;const p=(r.requestFullscreen||r.webkitRequestFullscreen).call(r);if(p&&p.catch)p.catch(()=>{});}
+  }catch(e){}
+}
+function syncFS(){const on=!!fsEl();fsBtn.setAttribute('aria-pressed',on);fsBtn.querySelector('.fsl').textContent=on?'Exit':'Full';fsBtn.title=(on?'Exit':'Enter')+' fullscreen (F)';}
+fsBtn.onclick=toggleFS;
+document.addEventListener('fullscreenchange',syncFS);document.addEventListener('webkitfullscreenchange',syncFS);
+document.addEventListener('keydown',e=>{if((e.key==='f'||e.key==='F')&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&fsCan&&!e.target.isContentEditable&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();toggleFS();}});
+syncFS();
 document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$('#q').focus();}});
 
 /* Quick links */
