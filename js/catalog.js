@@ -24,11 +24,20 @@ export const CATALOG = [
 ];
 
 export const ACCENTS = {
-  morning: '#e38b6a',
-  day: '#3cbfc0',
-  evening: '#e2a15a',
-  night: '#8ea2ff'
+  morning: '#f0b48a',
+  day: '#6fe3e0',
+  evening: '#f0c27b',
+  night: '#b9c2ff'
 };
+
+export function ambientName(tod) {
+  return {
+    morning: 'Morning light',
+    day: 'Day light',
+    evening: 'Evening light',
+    night: 'Night light'
+  }[tod];
+}
 
 export function timeOfDay(date = new Date()) {
   const h = date.getHours();

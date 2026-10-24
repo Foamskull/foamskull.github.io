@@ -7,7 +7,7 @@
 <title>Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;0,9..144,640;1,9..144,560&family=Outfit:wght@380;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Syne:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/home.css">
 <script type="importmap">
 {
@@ -18,8 +18,17 @@
 </script>
 </head>
 <body>
+<div id="world" aria-hidden="true">
+  <canvas id="hero"></canvas>
+  <div class="grid"></div>
+  <div class="orbs"><i></i><i></i><i></i></div>
+</div>
 <div id="boot" hidden>
-  <p>Home</p>
+  <div class="boot-core">
+    <span class="mark" aria-hidden="true"></span>
+    <p>Home</p>
+    <div class="boot-bar" aria-hidden="true"><i></i></div>
+  </div>
 </div>
 <div id="app">
   <header class="top">
@@ -56,12 +65,11 @@
         <p class="lede">Shows, music, the everyday sites, and a few live details. One screen, nothing shouting.</p>
         <div class="hero-actions" data-row>
           <button type="button" id="openMedia" class="primary" data-item>Play something</button>
-          <button type="button" id="openPersonal" data-item>Notes and plans</button>
+          <button type="button" id="openPersonal" class="solid" data-item>Notes and plans</button>
         </div>
       </div>
       <div class="stage">
-        <canvas id="hero" aria-hidden="true"></canvas>
-        <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="readout"><span id="ambientLabel">Night light</span><span class="meter" aria-hidden="true"></span></div>
       </div>
     </section>
     <p id="hint" class="hint" hidden>Drag a tile to reorder it. With one highlighted, [ and ] move it and Delete removes it.</p>

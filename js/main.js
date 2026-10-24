@@ -1,4 +1,4 @@
-import { ACCENTS, greeting, timeOfDay } from './catalog.js';
+import { ACCENTS, ambientName, greeting, timeOfDay } from './catalog.js';
 import { bus } from './bus.js';
 import { mountHero } from './hero.js';
 import { bindInput, focusFirst, listenOnce, voiceSupported } from './input.js';
@@ -28,6 +28,10 @@ function applySettings() {
   bus.motion = reduce ? 0 : 1;
   document.documentElement.dataset.motion = reduce ? 'reduce' : 'full';
   document.documentElement.style.setProperty('--intensity', String(cfg.intensity));
+  if (reduce) {
+    document.documentElement.style.setProperty('--tx', '0');
+    document.documentElement.style.setProperty('--ty', '0');
+  }
   hero?.kick?.();
   document.querySelectorAll('[data-engine]').forEach(button => {
     button.setAttribute('aria-pressed', String(button.dataset.engine === cfg.engine));
@@ -56,6 +60,8 @@ function paintClock() {
     bus.accent = ACCENTS[tod];
     hero?.setAccent?.(bus.accent);
     document.querySelector('#kicker').textContent = greeting(tod);
+    const ambient = document.querySelector('#ambientLabel');
+    if (ambient) ambient.textContent = ambientName(tod);
   }
   document.querySelector('#clock').textContent = now.toLocaleTimeString('en-NZ', { hour: '2-digit', minute: '2-digit' });
   document.querySelector('#dateLine').textContent = now.toLocaleDateString('en-NZ', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -379,16 +385,26 @@ bindInput({
   closeOverlay
 });
 
+window.addEventListener('pointermove', event => {
+  if (!bus.motion || event.pointerType !== 'mouse') return;
+  const x = event.clientX / innerWidth - 0.5;
+  const y = event.clientY / innerHeight - 0.5;
+  bus.lookX = x;
+  bus.lookY = y;
+  document.documentElement.style.setProperty('--tx', x.toFixed(3));
+  document.documentElement.style.setProperty('--ty', y.toFixed(3));
+}, { passive: true });
+
 const boot = document.querySelector('#boot');
 if (params.has('noboot') || !motionOn()) boot.remove();
 else {
   const finish = () => {
     if (!boot.isConnected) return;
     boot.classList.add('out');
-    setTimeout(() => boot.remove(), 420);
+    setTimeout(() => boot.remove(), 560);
   };
   boot.hidden = false;
-  setTimeout(finish, 1100);
+  setTimeout(finish, 1500);
   boot.addEventListener('click', finish);
   document.addEventListener('keydown', finish, { once: true });
 }
