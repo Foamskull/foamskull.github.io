@@ -119,13 +119,17 @@ async function loadNews(card) {
   const stamp = [now.getUTCFullYear(), String(now.getUTCMonth() + 1).padStart(2, '0'), String(now.getUTCDate()).padStart(2, '0')].join('/');
   try {
     const data = await fetch(`https://en.wikipedia.org/api/rest_v1/feed/featured/${stamp}`).then(response => { if (!response.ok) throw new Error('status'); return response.json(); });
-    const links = (data.news || []).flatMap(story => story.links || []).slice(0, 4);
-    if (!links.length) throw new Error('empty');
-    card.innerHTML = `<p class="eyebrow">In the news</p><ul class="headlines">${links.map(link => {
-      const title = strip(link.title || link.displaytitle || 'Story');
-      const href = `https://en.wikipedia.org/wiki/${encodeURIComponent((link.normalizedtitle || title).replace(/ /g, '_'))}`;
-      return `<li><a data-item href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(title)}</a></li>`;
-    }).join('')}</ul>`;
+    const items = (data.news || []).slice(0, 4).map(story => {
+      const link = (story.links || [])[0];
+      if (!link) return null;
+      const sentence = strip(String(story.story || '').replace(/<!--[\s\S]*?-->/g, '')).split(/(?<=[.!?])\s/)[0];
+      const title = sentence || strip(link.displaytitle || link.normalizedtitle || link.title || 'Story');
+      const slug = (link.normalizedtitle || strip(link.title || title)).replace(/ /g, '_');
+      const href = `https://en.wikipedia.org/wiki/${encodeURIComponent(slug)}`;
+      return { title, href };
+    }).filter(Boolean);
+    if (!items.length) throw new Error('empty');
+    card.innerHTML = `<p class="eyebrow">In the news</p><ul class="headlines">${items.map(item => `<li><a data-item href="${esc(item.href)}" target="_blank" rel="noopener noreferrer">${esc(item.title)}</a></li>`).join('')}</ul>`;
     return;
   } catch { /* fall through */ }
   try {
