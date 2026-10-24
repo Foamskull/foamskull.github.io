@@ -168,6 +168,11 @@ textarea { min-height: 12rem; resize: vertical; }
   border-color: #ffe1a3;
   font-weight: 700;
 }
+.hero-actions .primary {
+  background: var(--amber);
+  color: #1a1204;
+  border-color: #ffe1a3;
+}
 .hero-actions .solid {
   background: #101612;
   color: #e9fff6;
