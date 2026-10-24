@@ -31,11 +31,16 @@ button,input,textarea{font:inherit;color:inherit}
   background:radial-gradient(ellipse at center,transparent 46%,rgba(0,0,0,.48))}
 #bezel{position:fixed;inset:0;width:100%;height:100%;z-index:60;pointer-events:none}
 #bezel path,.cut path{fill:none;vector-effect:non-scaling-stroke;shape-rendering:geometricPrecision}
-#bezelLine,.cut .line{stroke:#ff2a2a;stroke-width:1.5}
-#bezelTicks,.cut .ticks{stroke:rgba(255,214,214,.9);stroke-width:1}
-#bezel .run,.cut .run{stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:42 958;animation:run 8.5s linear infinite;filter:drop-shadow(0 0 3px #ff1a1a)}
-.cut{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6}
+#bezel .glow,.cut .glow{stroke:#ff1a1a;stroke-width:9;opacity:.42;animation:framePulse 3.4s ease-in-out infinite}
+#bezelLine,.cut .line{stroke:#ff2424;stroke-width:3.5}
+.cut .inner,#bezel .inner{stroke:rgba(255,228,228,.92);stroke-width:1.5}
+#bezel .brackets,.cut .brackets{stroke:#fff;stroke-width:4;stroke-linejoin:miter}
+#bezelTicks,.cut .ticks{stroke:#ffe4e4;stroke-width:2}
+#bezel .run,.cut .run{stroke:#fff;stroke-width:4.5;stroke-linecap:round;stroke-dasharray:86 914;animation:run 6.5s linear infinite;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px #ff2a2a)}
+#bezel .run.back,.cut .run.back{stroke:#ffd0d0;stroke-width:3.5;stroke-dasharray:58 942;animation-duration:8.5s;animation-direction:reverse;filter:drop-shadow(0 0 3px #ffb0b0) drop-shadow(0 0 9px #ff1a1a)}
+.cut{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6;overflow:visible}
 @keyframes run{to{stroke-dashoffset:-1000}}
+@keyframes framePulse{0%,100%{opacity:.28}50%{opacity:.72}}
 
 /* ---------- app shell ---------- */
 #app{position:relative;z-index:2;height:100vh;width:100vw;display:grid;grid-template-rows:auto 1fr auto;gap:var(--gap);padding:22px 20px 16px}
@@ -77,23 +82,23 @@ main{min-height:0;display:grid;grid-template-rows:1fr}
 
 /* ---------- windows ---------- */
 .win{position:relative;display:flex;flex-direction:column;min-height:0;overflow:hidden;border-radius:0;
-  border:1px solid rgba(255,60,60,.9);
+  border:3px solid #ff2a2a;
   background:
-    linear-gradient(#fff,#fff) left 6px top 6px / 10px 1px no-repeat,
-    linear-gradient(#fff,#fff) left 6px top 6px / 1px 10px no-repeat,
-    linear-gradient(#fff,#fff) right 6px top 6px / 10px 1px no-repeat,
-    linear-gradient(#fff,#fff) right 6px top 6px / 1px 10px no-repeat,
-    linear-gradient(#fff,#fff) left 6px bottom 6px / 10px 1px no-repeat,
-    linear-gradient(#fff,#fff) left 6px bottom 6px / 1px 10px no-repeat,
-    linear-gradient(#fff,#fff) right 6px bottom 6px / 10px 1px no-repeat,
-    linear-gradient(#fff,#fff) right 6px bottom 6px / 1px 10px no-repeat,
+    linear-gradient(#fff,#fff) left 8px top 8px / 18px 2px no-repeat,
+    linear-gradient(#fff,#fff) left 8px top 8px / 2px 18px no-repeat,
+    linear-gradient(#fff,#fff) right 8px top 8px / 18px 2px no-repeat,
+    linear-gradient(#fff,#fff) right 8px top 8px / 2px 18px no-repeat,
+    linear-gradient(#fff,#fff) left 8px bottom 8px / 18px 2px no-repeat,
+    linear-gradient(#fff,#fff) left 8px bottom 8px / 2px 18px no-repeat,
+    linear-gradient(#fff,#fff) right 8px bottom 8px / 18px 2px no-repeat,
+    linear-gradient(#fff,#fff) right 8px bottom 8px / 2px 18px no-repeat,
     linear-gradient(180deg,rgba(24,4,8,.92),rgba(6,1,2,.9));
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+  box-shadow:inset 0 0 0 1px rgba(255,226,226,.7);
   backdrop-filter:blur(16px) saturate(1.2)}
 .win:hover{border-color:#ff8a8a}
 .win::before,.win::after{display:none}
-.win>.edge{position:absolute;top:0;left:0;right:0;height:2px;overflow:hidden;pointer-events:none;z-index:3}
-.win>.edge::before{content:"";position:absolute;top:0;width:30%;height:2px;left:-30%;background:linear-gradient(90deg,transparent,#fff,var(--c),transparent);animation:edge 6s linear infinite;animation-delay:var(--d,0s)}
+.win>.edge{position:absolute;top:0;left:0;right:0;height:3px;overflow:hidden;pointer-events:none;z-index:3}
+.win>.edge::before{content:"";position:absolute;top:0;width:34%;height:3px;left:-34%;background:linear-gradient(90deg,transparent,#fff,var(--c),transparent);animation:edge 6s linear infinite;animation-delay:var(--d,0s);filter:drop-shadow(0 0 4px #ff2a2a)}
 @keyframes edge{to{left:110%}}
 .wh{display:flex;align-items:center;gap:.6rem;padding:.55rem .9rem .5rem 1rem;border-bottom:1px solid rgba(255,60,60,.45);flex:none}
 .wh h2{font-family:var(--hd);font-weight:700;font-size:.78rem;letter-spacing:.2em;color:#fff;text-shadow:0 0 8px rgba(255,30,30,.8)}
@@ -318,7 +323,7 @@ footer .tag{color:#fff;background:#ff2a2a;padding:.12rem .45rem;font-family:var(
 #sheet .bar .kbd{margin-left:auto}
 #dock{flex:1;min-height:0;overflow:auto;padding:.75rem;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--c) transparent}
 #dock.cmd-open{overflow:visible}
-#dock>.win{display:none;flex:1;min-height:0;box-shadow:none;background:transparent;border-color:rgba(255,60,60,.35)}
+#dock>.win{display:none;flex:1;min-height:0;box-shadow:inset 0 0 0 1px rgba(255,210,210,.35);background:transparent;border:3px solid rgba(255,50,50,.9)}
 #dock>.win.show{display:flex}
 #dock>.cmd.show{flex:none;overflow:visible}
 #dock>.stats.show{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-content:start;gap:0}
@@ -374,7 +379,8 @@ footer .tag{color:#fff;background:#ff2a2a;padding:.12rem .45rem;font-family:var(
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0s!important;animation-iteration-count:1!important;transition-duration:0s!important}
   .tick div{padding-left:0}
-  .aurora i,.floor,#sheet .panel,body.intro .node .ico{animation:none!important}
+  .aurora i,.floor,#sheet .panel,body.intro .node .ico,#bezel .glow,.cut .glow{animation:none!important}
+  #bezel .run,.cut .run{opacity:0}
   #sheet .panel{transform:none}
 }
 </style>
@@ -385,8 +391,12 @@ footer .tag{color:#fff;background:#ff2a2a;padding:.12rem .45rem;font-family:var(
 <div class="floor" aria-hidden="true"></div>
 <div class="fx" aria-hidden="true"></div>
 <svg id="bezel" aria-hidden="true">
-  <path id="bezelLine" pathLength="1000"></path>
+  <path class="glow" pathLength="1000"></path>
+  <path id="bezelLine" class="line" pathLength="1000"></path>
+  <path class="inner" pathLength="1000"></path>
+  <path class="brackets"></path>
   <path id="bezelRun" class="run" pathLength="1000"></path>
+  <path class="run back" pathLength="1000"></path>
   <path id="bezelTicks" class="ticks"></path>
 </svg>
 
@@ -414,7 +424,7 @@ footer .tag{color:#fff;background:#ff2a2a;padding:.12rem .45rem;font-family:var(
       </div>
       <button class="btn" id="fullBtn" title="Toggle fullscreen (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>FULL</span></button>
     </div>
-    <svg class="cut" id="headCut" aria-hidden="true"><path class="line" pathLength="1000"></path><path class="run" pathLength="1000"></path></svg>
+    <svg class="cut" id="headCut" aria-hidden="true"><path class="glow" pathLength="1000"></path><path class="line" pathLength="1000"></path><path class="inner" pathLength="1000"></path><path class="brackets"></path><path class="run" pathLength="1000"></path><path class="run back" pathLength="1000"></path></svg>
   </header>
 
   <main>
@@ -434,14 +444,14 @@ footer .tag{color:#fff;background:#ff2a2a;padding:.12rem .45rem;font-family:var(
       <div class="tick"><div id="tick">SYSTEMS NOMINAL</div></div>
       <div class="keys"><b>NODE</b> OPEN · <b>/</b> COMMAND · <b>F</b> FULL · <b>ESC</b> BACK</div>
     </div>
-    <svg class="cut" id="footCut" aria-hidden="true"><path class="line" pathLength="1000"></path><path class="run" pathLength="1000" style="animation-delay:-3s"></path></svg>
+    <svg class="cut" id="footCut" aria-hidden="true"><path class="glow" pathLength="1000"></path><path class="line" pathLength="1000"></path><path class="inner" pathLength="1000"></path><path class="brackets"></path><path class="run" pathLength="1000" style="animation-delay:-2.2s"></path><path class="run back" pathLength="1000" style="animation-delay:-4s"></path></svg>
   </footer>
 </div>
 
 <div id="sheet" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="sheetTitle">
   <div class="veil" id="sheetVeil"></div>
   <div class="panel">
-    <svg class="cut" id="panelCut" aria-hidden="true"><path class="line" pathLength="1000"></path><path class="run" pathLength="1000" style="animation-delay:-1.5s"></path></svg>
+    <svg class="cut" id="panelCut" aria-hidden="true"><path class="glow" pathLength="1000"></path><path class="line" pathLength="1000"></path><path class="inner" pathLength="1000"></path><path class="brackets"></path><path class="run" pathLength="1000" style="animation-delay:-1.4s"></path><path class="run back" pathLength="1000" style="animation-delay:-3.2s"></path></svg>
     <div class="bar">
       <button class="btn c" id="sheetBack" type="button">← BACK</button>
       <h2 id="sheetTitle">SECTION</h2>
@@ -1177,23 +1187,35 @@ else{$$('.mat').forEach(el=>el.style.animationPlayState='paused');
 function chamfer(w,h,m,c){c=Math.max(4,Math.min(c,(w-m*2)/3,(h-m*2)/3));
   const x0=m,y0=m,x1=w-m,y1=h-m;
   return `M ${x0+c} ${y0} H ${x1-c} L ${x1} ${y0+c} V ${y1-c} L ${x1-c} ${y1} H ${x0+c} L ${x0} ${y1-c} V ${y0+c} Z`}
-function fitCut(svg,w,h,m,c,ticks){if(!svg||w<8||h<8)return;
+function bracketPath(w,h,m,c,len){
+  const avail=Math.min(w,h)/2-(m+c)-1;
+  len=Math.min(len,Math.max(0,avail));
+  if(len<5)return '';
+  const x0=m,y0=m,x1=w-m,y1=h-m;
+  return `M ${x0} ${y0+c+len} V ${y0+c} L ${x0+c} ${y0} H ${x0+c+len} M ${x1-c-len} ${y0} H ${x1-c} L ${x1} ${y0+c} V ${y0+c+len} M ${x1} ${y1-c-len} V ${y1-c} L ${x1-c} ${y1} H ${x1-c-len} M ${x0+c+len} ${y1} H ${x0+c} L ${x0} ${y1-c} V ${y1-c-len}`}
+function fitCut(svg,w,h,m,c,ticks,inset){if(!svg||w<8||h<8)return;
   svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
-  const d=chamfer(w,h,m,c);
-  svg.querySelectorAll('path').forEach(p=>{if(!p.classList.contains('ticks'))p.setAttribute('d',d)});
+  inset=inset||6;
+  const d=chamfer(w,h,m,c),di=chamfer(w,h,m+inset,Math.max(6,c-2));
+  svg.querySelectorAll('path').forEach(p=>{
+    if(p.classList.contains('ticks')||p.classList.contains('brackets'))return;
+    p.setAttribute('d',p.classList.contains('inner')?di:d);
+  });
+  const br=svg.querySelector('.brackets');
+  if(br)br.setAttribute('d',bracketPath(w,h,m,c,ticks?28:16));
   const tk=svg.querySelector('.ticks');
   if(!tk)return;
   if(!ticks){tk.setAttribute('d','');return}
   const parts=[],mid=w/2,my=h/2;
-  for(let i=-5;i<=5;i++){if(!i)continue;const x=mid+i*16;if(x<m+c+10||x>w-m-c-10)continue;parts.push(`M ${x} ${m} V ${m+6}`,`M ${x} ${h-m} V ${h-m-6}`)}
-  for(let i=-4;i<=4;i++){if(!i)continue;const y=my+i*16;if(y<m+c+10||y>h-m-c-10)continue;parts.push(`M ${m} ${y} H ${m+6}`,`M ${w-m} ${y} H ${w-m-6}`)}
+  for(let i=-5;i<=5;i++){if(!i)continue;const x=mid+i*18;if(x<m+c+12||x>w-m-c-12)continue;parts.push(`M ${x} ${m} V ${m+8}`,`M ${x} ${h-m} V ${h-m-8}`)}
+  for(let i=-4;i<=4;i++){if(!i)continue;const y=my+i*18;if(y<m+c+12||y>h-m-c-12)continue;parts.push(`M ${m} ${y} H ${m+8}`,`M ${w-m} ${y} H ${w-m-8}`)}
   tk.setAttribute('d',parts.join(' '))}
 function sizeFrames(){
-  fitCut($('#bezel'),innerWidth,innerHeight,8,22,true);
+  fitCut($('#bezel'),innerWidth,innerHeight,10,24,true,7);
   const hd=$('header'),ft=$('footer'),pn=$('#sheet .panel');
-  if(hd)fitCut($('#headCut'),hd.clientWidth,hd.clientHeight,1,13,false);
-  if(ft)fitCut($('#footCut'),ft.clientWidth,ft.clientHeight,1,10,false);
-  if(pn&&pn.clientWidth>8)fitCut($('#panelCut'),pn.clientWidth,pn.clientHeight,2,14,false);
+  if(hd)fitCut($('#headCut'),hd.clientWidth,hd.clientHeight,3,14,false,5);
+  if(ft)fitCut($('#footCut'),ft.clientWidth,ft.clientHeight,3,10,false,4);
+  if(pn&&pn.clientWidth>8)fitCut($('#panelCut'),pn.clientWidth,pn.clientHeight,4,16,false,6);
 }
 let rT;addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{sizeBg();sizeGlobe();sizeFrames();sys()},120)});
 new ResizeObserver(()=>sizeFrames()).observe($('header'));
