@@ -1,8 +1,8 @@
 export const ROWS = [
-  { id: 'watch', title: 'Watch' },
-  { id: 'listen', title: 'Listen' },
-  { id: 'everyday', title: 'Everyday' },
-  { id: 'yours', title: 'Your row' }
+  { id: 'watch', title: 'Feed · visual' },
+  { id: 'listen', title: 'Feed · audio' },
+  { id: 'everyday', title: 'Comms' },
+  { id: 'yours', title: 'Local access' }
 ];
 
 export const CATALOG = [
@@ -24,18 +24,18 @@ export const CATALOG = [
 ];
 
 export const ACCENTS = {
-  morning: '#f0b48a',
-  day: '#6fe3e0',
-  evening: '#f0c27b',
-  night: '#b9c2ff'
+  morning: '#ffc14a',
+  day: '#ffb000',
+  evening: '#ff8a1e',
+  night: '#e09828'
 };
 
 export function ambientName(tod) {
   return {
-    morning: 'Morning light',
-    day: 'Day light',
-    evening: 'Evening light',
-    night: 'Night light'
+    morning: 'Stable',
+    day: 'Nominal',
+    evening: 'Elevated',
+    night: 'Quiet'
   }[tod];
 }
 
@@ -49,9 +49,9 @@ export function timeOfDay(date = new Date()) {
 
 export function greeting(tod) {
   return {
-    morning: 'Good morning',
-    day: 'Good afternoon',
-    evening: 'Good evening',
-    night: 'Good night'
+    morning: 'Day watch',
+    day: 'Main watch',
+    evening: 'Evening watch',
+    night: 'Night watch'
   }[tod];
 }

@@ -289,7 +289,7 @@ export function bindMedia() {
         video().pause();
         frame().src = '';
         stopVisuals();
-        document.querySelector('#nowName').textContent = 'Nothing playing';
+        document.querySelector('#nowName').textContent = 'Signal idle';
         document.querySelector('#dock').hidden = true;
       } else if (removingCurrent) play(index);
     }

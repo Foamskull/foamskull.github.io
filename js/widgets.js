@@ -57,9 +57,9 @@ async function loadWeather(card, place) {
       const label = i === 0 ? 'Today' : new Date(day + 'T12:00:00').toLocaleDateString('en-NZ', { weekday: 'short' });
       return `<li><b>${label}</b><span>${Math.round(data.daily.temperature_2m_max[i])}°</span><small>${Math.round(data.daily.temperature_2m_min[i])}° · ${data.daily.precipitation_probability_max[i] ?? 0}%</small></li>`;
     }).join('');
-    card.innerHTML = `<p class="eyebrow">${place}</p><p class="stat">${Math.round(data.current.temperature_2m)}°</p><p class="meta">${WMO(data.current.weather_code)} · wind ${Math.round(data.current.wind_speed_10m)} km/h</p><ol class="days">${days}</ol>`;
+    card.innerHTML = `<p class="eyebrow">Atmospheric · ${esc(place)}</p><p class="stat">${Math.round(data.current.temperature_2m)}°</p><p class="meta">${WMO(data.current.weather_code)} · wind ${Math.round(data.current.wind_speed_10m)} km/h</p><ol class="days">${days}</ol>`;
   } catch {
-    card.innerHTML = `<p class="eyebrow">${place}</p><p class="meta">Weather is offline right now.</p>`;
+    card.innerHTML = `<p class="eyebrow">Atmospheric</p><p class="meta">Scan is offline right now.</p>`;
   }
 }
 
@@ -79,10 +79,10 @@ async function loadRadar(card) {
     const zoom = 6;
     const { x, y } = tileXY(cfg.lat, cfg.lon, zoom);
     const src = `${meta.host}${frame.path}/256/${zoom}/${x}/${y}/2/1_1.png`;
-    card.innerHTML = `<p class="eyebrow">Rain near ${cfg.place}</p><img class="radar" alt="Latest rain radar tile" src="${src}">`;
-    card.querySelector('img').addEventListener('error', () => { card.innerHTML = `<p class="eyebrow">Rain radar</p><p class="meta">The radar image didn’t load.</p>`; });
+    card.innerHTML = `<p class="eyebrow">Sector radar · ${esc(cfg.place)}</p><img class="radar" alt="Latest rain radar tile" src="${src}"><span class="sweep" aria-hidden="true"></span>`;
+    card.querySelector('img').addEventListener('error', () => { card.innerHTML = `<p class="eyebrow">Sector radar</p><p class="meta">The radar image didn’t load.</p>`; });
   } catch {
-    card.innerHTML = `<p class="eyebrow">Rain radar</p><p class="meta">Radar is offline right now.</p>`;
+    card.innerHTML = `<p class="eyebrow">Sector radar</p><p class="meta">Radar is offline right now.</p>`;
   }
 }
 
@@ -95,9 +95,9 @@ async function loadCrypto(card) {
       const dir = typeof change === 'number' ? `${change >= 0 ? '+' : ''}${change.toFixed(1)}%` : '';
       return `<li><span>${label}</span><b>${money(price)}</b><small>${dir}</small></li>`;
     }).join('');
-    card.innerHTML = `<p class="eyebrow">Markets · NZD</p><ul class="prices">${rows}</ul>`;
+    card.innerHTML = `<p class="eyebrow">Market telemetry · NZD</p><ul class="prices">${rows}</ul>`;
   } catch {
-    card.innerHTML = `<p class="eyebrow">Markets</p><p class="meta">Prices are offline right now.</p>`;
+    card.innerHTML = `<p class="eyebrow">Market telemetry</p><p class="meta">Prices are offline right now.</p>`;
   }
 }
 
@@ -129,16 +129,16 @@ async function loadNews(card) {
       return { title, href };
     }).filter(Boolean);
     if (!items.length) throw new Error('empty');
-    card.innerHTML = `<p class="eyebrow">In the news</p><ul class="headlines">${items.map(item => `<li><a data-item href="${esc(item.href)}" target="_blank" rel="noopener noreferrer">${esc(item.title)}</a></li>`).join('')}</ul>`;
+    card.innerHTML = `<p class="eyebrow">Intel feed</p><ul class="headlines">${items.map(item => `<li><a data-item href="${esc(item.href)}" target="_blank" rel="noopener noreferrer">${esc(item.title)}</a></li>`).join('')}</ul>`;
     return;
   } catch { /* fall through */ }
   try {
     const data = await fetch('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=4').then(response => { if (!response.ok) throw new Error('status'); return response.json(); });
     const hits = (data.hits || []).filter(hit => hit.url && hit.title);
     if (!hits.length) throw new Error('empty');
-    card.innerHTML = `<p class="eyebrow">Headlines</p><ul class="headlines">${hits.map(hit => `<li><a data-item href="${esc(hit.url)}" target="_blank" rel="noopener noreferrer">${esc(hit.title)}</a></li>`).join('')}</ul>`;
+    card.innerHTML = `<p class="eyebrow">Intel feed</p><ul class="headlines">${hits.map(hit => `<li><a data-item href="${esc(hit.url)}" target="_blank" rel="noopener noreferrer">${esc(hit.title)}</a></li>`).join('')}</ul>`;
   } catch {
-    card.innerHTML = `<p class="eyebrow">Headlines</p><p class="meta">Headlines are offline right now.</p>`;
+    card.innerHTML = `<p class="eyebrow">Intel feed</p><p class="meta">The feed is offline right now.</p>`;
   }
 }
 
@@ -150,8 +150,9 @@ export async function renderWidgets() {
   if (cfg.widgets.radar) cards.push(['radar', 'Radar']);
   if (cfg.widgets.crypto) cards.push(['crypto', 'Crypto']);
   if (cfg.widgets.news) cards.push(['news', 'News']);
-  root.innerHTML = cards.map(([id, label]) => `<article class="card${id === 'weather' ? ' wide' : ''}" id="card-${id}" data-row><p class="eyebrow">${label}</p><p class="meta">Loading…</p></article>`).join('')
-    || '<article class="card"><p class="meta">Widgets are hidden. Turn them back on in Settings.</p></article>';
+  const names = { weather: 'Atmospheric', radar: 'Sector radar', crypto: 'Market telemetry', news: 'Intel feed' };
+  root.innerHTML = cards.map(([id]) => `<article class="card${id === 'weather' ? ' wide' : ''}${id === 'radar' ? ' scan' : ''}" id="card-${id}" data-row><p class="eyebrow">${names[id]}</p><p class="meta">Linking…</p></article>`).join('')
+    || '<article class="card"><p class="meta">Monitors are dark. Turn them back on in Systems.</p></article>';
   const jobs = [];
   if (cfg.widgets.weather) jobs.push(loadWeather(document.querySelector('#card-weather'), cfg.place));
   if (cfg.widgets.radar) jobs.push(loadRadar(document.querySelector('#card-radar')));

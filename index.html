@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Home</title>
+<title>Ops</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/home.css">
 <script type="importmap">
 {
@@ -18,30 +18,27 @@
 </script>
 </head>
 <body>
-<div id="world" aria-hidden="true">
-  <canvas id="hero"></canvas>
-  <div class="grid"></div>
-  <div class="orbs"><i></i><i></i><i></i></div>
-</div>
+<div id="world" aria-hidden="true"></div>
 <div id="boot" hidden>
   <div class="boot-core">
-    <span class="mark" aria-hidden="true"></span>
-    <p>Home</p>
-    <div class="boot-bar" aria-hidden="true"><i></i></div>
+    <p class="boot-lines"><span>SECTOR 04</span><span>LINK STABLE</span><span>MONITORS ONLINE</span></p>
+    <p class="boot-word">Ops</p>
   </div>
 </div>
 <div id="app">
   <header class="top">
     <div class="brand">
-      <span class="mark" aria-hidden="true"></span>
+      <span class="lamp" aria-hidden="true"></span>
       <div>
-        <p class="kicker" id="kicker">Good evening</p>
-        <h1>Home</h1>
+        <p class="sector">Sector 04</p>
+        <p class="kicker" id="kicker">Night watch</p>
+        <h1>Ops</h1>
       </div>
     </div>
     <form id="searchForm" class="search" role="search">
       <label class="sr" for="q">Search</label>
-      <input id="q" name="q" type="search" placeholder="Search the web or YouTube" autocomplete="off">
+      <p class="screen-id">Comms</p>
+      <input id="q" name="q" type="search" placeholder="Query the net or a channel" autocomplete="off">
       <div class="engines" data-row role="group" aria-label="Search engine">
         <button type="button" data-item data-engine="google" aria-pressed="true">Google</button>
         <button type="button" data-item data-engine="youtube" aria-pressed="false">YouTube</button>
@@ -49,40 +46,48 @@
       </div>
     </form>
     <div class="top-actions" data-row>
-      <time id="clock" datetime="">--:--</time>
+      <div class="clock-block">
+        <time id="clock" datetime="">--:--:--</time>
+        <p class="alert"><i class="lamp" aria-hidden="true"></i><span id="ambientLabel">Nominal</span></p>
+      </div>
       <button type="button" id="voiceBtn" data-item>Voice</button>
       <button type="button" id="paletteBtn" data-item>Commands</button>
-      <button type="button" id="settingsBtn" data-item>Settings</button>
+      <button type="button" id="settingsBtn" data-item>Systems</button>
     </div>
   </header>
+  <p class="ticker" aria-hidden="true"><span>SECTOR 04 · FEEDS LIVE · COMMS OPEN · ATMOSPHERIC LINK · SECTOR RADAR · MARKET TELEMETRY · INTEL FEED · SECTOR 04 · FEEDS LIVE · COMMS OPEN · ATMOSPHERIC LINK · SECTOR RADAR · MARKET TELEMETRY · INTEL FEED · </span></p>
   <p id="voiceStatus" class="status" aria-live="polite"></p>
 
   <main>
     <section class="hero">
       <div class="hero-copy">
+        <p class="screen-id">Status</p>
         <p class="eyebrow" id="dateLine"></p>
-        <h2>What do you feel like?</h2>
-        <p class="lede">Shows, music, the everyday sites, and a few live details. One screen, nothing shouting.</p>
+        <h2>Hold the board.</h2>
+        <p class="lede">Visual feeds, audio channels, civic links, and the live sector monitors. One operations floor.</p>
         <div class="hero-actions" data-row>
-          <button type="button" id="openMedia" class="primary" data-item>Play something</button>
-          <button type="button" id="openPersonal" class="solid" data-item>Notes and plans</button>
+          <button type="button" id="openMedia" class="primary" data-item>Broadcast</button>
+          <button type="button" id="openPersonal" class="solid" data-item>Operations log</button>
         </div>
       </div>
       <div class="stage">
-        <div class="readout"><span id="ambientLabel">Night light</span><span class="meter" aria-hidden="true"></span></div>
+        <p class="screen-id">Scan</p>
+        <canvas id="hero" aria-hidden="true"></canvas>
+        <div class="orbs" aria-hidden="true"></div>
+        <div class="readout"><span>Sector map</span><span class="meter" aria-hidden="true"></span></div>
       </div>
     </section>
-    <p id="hint" class="hint" hidden>Drag a tile to reorder it. With one highlighted, [ and ] move it and Delete removes it.</p>
+    <p id="hint" class="hint" hidden>Drag a channel to reorder it. With one highlighted, [ and ] move it and Delete removes it.</p>
     <div id="rows"></div>
     <section class="widgets" id="widgets" aria-label="Live info"></section>
   </main>
 
   <footer class="dock" id="dock" hidden>
-    <p id="nowName">Nothing playing</p>
+    <p id="nowName">Signal idle</p>
     <div data-row>
       <button type="button" id="dockPlay" data-item>Play</button>
       <button type="button" id="dockNext" data-item>Next</button>
-      <button type="button" id="dockOpen" data-item>Open player</button>
+      <button type="button" id="dockOpen" data-item>Open monitor</button>
     </div>
   </footer>
   <p class="keys">Arrows move · Enter opens · / or Ctrl K for commands</p>
@@ -99,11 +104,11 @@
 
     <section id="panel-media">
       <div id="drop" class="drop">
-        <p>Drop music or video here</p>
+        <p>Drop a file onto the monitor</p>
         <label class="file">Choose files<input id="filePick" type="file" accept="audio/*,video/*" multiple></label>
       </div>
       <form id="urlForm" class="inline" data-row>
-        <input id="mediaUrl" type="url" placeholder="Direct link or YouTube URL" aria-label="Media address">
+        <input id="mediaUrl" type="url" placeholder="Direct link or YouTube URL" aria-label="Broadcast address">
         <button type="submit" data-item>Add</button>
       </form>
       <video id="video" controls playsinline hidden></video>
@@ -123,14 +128,14 @@
 
     <section id="panel-personal" hidden>
       <div class="tabs" data-row>
-        <button type="button" data-item data-show="notes" aria-pressed="true">Notes</button>
-        <button type="button" data-item data-show="tasks" aria-pressed="false">Tasks</button>
-        <button type="button" data-item data-show="agenda" aria-pressed="false">Agenda</button>
+        <button type="button" data-item data-show="notes" aria-pressed="true">Log</button>
+        <button type="button" data-item data-show="tasks" aria-pressed="false">Directives</button>
+        <button type="button" data-item data-show="agenda" aria-pressed="false">Schedule</button>
         <button type="button" data-item data-show="links" aria-pressed="false">Links</button>
       </div>
-      <div data-tab="notes"><textarea id="notes" aria-label="Notes" placeholder="Write something you’ll want later."></textarea></div>
+      <div data-tab="notes"><textarea id="notes" aria-label="Operations log" placeholder="Write a log entry."></textarea></div>
       <div data-tab="tasks" hidden>
-        <form id="todoForm" class="inline" data-row><input id="todoText" maxlength="140" placeholder="Add a task" aria-label="Task"><button type="submit" data-item>Add</button></form>
+        <form id="todoForm" class="inline" data-row><input id="todoText" maxlength="140" placeholder="Add a directive" aria-label="Directive"><button type="submit" data-item>Add</button></form>
         <ul id="todoList"></ul>
       </div>
       <div data-tab="agenda" hidden>
@@ -150,7 +155,7 @@
       <form id="settingsForm" class="stack" data-row>
         <label>Place<input name="place" autocomplete="off"></label>
         <div class="inline"><button type="button" id="placeBtn" data-item>Look up</button><p id="placeStatus" class="meta"></p></div>
-        <label>Glow<input name="intensity" type="range" min="0" max="1" step="0.05"></label>
+        <label>Phosphor<input name="intensity" type="range" min="0" max="1" step="0.05"></label>
         <label>Motion
           <select name="motion">
             <option value="system">Match this device</option>
@@ -166,13 +171,13 @@
           </select>
         </label>
         <fieldset>
-          <legend>Widgets</legend>
-          <label><input name="weather" type="checkbox"> Weather</label>
-          <label><input name="radar" type="checkbox"> Rain radar</label>
-          <label><input name="crypto" type="checkbox"> Crypto</label>
-          <label><input name="news" type="checkbox"> Headlines</label>
+          <legend>Monitors</legend>
+          <label><input name="weather" type="checkbox"> Atmospheric scan</label>
+          <label><input name="radar" type="checkbox"> Sector radar</label>
+          <label><input name="crypto" type="checkbox"> Market telemetry</label>
+          <label><input name="news" type="checkbox"> Intel feed</label>
         </fieldset>
-        <button type="button" id="resetTiles" data-item>Restore the original apps</button>
+        <button type="button" id="resetTiles" data-item>Restore the channel list</button>
         <p id="padState" class="meta">No controller yet. A gamepad can move and select.</p>
       </form>
     </section>
@@ -181,7 +186,7 @@
 
 <div id="palette" hidden>
   <div class="palette" role="dialog" aria-modal="true" aria-label="Commands">
-    <input id="palQ" type="search" placeholder="Type a command or a search" autocomplete="off">
+    <input id="palQ" type="search" placeholder="Command or search" autocomplete="off">
     <div id="palList" data-row></div>
   </div>
 </div>

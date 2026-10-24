@@ -1,28 +1,12 @@
 import { bus } from './bus.js';
 
-function glowTexture(THREE) {
-  const canvas = document.createElement('canvas');
-  canvas.width = 128;
-  canvas.height = 128;
-  const ctx = canvas.getContext('2d');
-  const grd = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-  grd.addColorStop(0, 'rgba(255,255,255,.95)');
-  grd.addColorStop(0.35, 'rgba(255,255,255,.28)');
-  grd.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.fillStyle = grd;
-  ctx.fillRect(0, 0, 128, 128);
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  return texture;
-}
-
 export async function mountHero(canvas) {
-  const world = canvas.parentElement;
+  const stage = canvas.parentElement;
   let THREE;
   try {
     THREE = await import('three');
   } catch {
-    world.classList.add('fallback');
+    stage.classList.add('fallback');
     return { stop() {}, setAccent() {}, kick() {} };
   }
   let renderer;
@@ -34,141 +18,119 @@ export async function mountHero(canvas) {
       powerPreference: 'high-performance'
     });
   } catch {
-    world.classList.add('fallback');
+    stage.classList.add('fallback');
     return { stop() {}, setAccent() {}, kick() {} };
   }
-  renderer.setClearColor(0x000000, 0);
+  renderer.setClearColor(0x07080a, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 40);
-  camera.position.set(0, 0.15, 7.6);
+  scene.fog = new THREE.Fog(0x07080a, 9, 18);
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 40);
+  camera.position.set(5.2, 4.1, 6.4);
 
-  const accent = new THREE.Color(bus.accent);
-  scene.add(new THREE.AmbientLight(0xf7f5ff, 0.35));
-  const key = new THREE.DirectionalLight(0xffffff, 1.8);
-  key.position.set(3, 4, 5);
+  const accent = new THREE.Color(bus.accent || '#ffb000');
+  const teal = new THREE.Color('#1f6f62');
+  scene.add(new THREE.AmbientLight(0xffe2a8, 0.35));
+  const key = new THREE.DirectionalLight(accent, 1.4);
+  key.position.set(4, 6, 3);
   scene.add(key);
-  const rim = new THREE.PointLight(accent, 18, 12, 2);
-  rim.position.set(1.6, 0.4, 1.2);
-  scene.add(rim);
 
-  const count = window.innerWidth < 720 ? 480 : 960;
-  const bases = new Float32Array(count * 3);
-  const seeds = new Float32Array(count);
-  for (let i = 0; i < count; i++) {
-    bases[i * 3] = (Math.random() - 0.5) * 18;
-    bases[i * 3 + 1] = (Math.random() - 0.5) * 10;
-    bases[i * 3 + 2] = (Math.random() - 0.5) * 8;
-    seeds[i] = Math.random();
+  const model = new THREE.Group();
+  scene.add(model);
+  const grid = new THREE.GridHelper(11, 16, 0x2f6f60, 0x14332c);
+  model.add(grid);
+
+  const heights = [0.32, 0.55, 0.85, 1.15, 1.6, 2.15];
+  const geos = heights.map(h => new THREE.BoxGeometry(0.68, h, 0.68));
+  const cityMat = new THREE.MeshBasicMaterial({ color: accent, wireframe: true, transparent: true, opacity: 0.9 });
+  const city = new THREE.Group();
+  for (let x = -3; x <= 3; x++) {
+    for (let z = -3; z <= 3; z++) {
+      if (Math.abs(x) === 3 && Math.abs(z) === 3) continue;
+      const index = Math.abs((x * 5 + z * 3 + 12) % heights.length);
+      const h = heights[index];
+      const block = new THREE.Mesh(geos[index], cityMat);
+      block.position.set(x * 0.92, h / 2, z * 0.92);
+      city.add(block);
+    }
   }
-  const pointsGeo = new THREE.BufferGeometry();
-  pointsGeo.setAttribute('position', new THREE.BufferAttribute(bases.slice(), 3));
-  const pointsMat = new THREE.PointsMaterial({
-    color: accent,
-    size: 0.042,
-    transparent: true,
-    opacity: 0.9,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    sizeAttenuation: true
-  });
-  const points = new THREE.Points(pointsGeo, pointsMat);
-  scene.add(points);
+  model.add(city);
 
-  const texture = glowTexture(THREE);
-  const hazeMat = new THREE.SpriteMaterial({
-    map: texture,
-    color: accent,
-    transparent: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    opacity: 0.55
-  });
-  const haze = new THREE.Sprite(hazeMat);
-  haze.scale.set(7.5, 7.5, 1);
-  haze.position.set(1.5, 0.1, -1.4);
-  scene.add(haze);
-  const shaftMat = hazeMat.clone();
-  shaftMat.opacity = 0.28;
-  const shaft = new THREE.Sprite(shaftMat);
-  shaft.scale.set(2.2, 8.5, 1);
-  shaft.position.set(2.4, 0.2, -0.6);
-  scene.add(shaft);
+  const hullMat = new THREE.MeshBasicMaterial({ color: 0x7dffe0, wireframe: true });
+  const hull = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.28, 0.55), hullMat);
+  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.7, 4), hullMat);
+  nose.rotation.z = -Math.PI / 2;
+  nose.position.x = 1.45;
+  const wingL = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.06, 1.35), hullMat);
+  wingL.position.set(-0.2, 0, 0);
+  hull.add(body, nose, wingL);
+  hull.position.set(1.4, 1.7, -1.2);
+  hull.rotation.y = 0.5;
+  model.add(hull);
 
-  const group = new THREE.Group();
-  group.position.set(1.7, 0.05, 0);
-  scene.add(group);
-  const glass = new THREE.MeshStandardMaterial({
-    color: 0xf4f7fb,
-    metalness: 0.72,
-    roughness: 0.12,
-    emissive: accent,
-    emissiveIntensity: 0.28,
-    transparent: true,
-    opacity: 0.72
-  });
-  const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.78, 0), glass);
-  group.add(core);
-  const wire = new THREE.Mesh(
-    new THREE.OctahedronGeometry(1.08, 0),
-    new THREE.MeshBasicMaterial({ color: accent, wireframe: true, transparent: true, opacity: 0.55 })
+  const scan = new THREE.Group();
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(3.15, 3.24, 72),
+    new THREE.MeshBasicMaterial({ color: accent, side: THREE.DoubleSide, transparent: true, opacity: 0.85 })
   );
-  group.add(wire);
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0xf7f8fb, transparent: true, opacity: 0.82 });
-  const rings = [[1.15, 0.15, 0.2], [0.35, 1.05, 0.4], [0.9, 0.4, 1.15]].map(rot => {
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(1.38, 0.012, 12, 96), ringMat);
-    ring.rotation.set(rot[0], rot[1], rot[2]);
-    group.add(ring);
-    return ring;
+  ring.rotation.x = -Math.PI / 2;
+  const arm = new THREE.Mesh(
+    new THREE.PlaneGeometry(3.15, 0.045),
+    new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0.95, side: THREE.DoubleSide })
+  );
+  arm.rotation.x = -Math.PI / 2;
+  arm.position.set(1.55, 0.02, 0);
+  scan.add(ring, arm);
+  model.add(scan);
+
+  const dustCount = 140;
+  const dustGeo = new THREE.BufferGeometry();
+  const dustPos = new Float32Array(dustCount * 3);
+  for (let i = 0; i < dustCount; i++) {
+    dustPos[i * 3] = (Math.random() - 0.5) * 10;
+    dustPos[i * 3 + 1] = Math.random() * 3.2;
+    dustPos[i * 3 + 2] = (Math.random() - 0.5) * 10;
+  }
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  const dustMat = new THREE.PointsMaterial({
+    color: accent,
+    size: 0.035,
+    transparent: true,
+    opacity: 0.7,
+    depthWrite: false
   });
+  model.add(new THREE.Points(dustGeo, dustMat));
 
   const look = { x: 0, y: 0 };
   let frame = 0;
   let running = true;
 
   function resize() {
-    const width = world.clientWidth || window.innerWidth;
-    const height = world.clientHeight || window.innerHeight;
-    const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-    renderer.setPixelRatio(ratio);
+    const width = Math.max(stage.clientWidth || 320, 10);
+    const height = Math.max(stage.clientHeight || 240, 10);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setSize(width, height, false);
-    camera.aspect = width / Math.max(1, height);
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
-  }
-
-  function flow(t) {
-    const arr = pointsGeo.attributes.position.array;
-    for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
-      const seed = seeds[i];
-      const wave = t * 0.22 + seed * 6.283;
-      arr[i3] = bases[i3] + Math.sin(wave + bases[i3 + 1] * 0.35) * 0.38;
-      arr[i3 + 1] = bases[i3 + 1] + Math.cos(wave * 0.8 + bases[i3] * 0.2) * 0.28;
-      arr[i3 + 2] = bases[i3 + 2] + Math.sin(wave * 0.55) * 0.22;
-    }
-    pointsGeo.attributes.position.needsUpdate = true;
   }
 
   function draw(now) {
     const t = (now || 0) / 1000;
     const motion = bus.motion;
-    look.x += ((bus.lookX || 0) - look.x) * (motion ? 0.06 : 1);
-    look.y += ((bus.lookY || 0) - look.y) * (motion ? 0.06 : 1);
+    look.x += ((bus.lookX || 0) - look.x) * (motion ? 0.08 : 1);
+    look.y += ((bus.lookY || 0) - look.y) * (motion ? 0.08 : 1);
     const portrait = camera.aspect < 1.05;
-    group.position.x = (portrait ? 0 : 1.65) + look.x * 0.45;
-    group.position.y = (portrait ? -0.15 : 0.05) - look.y * 0.28;
-    const spin = motion ? t * 0.22 : 0.5;
-    group.rotation.y = spin + look.x * 0.9;
-    group.rotation.x = look.y * 0.55 + Math.sin(spin) * 0.08 * motion;
-    rings[0].rotation.z = spin * 0.7;
-    rings[1].rotation.x = 0.35 + spin * 0.4;
-    wire.rotation.y = -spin * 0.6;
+    camera.position.set(portrait ? 0.2 : 5.1, 3.6 - look.y * 0.4, portrait ? 8.2 : 6.3);
+    camera.lookAt(0, 0.7, 0);
+    model.rotation.y = (motion ? t * 0.12 : 0.4) + look.x * 0.35;
+    scan.rotation.y = motion ? t * 0.7 : 0.8;
+    hull.position.y = 1.65 + Math.sin(t * 0.8) * 0.08 * motion;
     const pulse = bus.pulse || 0;
-    glass.emissiveIntensity = 0.22 + pulse * 1.35;
-    pointsMat.size = 0.038 + pulse * 0.06;
-    haze.scale.setScalar(7.2 + pulse * 1.6 + Math.sin(t * 0.6) * 0.15 * motion);
-    rim.intensity = 14 + pulse * 22;
-    if (motion) flow(t);
+    cityMat.opacity = 0.78 + pulse * 0.22;
+    ring.material.opacity = 0.45 + pulse * 0.5;
+    key.intensity = 1.1 + pulse * 1.6;
     renderer.render(scene, camera);
   }
 
@@ -183,7 +145,7 @@ export async function mountHero(canvas) {
   }
 
   const observer = new ResizeObserver(resize);
-  observer.observe(world);
+  observer.observe(stage);
   resize();
   draw(0);
   if (bus.motion) loop(performance.now());
@@ -194,12 +156,11 @@ export async function mountHero(canvas) {
   return {
     setAccent(hex) {
       accent.set(hex);
-      pointsMat.color.copy(accent);
-      glass.emissive.copy(accent);
-      wire.material.color.copy(accent);
-      hazeMat.color.copy(accent);
-      shaftMat.color.copy(accent);
-      rim.color.copy(accent);
+      cityMat.color.copy(accent);
+      ring.material.color.copy(accent);
+      arm.material.color.copy(accent);
+      dustMat.color.copy(accent);
+      key.color.copy(accent);
       if (!bus.motion) draw(0);
     },
     kick() {
@@ -210,17 +171,20 @@ export async function mountHero(canvas) {
       cancelAnimationFrame(frame);
       observer.disconnect();
       renderer.dispose();
-      pointsGeo.dispose();
-      pointsMat.dispose();
-      texture.dispose();
-      hazeMat.dispose();
-      shaftMat.dispose();
-      glass.dispose();
-      wire.geometry.dispose();
-      wire.material.dispose();
-      ringMat.dispose();
-      rings.forEach(ring => ring.geometry.dispose());
-      core.geometry.dispose();
+      geos.forEach(geo => geo.dispose());
+      cityMat.dispose();
+      hullMat.dispose();
+      body.geometry.dispose();
+      nose.geometry.dispose();
+      wingL.geometry.dispose();
+      ring.geometry.dispose();
+      ring.material.dispose();
+      arm.geometry.dispose();
+      arm.material.dispose();
+      dustGeo.dispose();
+      dustMat.dispose();
+      grid.geometry?.dispose?.();
+      teal.set('#000');
     }
   };
 }

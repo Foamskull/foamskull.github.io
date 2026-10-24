@@ -1,6 +1,6 @@
 export const bus = {
   pulse: 0,
-  accent: '#b9c2ff',
+  accent: '#ffb000',
   motion: 1,
   playing: false,
   lookX: 0,

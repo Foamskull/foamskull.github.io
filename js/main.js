@@ -63,7 +63,7 @@ function paintClock() {
     const ambient = document.querySelector('#ambientLabel');
     if (ambient) ambient.textContent = ambientName(tod);
   }
-  document.querySelector('#clock').textContent = now.toLocaleTimeString('en-NZ', { hour: '2-digit', minute: '2-digit' });
+  document.querySelector('#clock').textContent = now.toLocaleTimeString('en-NZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   document.querySelector('#dateLine').textContent = now.toLocaleDateString('en-NZ', { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
@@ -115,9 +115,9 @@ function goSearch(engine, query) {
 
 function openNamed(name) {
   const text = name.toLowerCase();
-  if (text.includes('media') || text.includes('music') || text.includes('player')) return openPanel('media');
-  if (text.includes('note') || text.includes('task') || text.includes('calendar') || text.includes('agenda')) return openPanel('personal');
-  if (text.includes('setting')) return openPanel('settings');
+  if (text.includes('media') || text.includes('music') || text.includes('player') || text.includes('broadcast')) return openPanel('media');
+  if (text.includes('note') || text.includes('task') || text.includes('calendar') || text.includes('agenda') || text.includes('directive') || /\blog\b/.test(text)) return openPanel('personal');
+  if (/\bsettings?\b/.test(text) || /\bsystems?\b/.test(text)) return openPanel('settings');
   const tile = findTile(name);
   if (tile) window.open(tile.url, '_blank', 'noopener');
 }
@@ -129,7 +129,7 @@ function openPanel(name) {
   window.__home.section = name;
   if (name === 'personal') paintPersonal();
   if (name === 'settings') applySettings();
-  const title = { media: 'Media', personal: 'Yours', settings: 'Settings' }[name];
+  const title = { media: 'Broadcast', personal: 'Operations log', settings: 'Systems' }[name];
   document.querySelector('#sheetTitle').textContent = title;
   focusFirst();
 }
