@@ -31,19 +31,21 @@ button,input,textarea{font:inherit;color:inherit}
   background:radial-gradient(ellipse at center,transparent 46%,rgba(0,0,0,.48))}
 #bezel{position:fixed;inset:0;width:100%;height:100%;z-index:60;pointer-events:none}
 #bezel path,.cut path{fill:none;vector-effect:non-scaling-stroke;shape-rendering:geometricPrecision}
-#bezel .glow,.cut .glow{stroke:#ff1a1a;stroke-width:9;opacity:.42;animation:framePulse 3.4s ease-in-out infinite}
-#bezelLine,.cut .line{stroke:#ff2424;stroke-width:3.5}
-.cut .inner,#bezel .inner{stroke:rgba(255,228,228,.92);stroke-width:1.5}
-#bezel .brackets,.cut .brackets{stroke:#fff;stroke-width:4;stroke-linejoin:miter}
-#bezelTicks,.cut .ticks{stroke:#ffe4e4;stroke-width:2}
-#bezel .run,.cut .run{stroke:#fff;stroke-width:4.5;stroke-linecap:round;stroke-dasharray:86 914;animation:run 6.5s linear infinite;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px #ff2a2a)}
-#bezel .run.back,.cut .run.back{stroke:#ffd0d0;stroke-width:3.5;stroke-dasharray:58 942;animation-duration:8.5s;animation-direction:reverse;filter:drop-shadow(0 0 3px #ffb0b0) drop-shadow(0 0 9px #ff1a1a)}
+#bezel .glow,.cut .glow{stroke:#ff0000;stroke-width:18;opacity:.5;animation:framePulse 3.2s ease-in-out infinite}
+#bezelLine,#headCut .line,#footCut .line{stroke:#ff1212;stroke-width:7}
+#panelCut .line{stroke:#ff1a1a;stroke-width:5}
+.cut .inner,#bezel .inner{stroke:#9d0016;stroke-width:2.5}
+#bezel .brackets,#headCut .brackets,#footCut .brackets{stroke:#ff2424;stroke-width:8;stroke-linejoin:miter}
+#panelCut .brackets{stroke:#ff1a1a;stroke-width:6;stroke-linejoin:miter}
+#bezelTicks,.cut .ticks{stroke:#ff1a1a;stroke-width:3}
+#bezel .run,.cut .run{stroke:#ff2a2a;stroke-width:6;stroke-linecap:round;stroke-dasharray:92 908;animation:run 6.5s linear infinite;filter:drop-shadow(0 0 4px #ff1a1a) drop-shadow(0 0 12px #ff0000) drop-shadow(0 0 18px #b00014)}
+#bezel .run.back,.cut .run.back{stroke:#d40018;stroke-width:5;stroke-dasharray:64 936;animation-duration:8.5s;animation-direction:reverse;filter:drop-shadow(0 0 4px #ff0030) drop-shadow(0 0 14px #9a0014)}
 .cut{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6;overflow:visible}
 @keyframes run{to{stroke-dashoffset:-1000}}
-@keyframes framePulse{0%,100%{opacity:.28}50%{opacity:.72}}
+@keyframes framePulse{0%,100%{opacity:.38}50%{opacity:.92}}
 
 /* ---------- app shell ---------- */
-#app{position:relative;z-index:2;height:100vh;width:100vw;display:grid;grid-template-rows:auto 1fr auto;gap:var(--gap);padding:22px 20px 16px}
+#app{position:relative;z-index:2;height:100vh;width:100vw;display:grid;grid-template-rows:auto 1fr auto;gap:var(--gap);padding:28px 24px 18px}
 header{position:relative;display:block;background:transparent;border:0;box-shadow:none;padding:0;height:auto}
 .hin,.fin{position:relative;background:linear-gradient(180deg,rgba(28,4,8,.9),rgba(6,1,2,.82));
   clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% var(--cut),100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,var(--cut) 100%,0 calc(100% - var(--cut)),0 var(--cut))}
@@ -82,23 +84,23 @@ main{min-height:0;display:grid;grid-template-rows:1fr}
 
 /* ---------- windows ---------- */
 .win{position:relative;display:flex;flex-direction:column;min-height:0;overflow:hidden;border-radius:0;
-  border:3px solid #ff2a2a;
+  border:5px solid #ff1414;
   background:
-    linear-gradient(#fff,#fff) left 8px top 8px / 18px 2px no-repeat,
-    linear-gradient(#fff,#fff) left 8px top 8px / 2px 18px no-repeat,
-    linear-gradient(#fff,#fff) right 8px top 8px / 18px 2px no-repeat,
-    linear-gradient(#fff,#fff) right 8px top 8px / 2px 18px no-repeat,
-    linear-gradient(#fff,#fff) left 8px bottom 8px / 18px 2px no-repeat,
-    linear-gradient(#fff,#fff) left 8px bottom 8px / 2px 18px no-repeat,
-    linear-gradient(#fff,#fff) right 8px bottom 8px / 18px 2px no-repeat,
-    linear-gradient(#fff,#fff) right 8px bottom 8px / 2px 18px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) left 10px top 10px / 26px 3px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) left 10px top 10px / 3px 26px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) right 10px top 10px / 26px 3px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) right 10px top 10px / 3px 26px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) left 10px bottom 10px / 26px 3px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) left 10px bottom 10px / 3px 26px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) right 10px bottom 10px / 26px 3px no-repeat,
+    linear-gradient(#ff1a1a,#ff1a1a) right 10px bottom 10px / 3px 26px no-repeat,
     linear-gradient(180deg,rgba(24,4,8,.92),rgba(6,1,2,.9));
-  box-shadow:inset 0 0 0 1px rgba(255,226,226,.7);
+  box-shadow:inset 0 0 0 2px rgba(156,0,22,.85),0 0 16px rgba(255,0,0,.35);
   backdrop-filter:blur(16px) saturate(1.2)}
 .win:hover{border-color:#ff8a8a}
 .win::before,.win::after{display:none}
-.win>.edge{position:absolute;top:0;left:0;right:0;height:3px;overflow:hidden;pointer-events:none;z-index:3}
-.win>.edge::before{content:"";position:absolute;top:0;width:34%;height:3px;left:-34%;background:linear-gradient(90deg,transparent,#fff,var(--c),transparent);animation:edge 6s linear infinite;animation-delay:var(--d,0s);filter:drop-shadow(0 0 4px #ff2a2a)}
+.win>.edge{position:absolute;top:0;left:0;right:0;height:5px;overflow:hidden;pointer-events:none;z-index:3}
+.win>.edge::before{content:"";position:absolute;top:0;width:36%;height:5px;left:-36%;background:linear-gradient(90deg,transparent,#c40018,#ff1a1a,transparent);animation:edge 6s linear infinite;animation-delay:var(--d,0s);filter:drop-shadow(0 0 6px #ff0000)}
 @keyframes edge{to{left:110%}}
 .wh{display:flex;align-items:center;gap:.6rem;padding:.55rem .9rem .5rem 1rem;border-bottom:1px solid rgba(255,60,60,.45);flex:none}
 .wh h2{font-family:var(--hd);font-weight:700;font-size:.78rem;letter-spacing:.2em;color:#fff;text-shadow:0 0 8px rgba(255,30,30,.8)}
@@ -323,7 +325,7 @@ footer .tag{color:#fff;background:#ff2a2a;padding:.12rem .45rem;font-family:var(
 #sheet .bar .kbd{margin-left:auto}
 #dock{flex:1;min-height:0;overflow:auto;padding:.75rem;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--c) transparent}
 #dock.cmd-open{overflow:visible}
-#dock>.win{display:none;flex:1;min-height:0;box-shadow:inset 0 0 0 1px rgba(255,210,210,.35);background:transparent;border:3px solid rgba(255,50,50,.9)}
+#dock>.win{display:none;flex:1;min-height:0;box-shadow:inset 0 0 0 2px rgba(156,0,22,.8),0 0 14px rgba(255,0,0,.28);background:transparent;border:5px solid #ff1414}
 #dock>.win.show{display:flex}
 #dock>.cmd.show{flex:none;overflow:visible}
 #dock>.stats.show{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-content:start;gap:0}
@@ -1202,7 +1204,7 @@ function fitCut(svg,w,h,m,c,ticks,inset){if(!svg||w<8||h<8)return;
     p.setAttribute('d',p.classList.contains('inner')?di:d);
   });
   const br=svg.querySelector('.brackets');
-  if(br)br.setAttribute('d',bracketPath(w,h,m,c,ticks?28:16));
+  if(br)br.setAttribute('d',bracketPath(w,h,m,c,ticks?42:26));
   const tk=svg.querySelector('.ticks');
   if(!tk)return;
   if(!ticks){tk.setAttribute('d','');return}
@@ -1211,11 +1213,11 @@ function fitCut(svg,w,h,m,c,ticks,inset){if(!svg||w<8||h<8)return;
   for(let i=-4;i<=4;i++){if(!i)continue;const y=my+i*18;if(y<m+c+12||y>h-m-c-12)continue;parts.push(`M ${m} ${y} H ${m+8}`,`M ${w-m} ${y} H ${w-m-8}`)}
   tk.setAttribute('d',parts.join(' '))}
 function sizeFrames(){
-  fitCut($('#bezel'),innerWidth,innerHeight,10,24,true,7);
+  fitCut($('#bezel'),innerWidth,innerHeight,14,28,true,9);
   const hd=$('header'),ft=$('footer'),pn=$('#sheet .panel');
-  if(hd)fitCut($('#headCut'),hd.clientWidth,hd.clientHeight,3,14,false,5);
-  if(ft)fitCut($('#footCut'),ft.clientWidth,ft.clientHeight,3,10,false,4);
-  if(pn&&pn.clientWidth>8)fitCut($('#panelCut'),pn.clientWidth,pn.clientHeight,4,16,false,6);
+  if(hd)fitCut($('#headCut'),hd.clientWidth,hd.clientHeight,6,16,false,7);
+  if(ft)fitCut($('#footCut'),ft.clientWidth,ft.clientHeight,5,11,false,5);
+  if(pn&&pn.clientWidth>8)fitCut($('#panelCut'),pn.clientWidth,pn.clientHeight,6,18,false,7);
 }
 let rT;addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{sizeBg();sizeGlobe();sizeFrames();sys()},120)});
 new ResizeObserver(()=>sizeFrames()).observe($('header'));
