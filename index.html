@@ -1,195 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" data-tod="night" data-motion="full">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<title>Ops</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Now Showing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/home.css">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
-  }
-}
-</script>
 </head>
 <body>
-<div id="world" aria-hidden="true"></div>
-<div id="boot" hidden>
-  <div class="boot-core">
-    <p class="boot-lines"><span>SECTOR 04</span><span>LINK STABLE</span><span>MONITORS ONLINE</span></p>
-    <p class="boot-word">Ops</p>
+<div id="arts"></div>
+<div class="scrim"></div>
+<div class="grain"></div>
+<header class="top">
+  <div class="me">
+    <div class="av" aria-hidden="true"><b>M</b></div>
+    <div><small id="greet">Good evening</small><strong>Mark</strong></div>
   </div>
-</div>
-<div id="app">
-  <header class="top">
-    <div class="brand">
-      <span class="lamp" aria-hidden="true"></span>
-      <div>
-        <p class="sector">Sector 04</p>
-        <p class="kicker" id="kicker">Night watch</p>
-        <h1>Ops</h1>
-      </div>
-    </div>
-    <form id="searchForm" class="search" role="search">
-      <label class="sr" for="q">Search</label>
-      <p class="screen-id">Comms</p>
-      <input id="q" name="q" type="search" placeholder="Query the net or a channel" autocomplete="off">
-      <div class="engines" data-row role="group" aria-label="Search engine">
-        <button type="button" data-item data-engine="google" aria-pressed="true">Google</button>
-        <button type="button" data-item data-engine="youtube" aria-pressed="false">YouTube</button>
-        <button type="button" data-item data-engine="ddg" aria-pressed="false">DuckDuckGo</button>
-      </div>
-    </form>
-    <div class="top-actions" data-row>
-      <div class="clock-block">
-        <time id="clock" datetime="">--:--:--</time>
-        <p class="alert"><i class="lamp" aria-hidden="true"></i><span id="ambientLabel">Nominal</span></p>
-      </div>
-      <button type="button" id="voiceBtn" data-item>Voice</button>
-      <button type="button" id="paletteBtn" data-item>Commands</button>
-      <button type="button" id="settingsBtn" data-item>Systems</button>
-    </div>
-  </header>
-  <p class="ticker" aria-hidden="true"><span>SECTOR 04 · FEEDS LIVE · COMMS OPEN · ATMOSPHERIC LINK · SECTOR RADAR · MARKET TELEMETRY · INTEL FEED · SECTOR 04 · FEEDS LIVE · COMMS OPEN · ATMOSPHERIC LINK · SECTOR RADAR · MARKET TELEMETRY · INTEL FEED · </span></p>
-  <p id="voiceStatus" class="status" aria-live="polite"></p>
-
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="screen-id">Status</p>
-        <p class="eyebrow" id="dateLine"></p>
-        <h2>Hold the board.</h2>
-        <p class="lede">Visual feeds, audio channels, civic links, and the live sector monitors. One operations floor.</p>
-        <div class="hero-actions" data-row>
-          <button type="button" id="openMedia" class="primary" data-item>Broadcast</button>
-          <button type="button" id="openPersonal" class="solid" data-item>Operations log</button>
-        </div>
-      </div>
-      <div class="stage">
-        <p class="screen-id">Scan</p>
-        <canvas id="hero" aria-hidden="true"></canvas>
-        <div class="orbs" aria-hidden="true"></div>
-        <div class="readout"><span>Sector map</span><span class="meter" aria-hidden="true"></span></div>
-      </div>
-    </section>
-    <p id="hint" class="hint" hidden>Drag a channel to reorder it. With one highlighted, [ and ] move it and Delete removes it.</p>
-    <div id="rows"></div>
-    <section class="widgets" id="widgets" aria-label="Live info"></section>
-  </main>
-
-  <footer class="dock" id="dock" hidden>
-    <p id="nowName">Signal idle</p>
-    <div data-row>
-      <button type="button" id="dockPlay" data-item>Play</button>
-      <button type="button" id="dockNext" data-item>Next</button>
-      <button type="button" id="dockOpen" data-item>Open monitor</button>
-    </div>
-  </footer>
-  <p class="keys">Arrows move · Enter opens · / or Ctrl K for commands</p>
-</div>
-
-<audio id="audio" preload="metadata"></audio>
-
-<div id="overlay" hidden>
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <header class="sheet-bar">
-      <h2 id="sheetTitle">Panel</h2>
-      <button type="button" id="sheetClose" data-item>Close</button>
-    </header>
-
-    <section id="panel-media">
-      <div id="drop" class="drop">
-        <p>Drop a file onto the monitor</p>
-        <label class="file">Choose files<input id="filePick" type="file" accept="audio/*,video/*" multiple></label>
-      </div>
-      <form id="urlForm" class="inline" data-row>
-        <input id="mediaUrl" type="url" placeholder="Direct link or YouTube URL" aria-label="Broadcast address">
-        <button type="submit" data-item>Add</button>
-      </form>
-      <video id="video" controls playsinline hidden></video>
-      <iframe id="yt" title="YouTube" hidden allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      <div id="vizWrap"><canvas id="viz" aria-hidden="true"></canvas></div>
-      <div class="transport" data-row>
-        <button type="button" id="prevBtn" data-item>Previous</button>
-        <button type="button" id="playBtn" data-item>Play</button>
-        <button type="button" id="nextBtn" data-item>Next</button>
-        <button type="button" id="shuffleBtn" data-item aria-pressed="false">Shuffle</button>
-        <button type="button" id="repeatBtn" data-item aria-pressed="false">Repeat</button>
-      </div>
-      <label class="slider">Position<input id="seek" type="range" min="0" max="0" value="0" step="0.1"></label>
-      <label class="slider">Volume<input id="volume" type="range" min="0" max="1" value="1" step="0.01"></label>
-      <ol id="playlist" data-row></ol>
-    </section>
-
-    <section id="panel-personal" hidden>
-      <div class="tabs" data-row>
-        <button type="button" data-item data-show="notes" aria-pressed="true">Log</button>
-        <button type="button" data-item data-show="tasks" aria-pressed="false">Directives</button>
-        <button type="button" data-item data-show="agenda" aria-pressed="false">Schedule</button>
-        <button type="button" data-item data-show="links" aria-pressed="false">Links</button>
-      </div>
-      <div data-tab="notes"><textarea id="notes" aria-label="Operations log" placeholder="Write a log entry."></textarea></div>
-      <div data-tab="tasks" hidden>
-        <form id="todoForm" class="inline" data-row><input id="todoText" maxlength="140" placeholder="Add a directive" aria-label="Directive"><button type="submit" data-item>Add</button></form>
-        <ul id="todoList"></ul>
-      </div>
-      <div data-tab="agenda" hidden>
-        <form id="eventForm" class="stack" data-row>
-          <input name="title" required maxlength="80" placeholder="Plan" aria-label="Plan">
-          <div class="inline"><input name="date" required type="date" aria-label="Date"><input name="time" type="time" aria-label="Time"><button type="submit" data-item>Save</button></div>
-        </form>
-        <ul id="agenda"></ul>
-      </div>
-      <div data-tab="links" hidden>
-        <form id="linkForm" class="inline" data-row><input name="name" required maxlength="40" placeholder="Name" aria-label="Link name"><input name="url" required type="url" placeholder="https://" aria-label="Link address"><button type="submit" data-item>Add</button></form>
-        <ul id="linkList"></ul>
-      </div>
-    </section>
-
-    <section id="panel-settings" hidden>
-      <form id="settingsForm" class="stack" data-row>
-        <label>Place<input name="place" autocomplete="off"></label>
-        <div class="inline"><button type="button" id="placeBtn" data-item>Look up</button><p id="placeStatus" class="meta"></p></div>
-        <label>Phosphor<input name="intensity" type="range" min="0" max="1" step="0.05"></label>
-        <label>Motion
-          <select name="motion">
-            <option value="system">Match this device</option>
-            <option value="full">Full</option>
-            <option value="reduce">Reduce</option>
-          </select>
-        </label>
-        <label>Search engine
-          <select name="engine">
-            <option value="google">Google</option>
-            <option value="youtube">YouTube</option>
-            <option value="ddg">DuckDuckGo</option>
-          </select>
-        </label>
-        <fieldset>
-          <legend>Monitors</legend>
-          <label><input name="weather" type="checkbox"> Atmospheric scan</label>
-          <label><input name="radar" type="checkbox"> Sector radar</label>
-          <label><input name="crypto" type="checkbox"> Market telemetry</label>
-          <label><input name="news" type="checkbox"> Intel feed</label>
-        </fieldset>
-        <button type="button" id="resetTiles" data-item>Restore the channel list</button>
-        <p id="padState" class="meta">No controller yet. A gamepad can move and select.</p>
-      </form>
-    </section>
+  <nav class="tabs" id="tabs" aria-label="Shelves"><span class="pill" id="pill"></span></nav>
+  <div class="stat">
+    <span class="wx" id="wx">⛅ Auckland</span>
+    <div><b id="tm">–:–</b><small id="dt"></small></div>
   </div>
-</div>
-
-<div id="palette" hidden>
-  <div class="palette" role="dialog" aria-modal="true" aria-label="Commands">
-    <input id="palQ" type="search" placeholder="Command or search" autocomplete="off">
-    <div id="palList" data-row></div>
-  </div>
-</div>
+</header>
+<section class="hero" id="hero"></section>
+<section class="shelf">
+  <div class="sh-t"><b id="sht">Right now</b><span id="shs"></span></div>
+  <div class="rail" id="rail"></div>
+</section>
+<div class="wid" id="wid"></div>
+<footer class="hints">
+  <span><kbd>←</kbd><kbd>→</kbd>browse</span>
+  <span><kbd>↵</kbd>open</span>
+  <span><kbd>Tab</kbd>switch shelf</span>
+  <span><kbd>/</kbd>search</span>
+  <div class="dots" id="dots"></div>
+</footer>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>
