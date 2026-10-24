@@ -1190,11 +1190,11 @@ function chamfer(w,h,m,c){c=Math.max(4,Math.min(c,(w-m*2)/3,(h-m*2)/3));
   const x0=m,y0=m,x1=w-m,y1=h-m;
   return `M ${x0+c} ${y0} H ${x1-c} L ${x1} ${y0+c} V ${y1-c} L ${x1-c} ${y1} H ${x0+c} L ${x0} ${y1-c} V ${y0+c} Z`}
 function bracketPath(w,h,m,c,len){
-  const avail=Math.min(w,h)/2-(m+c)-1;
-  len=Math.min(len,Math.max(0,avail));
-  if(len<5)return '';
   const x0=m,y0=m,x1=w-m,y1=h-m;
-  return `M ${x0} ${y0+c+len} V ${y0+c} L ${x0+c} ${y0} H ${x0+c+len} M ${x1-c-len} ${y0} H ${x1-c} L ${x1} ${y0+c} V ${y0+c+len} M ${x1} ${y1-c-len} V ${y1-c} L ${x1-c} ${y1} H ${x1-c-len} M ${x0+c+len} ${y1} H ${x0+c} L ${x0} ${y1-c} V ${y1-c-len}`}
+  const v=Math.min(len,Math.max(0,h/2-(m+c)-1));
+  const hz=Math.min(len,Math.max(0,w/2-(m+c)-1));
+  if(v<4&&hz<8)return '';
+  return `M ${x0} ${y0+c+v} V ${y0+c} L ${x0+c} ${y0} H ${x0+c+hz} M ${x1-c-hz} ${y0} H ${x1-c} L ${x1} ${y0+c} V ${y0+c+v} M ${x1} ${y1-c-v} V ${y1-c} L ${x1-c} ${y1} H ${x1-c-hz} M ${x0+c+hz} ${y1} H ${x0+c} L ${x0} ${y1-c} V ${y1-c-v}`}
 function fitCut(svg,w,h,m,c,ticks,inset){if(!svg||w<8||h<8)return;
   svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
   inset=inset||6;
