@@ -57,6 +57,7 @@ const pill = document.querySelector('#pill');
 let cur = 'now';
 let fi = 0;
 let list = [];
+let moved = false;
 let engine = load('settings', {}).engine || 'google';
 let swT = 0;
 let started = false;
@@ -298,8 +299,8 @@ function widgets(id) {
       : card('k-news', 'Headlines', 'Today', `<p class="k-q2">${live.news?.offline ? 'Headlines are offline right now.' : 'Fetching stories…'}</p>`);
     return [weather, news];
   }
-  if (id === 'notes') return [noteCard(), taskCard(), agendaCard()];
-  if (id === 'now') return [agendaCard()];
+  if (id === 'notes') return [noteCard(), taskCard(), agendaCard(true)];
+  if (id === 'now') return [agendaCard(false)];
   return [];
 }
 function noteCard() {
@@ -315,10 +316,11 @@ function taskCard() {
   const rows = pack.items.map(item => `<label class="k-row k-tk${item.done ? ' done' : ''}"><input type="checkbox" data-task="${esc(item.id)}"${item.done ? ' checked' : ''}${pack.sample ? ' data-sample="1"' : ''}><i></i><span>${esc(item.text)}</span></label>`).join('');
   return card('k-tasks', 'Tasks', `${done} of ${pack.items.length} done`, `${rows}<form class="add" data-add="task"><input name="text" maxlength="80" placeholder="Add a task" required><button type="submit">Add</button></form>`);
 }
-function agendaCard() {
+function agendaCard(editable) {
   const pack = agendaNow();
-  const rows = pack.items.map(item => `<div class="k-row k-ag"><em>${esc(item.when)}</em><span>${esc(item.title)}</span>${pack.sample ? '' : `<button type="button" data-drop="${esc(item.id)}" aria-label="Remove ${esc(item.title)}">×</button>`}</div>`).join('');
-  return card('k-agenda', 'Agenda', 'this week', `${rows}<form class="add" data-add="event"><input type="date" name="date" required><input type="time" name="time"><input name="title" maxlength="80" placeholder="Add a plan" required><button type="submit">Add</button></form>`);
+  const rows = pack.items.map(item => `<div class="k-row k-ag"><em>${esc(item.when)}</em><span>${esc(item.title)}</span>${editable && !pack.sample ? `<button type="button" data-drop="${esc(item.id)}" aria-label="Remove ${esc(item.title)}">×</button>` : ''}</div>`).join('');
+  const form = editable ? `<form class="add" data-add="event"><input type="date" name="date" required><input type="time" name="time"><input name="title" maxlength="80" placeholder="Add a plan" required><button type="submit">Add</button></form>` : '';
+  return card('k-agenda', 'Agenda', 'this week', rows + form);
 }
 
 function placePill() {
@@ -408,7 +410,9 @@ function heroSearch() {
 }
 function focus(index, first = false, silent = false) {
   if (cur === 'search') return;
-  fi = Math.max(0, Math.min(list.length - 1, index));
+  const next = Math.max(0, Math.min(list.length - 1, index));
+  if (!silent && !first && next !== fi) moved = true;
+  fi = next;
   const item = list[fi];
   if (!item) return;
   rail.querySelectorAll('.tile').forEach((tile, i) => tile.classList.toggle('f', i === fi));
@@ -424,9 +428,10 @@ function focus(index, first = false, silent = false) {
   }
   setHue(item.cat);
   placePill();
+  const greet = cur === 'now' && fi === 0 && !moved;
   if (silent) {
     hero.classList.remove('sw');
-    hero.innerHTML = heroHTML(item, false);
+    hero.innerHTML = heroHTML(item, greet);
     wireHero();
     return;
   }
@@ -435,7 +440,7 @@ function focus(index, first = false, silent = false) {
   hero.classList.add('sw');
   clearTimeout(swT);
   swT = setTimeout(() => {
-    hero.innerHTML = heroHTML(item, cur === 'now' && first);
+    hero.innerHTML = heroHTML(item, greet);
     hero.classList.remove('sw');
     wireHero();
   }, first ? 0 : 260);
@@ -443,6 +448,7 @@ function focus(index, first = false, silent = false) {
 }
 function show(id, keep) {
   if (!shelves()[id]) id = 'now';
+  if (!keep) moved = false;
   cur = id;
   setHue(HUE[id] ? id : 'now');
   tabs.querySelectorAll('.tab').forEach(button => button.classList.toggle('on', button.dataset.c === id));
@@ -552,18 +558,19 @@ TABS.forEach(tab => {
   tabs.appendChild(button);
 });
 
+const field = event => event.target instanceof Element && event.target.closest('input, textarea');
 let wheelAt = 0;
 addEventListener('wheel', event => {
   if (cur === 'search' || mobile() || Date.now() - wheelAt < 220) return;
-  if (event.target.closest('input, textarea, .wid')) return;
+  if (event.target instanceof Element && event.target.closest('input, textarea, .wid')) return;
   wheelAt = Date.now();
   focus(fi + ((event.deltaY || event.deltaX) > 0 ? 1 : -1));
 }, { passive: true });
 addEventListener('keydown', event => {
-  const typing = event.target.closest('input, textarea');
+  const typing = field(event);
   if (event.key === 'ArrowRight' && !typing) { event.preventDefault(); focus(fi + 1); }
   else if (event.key === 'ArrowLeft' && !typing) { event.preventDefault(); focus(fi - 1); }
-  else if (event.key === 'Tab' && !event.target.closest('textarea')) {
+  else if (event.key === 'Tab' && !(event.target instanceof Element && event.target.closest('textarea'))) {
     event.preventDefault();
     const index = TABS.findIndex(tab => tab.id === cur);
     show(TABS[(index + (event.shiftKey ? TABS.length - 1 : 1)) % TABS.length].id);
@@ -618,9 +625,12 @@ function boot() {
 }
 paintClock();
 setInterval(paintClock, 10000);
+let softT = 0;
 subscribe(() => {
   paintWeather();
-  if (started && cur !== 'search' && ['now', 'info', 'money'].includes(cur)) soft();
+  if (!started || cur === 'search' || !['now', 'info', 'money'].includes(cur)) return;
+  clearTimeout(softT);
+  softT = setTimeout(soft, 40);
 });
 refreshLive();
 bindParallax();
