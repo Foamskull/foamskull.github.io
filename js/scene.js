@@ -9,7 +9,8 @@ const PLATES = {
   money: 'img/sky-money.webp',
   info: 'img/sky-afternoon.webp',
   notes: 'img/sky-notes.webp',
-  search: 'img/sky-search.webp'
+  search: 'img/sky-search.webp',
+  movies: 'img/sky-evening.webp'
 };
 
 const LOOK = {
@@ -23,7 +24,8 @@ const LOOK = {
   money: { x: 0.81, y: 0.40, core: 'rgba(255,220,160,.55)', mid: 'rgba(40,180,160,.2)', water: '170,230,190', wide: '42vw' },
   info: { x: 0.81, y: 0.30, core: 'rgba(255,250,235,.42)', mid: 'rgba(180,210,255,.16)', water: '210,230,255', wide: '34vw' },
   notes: { x: 0.73, y: 0.40, core: 'rgba(255,186,110,.66)', mid: 'rgba(255,90,30,.26)', water: '255,170,110', wide: '46vw' },
-  search: { x: 0.78, y: 0.42, core: 'rgba(190,230,255,.4)', mid: 'rgba(60,120,255,.18)', water: '160,210,255', wide: '36vw' }
+  search: { x: 0.78, y: 0.42, core: 'rgba(190,230,255,.4)', mid: 'rgba(60,120,255,.18)', water: '160,210,255', wide: '36vw' },
+  movies: { x: 0.78, y: 0.52, core: 'rgba(255,214,170,.55)', mid: 'rgba(255,96,70,.22)', water: '255,196,150', wide: '42vw' }
 };
 
 const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
