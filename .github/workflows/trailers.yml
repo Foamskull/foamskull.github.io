@@ -1,0 +1,33 @@
+name: Refresh movie trailers
+
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  trailers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch trailers
+        run: node scripts/fetch-trailers.mjs
+      - name: Commit trailers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/trailers.json
+          if git diff --staged --quiet; then
+            echo "No trailer changes"
+          else
+            git commit -m "Update movie trailers"
+            git push
+          fi

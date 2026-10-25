@@ -1,14 +1,16 @@
 import { APPS, CATS, appByName, appsOf, catName, icon } from './catalog.js';
 import { forecastGlyph, live, refreshLive, skyGlyph, subscribe } from './live.js';
+import { loadTrailers, trailerDate, trailerEmbed, trailerThumb, trailerWatch } from './movies.js';
 import { bindParallax, setArt } from './scene.js';
 import { searchUrl } from './search.js';
 import { esc, load, save } from './store.js';
 
 const HUE = {
-  now: '#ffb347', watch: '#ff4d6d', listen: '#2ee88f', play: '#b56bff',
+  now: '#ffb347', watch: '#ff4d6d', movies: '#ff6a2c', listen: '#2ee88f', play: '#b56bff',
   money: '#2ee6c8', info: '#4fb8ff', notes: '#ff9a3c', search: '#7af0ff'
 };
-const TABS = [{ id: 'now', name: 'Now' }, ...CATS];
+const FILM = '<svg class="k-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4M3 12h4M3 16h4M17 8h4M17 12h4M17 16h4"/></svg>';
+const TABS = [{ id: 'now', name: 'Now' }, CATS[0], { id: 'movies', name: 'Movies', mark: FILM }, ...CATS.slice(1)];
 const SHOWS = [
   { title: 'Midnight Drive', ep: 'S2 · E4', service: 'Netflix', progress: 0.62, color: '#e5484d', url: 'https://www.netflix.com', left: '38 minutes left', meta: ['S2 · E4', '38 min left', 'HD · 5.1'], blurb: 'Season 2, episode 4 · 38 minutes left on Netflix. Your Sunday binge is waiting.' },
   { title: 'The Bay', ep: 'S1 · E7', service: 'TVNZ+', progress: 0.3, color: '#3b82f6', url: 'https://www.tvnz.co.nz' },
@@ -61,6 +63,10 @@ let moved = false;
 let engine = load('settings', {}).engine || 'google';
 let swT = 0;
 let started = false;
+let trailers = [];
+let trailerSound = false;
+let trailerId = '';
+let playT = 0;
 
 const forcedTod = new URLSearchParams(location.search).get('tod');
 function todOf(date = new Date()) {
@@ -255,6 +261,20 @@ function shelves() {
   return {
     now: { t: 'Right now', s: `Picked for a ${day} ${tod}`, items: [contMini(), appTile(appByName('Spotify')), weatherMini(), appTile(appByName('YouTube')), agendaMini(), appTile(appByName('Steam')), newsMini(), appTile(appByName('Disney+'))] },
     watch: { t: 'Watch', s: `${appsOf('watch').length} apps`, items: [contMini(), ...appsOf('watch').map(appTile)] },
+    movies: {
+      t: 'Movies',
+      s: trailers.length ? `${trailers.length} new trailers` : 'Trailers will be back',
+      items: trailers.map(trailer => ({
+        type: 'trailer',
+        cat: 'movies',
+        id: trailer.id,
+        title: trailer.name,
+        name: trailer.name,
+        channel: trailer.channel,
+        when: trailerDate(trailer.published),
+        kick: 'Trailer'
+      }))
+    },
     listen: { t: 'Listen', s: '1 app · now playing', items: [playMini(), ...appsOf('listen').map(appTile)] },
     play: { t: 'Play', s: `${appsOf('play').length} apps`, items: [liveMini(), ...appsOf('play').map(appTile)] },
     money: { t: 'Money', s: `${appsOf('money').length} banks · markets`, items: [...appsOf('money').map(appTile), marketMini()] },
@@ -273,6 +293,13 @@ function changeHtml(value) {
   return `<em class="${down ? 'k-dn' : 'k-up'}">${down ? '▼' : '▲'}${Math.abs(value).toFixed(1)}%</em>`;
 }
 function widgets(id) {
+  if (id === 'movies') {
+    const rows = trailers.slice(0, 6);
+    const body = rows.length
+      ? rows.map((item, i) => `<button class="k-row k-tr" type="button" data-trailer="${i}"><b>${esc(item.name)}</b><small>${esc(trailerDate(item.published))}</small></button>`).join('')
+      : '<p class="k-q2">Trailers will be back after the next refresh.</p>';
+    return [card('k-trailers', 'New trailers', rows.length ? `${trailers.length}` : 'soon', body)];
+  }
   if (id === 'watch') {
     return [card('k-cont', 'Continue watching', `${SHOWS.length} shows`, SHOWS.map(show => `<a class="k-row k-cw" href="${esc(show.url)}" target="_blank" rel="noopener"><i style="--c:${show.color}"></i><div><b>${esc(show.title)}</b><small>${esc(show.ep)} · ${esc(show.service)}</small><div class="k-bar"><u style="width:${show.progress * 100}%"></u></div></div></a>`).join(''))];
   }
@@ -330,6 +357,10 @@ function placePill() {
   if (!on) return;
   pill.style.left = `${on.offsetLeft}px`;
   pill.style.width = `${on.offsetWidth}px`;
+  const edge = on.offsetLeft - tabs.scrollLeft;
+  if (edge < 8 || edge + on.offsetWidth > tabs.clientWidth - 8) {
+    tabs.scrollTo({ left: Math.max(0, on.offsetLeft - 12), behavior: 'auto' });
+  }
 }
 function renderShelf() {
   const shelf = shelves()[cur];
@@ -344,12 +375,19 @@ function renderShelf() {
       const app = item.app;
       return `<a class="tile${app.wide ? ' wide' : ''}${app.fill ? ' fill' : ''}" style="--i:${i};--h:${hue}" href="${esc(app.url)}" target="_blank" rel="noopener"><span class="tf" style="--b:${app.bg}"><img src="${esc(app.icon)}" alt=""></span><span class="ring"></span><span class="lb">${esc(app.name)}<small>${esc(catName(app.cat))}</small></span></a>`;
     }
+    if (item.type === 'trailer') {
+      return `<button type="button" class="tile trailer" style="--i:${i};--h:${hue}"><span class="tf"><img src="${esc(trailerThumb(item.id))}" alt=""><span class="tdate">${esc(item.when)}</span></span><span class="ring"></span><span class="lb">${esc(item.name)}<small>${esc(item.when)}</small></span></button>`;
+    }
     return `<div class="tile" style="--i:${i};--h:${hue}"><span class="tf" style="background:${item.bg}"><span class="mini">${item.inner}</span></span><span class="ring"></span><span class="lb">${esc(item.kick)}</span></div>`;
   }).join('');
   rail.querySelectorAll('.tile').forEach((node, i) => {
     node.addEventListener('mouseenter', () => focus(i));
     node.addEventListener('click', event => {
       if (cur === 'search') return;
+      if (list[i].type === 'trailer') {
+        focus(i);
+        return;
+      }
       if (list[i].type === 'app' && fi !== i) {
         event.preventDefault();
         focus(i);
@@ -410,13 +448,89 @@ function heroSearch() {
   });
   setTimeout(() => input.focus({ preventScroll: true }), 280);
 }
+function renderTrailerEmpty() {
+  hero.innerHTML = '<div class="kick"><i></i>Movies</div><h1 class="ttl sm">Trailers will be back</h1><p class="desc">The latest studio trailers did not load. They show up here again after the daily refresh.</p>';
+}
+function paintTrailer(item) {
+  clearTimeout(swT);
+  hero.classList.remove('sw');
+  const frame = hero.querySelector('iframe');
+  if (frame) {
+    const title = hero.querySelector('.ttl');
+    title.textContent = item.name;
+    title.className = titleClass(item.name);
+    hero.querySelector('.desc').textContent = `${item.channel} · trailer posted ${item.when}`;
+    const bits = hero.querySelectorAll('.meta span');
+    if (bits[0]) bits[0].textContent = item.when;
+    if (bits[1]) bits[1].textContent = item.channel;
+    const link = hero.querySelector('.yt');
+    if (link) link.href = trailerWatch(item.id);
+    frame.title = `${item.name} trailer`;
+    return;
+  }
+  hero.innerHTML = `<div class="kick"><i></i>Latest trailer</div><div class="player"><iframe title="${esc(item.name)} trailer" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><h1 class="${titleClass(item.name)}">${esc(item.name)}</h1><p class="desc">${esc(item.channel)} · trailer posted ${esc(item.when)}</p><div class="meta"><span>${esc(item.when)}</span><span>${esc(item.channel)}</span><span>Trailer</span></div><div class="cta"><button class="btn unmute" type="button" aria-pressed="${trailerSound ? 'true' : 'false'}">${trailerSound ? 'Mute' : 'Unmute'}</button><a class="btn g yt" href="${esc(trailerWatch(item.id))}" target="_blank" rel="noopener">YouTube</a></div>`;
+  hero.querySelector('.unmute').addEventListener('click', toggleTrailerSound);
+  hero.querySelector('iframe').addEventListener('load', () => {
+    const player = hero.querySelector('iframe');
+    if (!player) return;
+    player.dataset.ready = '1';
+    try {
+      player.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: player.dataset.id || '1' }), '*');
+    } catch { /* the embed ignores the handshake until it is ready */ }
+  });
+}
+function startTrailer(item) {
+  const frame = hero.querySelector('iframe');
+  if (!frame || item?.type !== 'trailer') return;
+  const wantSound = trailerSound;
+  if (wantSound && frame.dataset.ready === '1' && frame.dataset.mute === '0' && frame.dataset.id && frame.dataset.id !== item.id) {
+    frame.contentWindow?.postMessage(JSON.stringify({
+      event: 'command',
+      func: 'loadVideoById',
+      args: [{ videoId: item.id, startSeconds: 0 }]
+    }), '*');
+    frame.dataset.id = item.id;
+    frame.title = `${item.name} trailer`;
+    trailerId = item.id;
+    return;
+  }
+  const mute = wantSound ? '0' : '1';
+  if (frame.dataset.id === item.id && frame.dataset.mute === mute && frame.src) return;
+  frame.dataset.id = item.id;
+  frame.dataset.mute = mute;
+  frame.dataset.ready = '0';
+  frame.title = `${item.name} trailer`;
+  trailerId = item.id;
+  frame.src = trailerEmbed(item.id, mute !== '0');
+}
+function syncTrailer(item, { first, silent }) {
+  const frame = hero.querySelector('iframe');
+  paintTrailer(item);
+  if (silent && frame && frame.dataset.id === item.id) return;
+  clearTimeout(playT);
+  playT = setTimeout(() => startTrailer(item), first || silent ? 0 : 200);
+}
+function toggleTrailerSound() {
+  const item = list[fi];
+  if (item?.type !== 'trailer') return;
+  trailerSound = !trailerSound;
+  const button = hero.querySelector('.unmute');
+  if (button) {
+    button.textContent = trailerSound ? 'Mute' : 'Unmute';
+    button.setAttribute('aria-pressed', trailerSound ? 'true' : 'false');
+  }
+  startTrailer(item);
+}
 function focus(index, first = false, silent = false) {
   if (cur === 'search') return;
   const next = Math.max(0, Math.min(list.length - 1, index));
   if (!silent && !first && next !== fi) moved = true;
   fi = next;
   const item = list[fi];
-  if (!item) return;
+  if (!item) {
+    if (cur === 'movies') renderTrailerEmpty();
+    return;
+  }
   rail.querySelectorAll('.tile').forEach((tile, i) => tile.classList.toggle('f', i === fi));
   if (!mobile()) {
     const small = rail.classList.contains('sm');
@@ -430,6 +544,10 @@ function focus(index, first = false, silent = false) {
   }
   setHue(item.cat);
   placePill();
+  if (item.type === 'trailer') {
+    syncTrailer(item, { first, silent });
+    return;
+  }
   const greet = cur === 'now' && fi === 0 && !moved;
   if (silent) {
     hero.classList.remove('sw');
@@ -449,6 +567,7 @@ function focus(index, first = false, silent = false) {
   setArt(key, seed);
 }
 function show(id, keep) {
+  clearTimeout(swT);
   if (!shelves()[id]) id = 'now';
   if (!keep) moved = false;
   cur = id;
@@ -458,7 +577,18 @@ function show(id, keep) {
   renderShelf();
   renderWidgets();
   document.body.classList.toggle('srch', id === 'search');
+  document.body.classList.toggle('movies', id === 'movies');
+  if (id !== 'movies') {
+    trailerSound = false;
+    trailerId = '';
+    clearTimeout(playT);
+    const frame = hero.querySelector('iframe');
+    if (frame) frame.src = 'about:blank';
+  }
+  const act = document.querySelector('#actHint');
+  if (act) act.textContent = id === 'movies' ? 'unmute' : 'open';
   document.querySelector('#dots').innerHTML = TABS.map(tab => `<i class="${tab.id === id ? 'on' : ''}"></i>`).join('');
+  if (id === 'movies') setArt('movies');
   if (id === 'search') {
     hero.classList.remove('sw');
     heroSearch();
@@ -516,6 +646,9 @@ function wireWidgets() {
       soft();
     });
   });
+  wid.querySelectorAll('[data-trailer]').forEach(button => {
+    button.addEventListener('click', () => focus(Number(button.dataset.trailer)));
+  });
   wid.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', event => {
       event.preventDefault();
@@ -555,7 +688,7 @@ TABS.forEach(tab => {
   button.type = 'button';
   button.className = 'tab';
   button.dataset.c = tab.id;
-  button.innerHTML = `${tab.id === 'now' ? '<svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>' : icon(tab.id, 17)}${tab.name}`;
+  button.innerHTML = `${tab.mark || (tab.id === 'now' ? '<svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg>' : icon(tab.id, 17))}${tab.name}`;
   button.addEventListener('click', () => show(tab.id));
   tabs.appendChild(button);
 });
@@ -582,7 +715,8 @@ addEventListener('keydown', event => {
     const tile = rail.querySelectorAll('.tile')[fi];
     const item = list[fi];
     if (!item) return;
-    if (item.type === 'app') tile?.click();
+    if (item.type === 'trailer') toggleTrailerSound();
+    else if (item.type === 'app') tile?.click();
     else if (item.href) window.open(item.href, '_blank', 'noopener');
     else if (item.tab || item.cat) show(item.tab || item.cat);
   }
@@ -605,7 +739,8 @@ function pollPad() {
     else if (left) { focus(fi - 1); padAt = performance.now(); }
     else if (pad.buttons[0]?.pressed) {
       const item = list[fi];
-      if (item?.type === 'app') rail.querySelectorAll('.tile')[fi]?.click();
+      if (item?.type === 'trailer') toggleTrailerSound();
+      else if (item?.type === 'app') rail.querySelectorAll('.tile')[fi]?.click();
       else if (item?.href) window.open(item.href, '_blank', 'noopener');
       else if (item?.tab || item?.cat) show(item.tab || item.cat);
       padAt = performance.now();
@@ -635,6 +770,10 @@ subscribe(() => {
   softT = setTimeout(soft, 40);
 });
 refreshLive();
+loadTrailers().then(items => {
+  trailers = items;
+  if (started && cur === 'movies') show('movies');
+});
 bindParallax();
 window.__open = show;
 window.__home = { section: 'now', tiles: 0, searchUrl: null };
