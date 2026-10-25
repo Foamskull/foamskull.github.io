@@ -62,7 +62,9 @@ let engine = load('settings', {}).engine || 'google';
 let swT = 0;
 let started = false;
 
+const forcedTod = new URLSearchParams(location.search).get('tod');
 function todOf(date = new Date()) {
+  if (forcedTod === 'morning' || forcedTod === 'afternoon' || forcedTod === 'evening' || forcedTod === 'night') return forcedTod;
   const h = date.getHours();
   if (h < 5 || h >= 21) return 'night';
   if (h < 12) return 'morning';

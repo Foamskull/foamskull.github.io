@@ -1,128 +1,187 @@
-const PAL = {
-  morning: { sky: ['#1f4fff', '#ff8f86', '#ffd78a'], r: ['#ff7a95', '#c94fd6', '#6a2fc0', '#2b1569'], sun: '#fff3c0', sy: 0.62 },
-  afternoon: { sky: ['#0d6bff', '#58c3ff', '#c9f1ff'], r: ['#4fb0ff', '#2f7be0', '#2050aa', '#11285c'], sun: '#fffbe0', sy: 0.3 },
-  evening: { sky: ['#2a0b5e', '#ff4f6d', '#ffb35c'], r: ['#d43f7a', '#8a2a8c', '#46186e', '#1c0a3a'], sun: '#ffe08a', sy: 0.7 },
-  night: { sky: ['#050a2a', '#1b2470', '#4a3aa8'], r: ['#30307e', '#22225e', '#161642', '#0a0a26'], sun: '#f3f0ff', sy: 0.25 },
-  watch: { sky: ['#170033', '#ff2e63', '#ff9a3c'], r: ['#c2145f', '#73106f', '#330848', '#140320'], sun: '#ffd166', sy: 0.66 },
-  listen: { sky: ['#003b33', '#18c98b', '#d4ff86'], r: ['#10a374', '#0b7562', '#074b42', '#032824'], sun: '#f1ffc4', sy: 0.5 },
-  play: { sky: ['#17004d', '#7b3cff', '#ff6ad5'], r: ['#6326e0', '#41169f', '#260b68', '#12043a'], sun: '#8afcff', sy: 0.58 },
-  money: { sky: ['#032a44', '#0fb5a5', '#ffe28a'], r: ['#0e9690', '#086773', '#064456', '#032332'], sun: '#fff4b8', sy: 0.6 },
-  info: { sky: ['#0a59d6', '#4fb8ff', '#d2f0ff'], r: ['#3496e6', '#2069bd', '#164c90', '#0c2c5c'], sun: '#fff8d4', sy: 0.34 },
-  notes: { sky: ['#401400', '#ff7a2f', '#ffd76b'], r: ['#e85d2c', '#b73c22', '#7c2518', '#401209'], sun: '#fff2c4', sy: 0.64 },
-  search: { sky: ['#0a1040', '#3d5bff', '#86f2ff'], r: ['#3049dc', '#2133a3', '#15206e', '#0a1142'], sun: '#e0fcff', sy: 0.4 }
+const PLATES = {
+  morning: 'img/sky-morning.webp',
+  afternoon: 'img/sky-afternoon.webp',
+  evening: 'img/sky-evening.webp',
+  night: 'img/sky-night.webp',
+  watch: 'img/sky-watch.webp',
+  listen: 'img/sky-listen.webp',
+  play: 'img/sky-play.webp',
+  money: 'img/sky-money.webp',
+  info: 'img/sky-afternoon.webp',
+  notes: 'img/sky-notes.webp',
+  search: 'img/sky-search.webp'
 };
 
-function rnd(seed) {
-  let s = seed;
-  return () => {
-    s = (s * 9301 + 49297) % 233280;
-    return s / 233280;
-  };
-}
+const LOOK = {
+  morning: { x: 0.84, y: 0.44, core: 'rgba(255,236,210,.55)', mid: 'rgba(255,170,120,.22)', water: '255,214,180', wide: '42vw' },
+  afternoon: { x: 0.81, y: 0.30, core: 'rgba(255,250,235,.42)', mid: 'rgba(180,210,255,.16)', water: '210,230,255', wide: '34vw' },
+  evening: { x: 0.78, y: 0.52, core: 'rgba(255,214,170,.55)', mid: 'rgba(255,96,70,.22)', water: '255,196,150', wide: '42vw' },
+  night: { x: 0.73, y: 0.23, core: 'rgba(226,232,255,.5)', mid: 'rgba(140,160,255,.16)', water: '186,204,255', wide: '30vw' },
+  watch: { x: 0.80, y: 0.39, core: 'rgba(255,190,150,.62)', mid: 'rgba(255,70,110,.28)', water: '255,170,160', wide: '46vw' },
+  listen: { x: 0.80, y: 0.44, core: 'rgba(230,255,190,.5)', mid: 'rgba(80,200,120,.2)', water: '190,240,170', wide: '40vw' },
+  play: { x: 0.71, y: 0.31, core: 'rgba(220,210,255,.48)', mid: 'rgba(150,80,255,.2)', water: '190,170,255', wide: '36vw' },
+  money: { x: 0.81, y: 0.40, core: 'rgba(255,220,160,.55)', mid: 'rgba(40,180,160,.2)', water: '170,230,190', wide: '42vw' },
+  info: { x: 0.81, y: 0.30, core: 'rgba(255,250,235,.42)', mid: 'rgba(180,210,255,.16)', water: '210,230,255', wide: '34vw' },
+  notes: { x: 0.73, y: 0.40, core: 'rgba(255,186,110,.66)', mid: 'rgba(255,90,30,.26)', water: '255,170,110', wide: '46vw' },
+  search: { x: 0.78, y: 0.42, core: 'rgba(190,230,255,.4)', mid: 'rgba(60,120,255,.18)', water: '160,210,255', wide: '36vw' }
+};
 
-function ridge(seed, base, amp, w) {
-  const r = rnd(seed);
-  const f = [r() * 2 + 1, r() * 3 + 2, r() * 6 + 4];
-  const ph = [r() * 6, r() * 6, r() * 6];
-  let d = `M-100 1000 L-100 ${base}`;
-  for (let x = -100; x <= w + 100; x += 20) {
-    const y = base - amp * (Math.sin(x / w * f[0] * 3.1 + ph[0]) * 0.55 + Math.sin(x / w * f[1] * 3.1 + ph[1]) * 0.3 + Math.sin(x / w * f[2] * 3.1 + ph[2]) * 0.15);
-    d += ` L${x} ${y.toFixed(1)}`;
-  }
-  return `${d} L${w + 100} 1000Z`;
-}
-
-function trees(seed, base, w, col) {
-  const r = rnd(seed);
-  let o = '';
-  for (let i = 0; i < 46; i += 1) {
-    const x = r() * w;
-    const hh = 26 + r() * 46;
-    const y = base + 8 + r() * 50;
-    o += `<path d="M${x} ${y - hh} L${x - hh * 0.28} ${y} L${x + hh * 0.28} ${y}Z" fill="${col}"/>`;
-  }
-  return o;
-}
-
-function art(key, seed) {
-  const p = PAL[key] || PAL.evening;
-  const W = 1500;
-  const H = 960;
-  const id = `g${key}${seed}`;
-  const sx = W * (0.62 + 0.1 * Math.sin(seed));
-  const sy = H * p.sy * 0.6;
-  let o = `<svg viewBox="0 0 1500 960" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p.sky[0]}"/><stop offset=".6" stop-color="${p.sky[1]}"/><stop offset="1" stop-color="${p.sky[2]}"/></linearGradient><radialGradient id="s${id}"><stop offset="0" stop-color="${p.sun}" stop-opacity=".95"/><stop offset=".25" stop-color="${p.sun}" stop-opacity=".45"/><stop offset="1" stop-color="${p.sun}" stop-opacity="0"/></radialGradient></defs><g class="kb">`;
-  o += `<rect width="1500" height="960" fill="url(#${id})"/>`;
-  if (key === 'night') {
-    const r0 = rnd(seed + 3);
-    for (let i = 0; i < 90; i += 1) o += `<circle class="glim" style="animation-delay:-${(r0() * 3).toFixed(2)}s" cx="${r0() * 1500}" cy="${r0() * 500}" r="${r0() * 1.6 + 0.4}" fill="#fff"/>`;
-  }
-  let rays = '';
-  for (let q = 0; q < 16; q += 1) {
-    const a0 = q / 16 * 6.283 - 0.06;
-    const a1 = q / 16 * 6.283 + 0.06;
-    rays += `<path d="M0 0 L${(Math.cos(a0) * 900).toFixed(0)} ${(Math.sin(a0) * 900).toFixed(0)} L${(Math.cos(a1) * 900).toFixed(0)} ${(Math.sin(a1) * 900).toFixed(0)}Z"/>`;
-  }
-  o += `<g transform="translate(${sx},${sy})"><g class="rays" fill="${p.sun}" opacity=".09">${rays}</g></g>`;
-  o += `<circle cx="${sx}" cy="${sy}" r="360" fill="url(#s${id})"/><circle cx="${sx}" cy="${sy}" r="74" fill="${p.sun}"/>`;
-  for (let b = 0; b < 3; b += 1) {
-    o += `<g class="bird" style="animation-delay:-${b * 6 + seed % 7}s"><g transform="translate(0,${200 + b * 40})"><path class="flap" d="M${b * 30} 0 q8 -8 16 0 q8 -8 16 0" fill="none" stroke="${p.r[3]}" stroke-width="3.5" stroke-linecap="round"/></g></g>`;
-  }
-  const bases = [560, 640, 730, 830];
-  const amps = [150, 120, 90, 60];
-  for (let l = 0; l < 4; l += 1) {
-    o += `<g class="ly" data-d="${l + 1}"><path d="${ridge(seed * 7 + l * 13 + 1, bases[l], amps[l], W)}" fill="${p.r[l]}"/>${l === 3 ? trees(seed + 9, bases[l] - 30, W, p.r[3]) : ''}${l === 1 ? `<path d="${ridge(seed * 7 + l * 13 + 1, bases[l] + 30, amps[l] * 0.6, W)}" fill="${p.r[l]}" opacity=".55"/>` : ''}</g>`;
-    if (l < 3) o += `<rect y="${bases[l] - 40}" width="1500" height="200" fill="${p.sky[2]}" opacity=".09"/>`;
-    if (l === 1) {
-      o += `<rect y="${bases[2] - 70}" width="1500" height="90" fill="${p.sky[2]}" opacity=".35"/>`;
-      const rr = rnd(seed + 5);
-      for (let z = 0; z < 26; z += 1) {
-        const lx = sx - 180 + rr() * 360;
-        const ly = bases[2] - 60 + rr() * 70;
-        o += `<rect class="glim" style="animation-delay:-${(rr() * 3).toFixed(2)}s" x="${lx.toFixed(0)}" y="${ly.toFixed(0)}" width="${(20 + rr() * 70).toFixed(0)}" height="3" rx="1.5" fill="${p.sun}" opacity=".8"/>`;
-      }
-    }
-  }
-  return `${o}</g></svg>`;
-}
-
+const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 const arts = () => document.querySelector('#arts');
-let current = null;
+
+let root;
+let cloud;
+let bloom;
+let shimmer;
+let ctx;
 let mx = 0;
 let my = 0;
-let lastKey = '';
+let look = LOOK.evening;
+let shown = '';
+let token = 0;
+let raf = 0;
+let preloaded = false;
 
-function applyParallax() {
-  if (!current) return;
-  current.querySelectorAll('.ly').forEach(layer => {
-    const depth = Number(layer.dataset.d);
-    layer.style.transform = `translate(${(-mx * depth * 9).toFixed(1)}px,${(-my * depth * 4).toFixed(1)}px)`;
-  });
+function ensure() {
+  if (root) return;
+  root = document.createElement('div');
+  root.className = 'art on';
+  cloud = document.createElement('img');
+  cloud.className = 'clouds';
+  cloud.alt = '';
+  cloud.decoding = 'async';
+  cloud.src = 'img/sky-clouds.webp';
+  bloom = document.createElement('div');
+  bloom.className = 'bloom';
+  shimmer = document.createElement('canvas');
+  shimmer.className = 'shimmer';
+  shimmer.width = 640;
+  shimmer.height = 180;
+  ctx = shimmer.getContext('2d', { alpha: true });
+  root.append(cloud, bloom, shimmer);
+  arts().appendChild(root);
+  if (motion) loop(performance.now());
+  else drawWater(0);
 }
 
-export function setArt(key, seed) {
-  const stamp = `${key}:${seed}`;
-  if (stamp === lastKey) return;
-  lastKey = stamp;
-  const node = document.createElement('div');
-  node.className = 'art';
-  node.innerHTML = art(key, seed);
-  arts().appendChild(node);
-  requestAnimationFrame(() => requestAnimationFrame(() => node.classList.add('on')));
-  if (current) {
-    const old = current;
-    old.classList.remove('on');
-    setTimeout(() => old.remove(), 1200);
+function placeBloom(next) {
+  look = next;
+  bloom.style.left = `${next.x * 100}%`;
+  bloom.style.top = `${next.y * 100}%`;
+  bloom.style.width = next.wide;
+  bloom.style.height = next.wide;
+  bloom.style.background = `radial-gradient(circle, ${next.core} 0%, ${next.mid} 34%, transparent 70%)`;
+}
+
+function drawWater(now) {
+  if (!ctx) return;
+  const w = shimmer.width;
+  const h = shimmer.height;
+  ctx.clearRect(0, 0, w, h);
+  const sunx = look.x * w;
+  const [r, g, b] = look.water.split(',').map(Number);
+  for (let i = 0; i < 16; i += 1) {
+    const y = (i + 0.5) / 16 * h;
+    const sway = Math.sin(now * 0.0014 + i * 0.7) * (10 + i);
+    const x = sunx + sway;
+    const alpha = (0.05 + (1 - i / 16) * 0.09) * (0.75 + 0.25 * Math.sin(now * 0.002 + i));
+    const grad = ctx.createLinearGradient(x - 90, y, x + 90, y);
+    grad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+    grad.addColorStop(0.5, `rgba(${r},${g},${b},${alpha.toFixed(3)})`);
+    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(x - 90, y - 1.2, 180, 2.4);
   }
-  current = node;
-  applyParallax();
+}
+
+function applyMove(now) {
+  const slide = motion ? (now * 0.01) % 160 : 0;
+  const px = (-mx * 16).toFixed(1);
+  const py = (-my * 8).toFixed(1);
+  root.querySelectorAll('.plate').forEach(plate => {
+    plate.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+  });
+  if (cloud) cloud.style.transform = `translate3d(${(-mx * 34 - slide).toFixed(1)}px, ${(-my * 16).toFixed(1)}px, 0)`;
+}
+
+function loop(now) {
+  raf = requestAnimationFrame(loop);
+  if (document.hidden) return;
+  applyMove(now);
+  drawWater(now);
+}
+
+function preloadRest() {
+  if (preloaded) return;
+  preloaded = true;
+  const urls = [...new Set(Object.values(PLATES))];
+  let index = 0;
+  const step = () => {
+    if (index >= urls.length) return;
+    const url = urls[index];
+    index += 1;
+    if (url !== shown) {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = url;
+    }
+    const wait = window.requestIdleCallback || (fn => setTimeout(fn, 240));
+    wait(step);
+  };
+  setTimeout(step, 600);
+}
+
+export function setArt(key) {
+  ensure();
+  const next = LOOK[key] || LOOK.evening;
+  const url = PLATES[key] || PLATES.evening;
+  placeBloom(next);
+  if (!motion) drawWater(0);
+  if (url === shown) return;
+  const mine = ++token;
+  const img = new Image();
+  img.className = 'plate';
+  img.alt = '';
+  img.decoding = 'async';
+  if (!shown) img.fetchPriority = 'high';
+  let opened = false;
+  const reveal = () => {
+    if (opened) return;
+    if (mine !== token) {
+      img.remove();
+      return;
+    }
+    opened = true;
+    img.classList.add('on');
+    root.querySelectorAll('.plate').forEach(node => {
+      if (node !== img) node.classList.remove('on');
+    });
+    shown = url;
+    setTimeout(() => {
+      if (mine !== token) return;
+      root.querySelectorAll('.plate').forEach(node => {
+        if (node !== img) node.remove();
+      });
+    }, 1300);
+    preloadRest();
+  };
+  img.addEventListener('load', reveal, { once: true });
+  img.addEventListener('error', reveal, { once: true });
+  root.insertBefore(img, cloud);
+  img.src = url;
+  if (img.complete && img.naturalWidth) reveal();
 }
 
 export function bindParallax() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!motion) return;
   addEventListener('mousemove', event => {
     mx = event.clientX / innerWidth - 0.5;
     my = event.clientY / innerHeight - 0.5;
-    applyParallax();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    } else if (!raf) raf = requestAnimationFrame(loop);
   });
 }

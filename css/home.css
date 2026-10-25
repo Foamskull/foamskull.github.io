@@ -11,19 +11,28 @@ html, body { height: 100%; overflow: hidden; background: #05060f; }
 body { font-family: Manrope, sans-serif; color: var(--ink); color-scheme: dark; }
 button, input, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--h); outline-offset: 3px; }
-.art { position: fixed; inset: -30px; opacity: 0; transition: opacity 1.1s var(--out), transform 1.6s var(--out); transform: scale(1.07); }
-.art.on { opacity: 1; transform: none; }
-.art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.ly { transition: transform 1.2s var(--out); }
-.kb { animation: kb 40s ease-in-out infinite alternate; transform-origin: 60% 40%; }
-@keyframes kb { to { transform: scale(1.08) translateX(-20px); } }
-.rays { animation: rot 90s linear infinite; }
-.bird { animation: fly 22s linear infinite; }
-@keyframes fly { from { transform: translate(-200px, 40px); } to { transform: translate(1700px, -80px); } }
-.flap { animation: flap .5s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
-@keyframes flap { to { transform: scaleY(.4); } }
-.glim { animation: glim 3s ease-in-out infinite; }
-@keyframes glim { 50% { opacity: .35; } }
+#arts { position: fixed; inset: 0; background: #140c22; }
+.art { position: absolute; inset: -4%; overflow: hidden; }
+.plate {
+  position: absolute; inset: -2%; width: 104%; height: 104%; object-fit: cover;
+  opacity: 0; transition: opacity 1.15s var(--out);
+}
+.plate.on { opacity: 1; }
+.clouds {
+  position: absolute; left: -16%; top: -6%; width: 134%; height: 68%; object-fit: cover;
+  mix-blend-mode: screen; opacity: .32; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 70%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 70%);
+}
+.bloom {
+  position: absolute; border-radius: 50%; pointer-events: none; mix-blend-mode: screen;
+  transform: translate(-50%, -50%); opacity: .85; animation: bloom 9s ease-in-out infinite;
+}
+@keyframes bloom { 50% { opacity: .55; } }
+.shimmer {
+  position: absolute; left: 0; top: 56%; width: 100%; height: 30%;
+  pointer-events: none; mix-blend-mode: screen; opacity: .7;
+}
 .scrim {
   position: fixed; inset: 0; pointer-events: none;
   background:
