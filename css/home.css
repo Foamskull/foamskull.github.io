@@ -70,10 +70,10 @@ button, input, textarea { font: inherit; color: inherit; }
 }
 .tabs::-webkit-scrollbar { display: none; }
 .tab {
-  position: relative; z-index: 1; height: 44px; padding: 0 14px; white-space: nowrap;
+  position: relative; z-index: 1; height: 44px; padding: 0 12px; white-space: nowrap;
   border: 0; border-radius: 99px; background: none; color: var(--dim);
-  font: 700 15px Manrope, sans-serif; cursor: pointer; transition: color .3s;
-  display: flex; align-items: center; gap: 8px;
+  font: 700 14px Manrope, sans-serif; cursor: pointer; transition: color .3s;
+  display: flex; align-items: center; gap: 6px;
 }
 .tab .k-ic { width: 17px; height: 17px; flex: none; }
 .tab:hover { color: var(--ink); }

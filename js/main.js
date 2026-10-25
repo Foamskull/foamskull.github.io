@@ -771,8 +771,9 @@ subscribe(() => {
 });
 refreshLive();
 loadTrailers().then(items => {
+  const had = trailers.length;
   trailers = items;
-  if (started && cur === 'movies') show('movies');
+  if (started && cur === 'movies' && !had && items.length) show('movies');
 });
 bindParallax();
 window.__open = show;
