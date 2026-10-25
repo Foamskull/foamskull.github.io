@@ -79,8 +79,8 @@ function todOf(date = new Date()) {
 }
 let tod = todOf();
 
-function setHue(id) {
-  document.documentElement.style.setProperty('--h', HUE[id] || HUE.now);
+function setHue() {
+  document.documentElement.style.setProperty('--h', 'rgb(255, 6, 14)');
 }
 function mobile() {
   return matchMedia('(max-width: 1024px)').matches;
@@ -521,6 +521,89 @@ function toggleTrailerSound() {
   }
   startTrailer(item);
 }
+let screenIndex = 0;
+let screenSound = false;
+let screenTimer = 0;
+function paintScreen() {
+  const frame = document.querySelector('#screenFrame');
+  const name = document.querySelector('#screenName');
+  const when = document.querySelector('#screenWhen');
+  const item = trailers[screenIndex];
+  if (!frame || !name || !when) return;
+  if (!item) {
+    name.textContent = 'Trailers will be back';
+    when.textContent = '';
+    return;
+  }
+  name.textContent = item.name;
+  when.textContent = trailerDate(item.published);
+  const mute = screenSound ? '0' : '1';
+  if (frame.dataset.id === item.id && frame.dataset.mute === mute && frame.getAttribute('src')) return;
+  if (screenSound && frame.dataset.ready === '1' && frame.dataset.mute === '0' && frame.dataset.id && frame.dataset.id !== item.id) {
+    frame.contentWindow?.postMessage(JSON.stringify({
+      event: 'command',
+      func: 'loadVideoById',
+      args: [{ videoId: item.id, startSeconds: 0 }]
+    }), '*');
+    frame.dataset.id = item.id;
+    return;
+  }
+  frame.dataset.id = item.id;
+  frame.dataset.mute = mute;
+  frame.dataset.ready = '0';
+  frame.title = `${item.name} trailer`;
+  frame.src = trailerEmbed(item.id, mute !== '0');
+}
+function advanceScreen() {
+  if (!trailers.length || document.hidden || cur !== 'now') return;
+  screenIndex = (screenIndex + 1) % trailers.length;
+  paintScreen();
+}
+function showScreen(on) {
+  const frame = document.querySelector('#screenFrame');
+  if (!on) {
+    clearInterval(screenTimer);
+    screenTimer = 0;
+    screenSound = false;
+    const sound = document.querySelector('#screenSound');
+    if (sound) {
+      sound.textContent = 'Unmute';
+      sound.setAttribute('aria-pressed', 'false');
+    }
+    if (frame) {
+      frame.src = 'about:blank';
+      frame.removeAttribute('src');
+      frame.dataset.id = '';
+      frame.dataset.ready = '0';
+    }
+    return;
+  }
+  paintScreen();
+  if (!screenTimer) screenTimer = setInterval(advanceScreen, 22000);
+}
+function wireScreen() {
+  const frame = document.querySelector('#screenFrame');
+  frame?.addEventListener('load', () => {
+    if (!frame.src || frame.src === 'about:blank') return;
+    frame.dataset.ready = '1';
+    try {
+      frame.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: frame.dataset.id || '1' }), '*');
+    } catch { /* the embed ignores the handshake until it is ready */ }
+  });
+  document.querySelector('#screenOpen')?.addEventListener('click', () => {
+    const index = trailers.length ? screenIndex : 0;
+    show('movies', false, trailers.length ? index : undefined);
+  });
+  document.querySelector('#screenSound')?.addEventListener('click', () => {
+    const item = trailers[screenIndex];
+    if (!item) return;
+    screenSound = !screenSound;
+    const sound = document.querySelector('#screenSound');
+    sound.textContent = screenSound ? 'Mute' : 'Unmute';
+    sound.setAttribute('aria-pressed', screenSound ? 'true' : 'false');
+    paintScreen();
+  });
+}
 function focus(index, first = false, silent = false) {
   if (cur === 'search') return;
   const next = Math.max(0, Math.min(list.length - 1, index));
@@ -566,7 +649,7 @@ function focus(index, first = false, silent = false) {
   }, first ? 0 : 260);
   setArt(key, seed);
 }
-function show(id, keep) {
+function show(id, keep, at) {
   clearTimeout(swT);
   if (!shelves()[id]) id = 'now';
   if (!keep) moved = false;
@@ -578,6 +661,8 @@ function show(id, keep) {
   renderWidgets();
   document.body.classList.toggle('srch', id === 'search');
   document.body.classList.toggle('movies', id === 'movies');
+  document.body.classList.toggle('now', id === 'now');
+  showScreen(id === 'now');
   if (id !== 'movies') {
     trailerSound = false;
     trailerId = '';
@@ -599,7 +684,8 @@ function show(id, keep) {
         tile.classList.add('f');
       });
     });
-  } else if (keep) focus(Math.min(fi, list.length - 1), false, true);
+  } else if (Number.isInteger(at)) focus(at, true);
+  else if (keep) focus(Math.min(fi, list.length - 1), false, true);
   else focus(0, true);
   const hash = id === 'now' ? '#' : `#open=${id}`;
   if (location.hash !== hash && !(id === 'now' && (location.hash === '' || location.hash === '#'))) {
@@ -773,8 +859,10 @@ refreshLive();
 loadTrailers().then(items => {
   const had = trailers.length;
   trailers = items;
+  if (cur === 'now') showScreen(true);
   if (started && cur === 'movies' && !had && items.length) show('movies');
 });
+wireScreen();
 bindParallax();
 window.__open = show;
 window.__home = { section: 'now', tiles: 0, searchUrl: null };
