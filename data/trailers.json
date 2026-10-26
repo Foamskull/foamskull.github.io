@@ -1,13 +1,20 @@
 {
-  "updated": "2026-10-25T13:21:52.851Z",
+  "updated": "2026-10-26T15:06:39.944Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
     {
-      "id": "ZNmGhB3v0SQ",
-      "title": "Avengers Doomsday - Official Trailer 2 (2026) Chris Hemsworth, Chris Evans",
-      "name": "Avengers Doomsday",
-      "published": "2026-10-25T02:17:32+00:00",
-      "channel": "IGN Movie Trailers"
+      "id": "LYRmPlm6oV0",
+      "title": "Avengers: Doomsday Teaser - In Theaters December 18",
+      "name": "Avengers: Doomsday",
+      "published": "2026-10-26T14:50:38+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "V8FX3ysZ_ZU",
+      "title": "Ebenezer Exclusive Teaser - Tickets on Sale (2026)",
+      "name": "Ebenezer",
+      "published": "2026-10-26T14:00:26+00:00",
+      "channel": "Rotten Tomatoes Trailers"
     },
     {
       "id": "RFSfWpQhWzA",
@@ -119,13 +126,6 @@
       "title": "What Now? Trailer #1 (2026)",
       "name": "What Now?",
       "published": "2026-10-20T15:37:55+00:00",
-      "channel": "Rotten Tomatoes Indie"
-    },
-    {
-      "id": "2RK44mpG_po",
-      "title": "Nuisance Bear Trailer #1 (2026)",
-      "name": "Nuisance Bear",
-      "published": "2026-10-19T20:14:32+00:00",
       "channel": "Rotten Tomatoes Indie"
     }
   ]
