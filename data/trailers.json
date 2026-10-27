@@ -1,7 +1,28 @@
 {
-  "updated": "2026-10-26T15:06:39.944Z",
+  "updated": "2026-10-27T13:38:11.821Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "x2FMsIFNNFg",
+      "title": "Final. Trailer. Tomorrow. Dune: Part Three only in theaters and IMAX December 18.",
+      "name": "Final.",
+      "published": "2026-10-27T02:28:48+00:00",
+      "channel": "Warner Bros."
+    },
+    {
+      "id": "hwIL4dAsfLA",
+      "title": "THE ABOMINABLE DR. PHIBES (1971) | Official Trailer | Amazon MGM",
+      "name": "THE ABOMINABLE DR. PHIBES",
+      "published": "2026-10-26T18:00:14+00:00",
+      "channel": "Amazon MGM Studios"
+    },
+    {
+      "id": "TDrjIQvNBN4",
+      "title": "They’ve seen the path. You will too. Final Trailer tomorrow. #DuneMovie | #FilmedForIMAX",
+      "name": "They’ve seen the path. You will too.",
+      "published": "2026-10-26T17:00:30+00:00",
+      "channel": "Warner Bros."
+    },
     {
       "id": "LYRmPlm6oV0",
       "title": "Avengers: Doomsday Teaser - In Theaters December 18",
@@ -106,27 +127,6 @@
       "name": "In Waves",
       "published": "2026-10-20T20:21:44+00:00",
       "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "M0V4KssLt5o",
-      "title": "Dune: Part Three - Official 'Tickets on Sale Now' Trailer",
-      "name": "Dune: Part Three",
-      "published": "2026-10-20T19:09:51+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "7Q7yVNjFp48",
-      "title": "Above the Below Trailer #1 (2026)",
-      "name": "Above the Below",
-      "published": "2026-10-20T18:06:48+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "LnNFr0hX2rg",
-      "title": "What Now? Trailer #1 (2026)",
-      "name": "What Now?",
-      "published": "2026-10-20T15:37:55+00:00",
-      "channel": "Rotten Tomatoes Indie"
     }
   ]
 }
