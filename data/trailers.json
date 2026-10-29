@@ -1,20 +1,69 @@
 {
-  "updated": "2026-10-28T13:42:50.785Z",
+  "updated": "2026-10-29T13:45:06.317Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
     {
-      "id": "nIw1O3zvOfE",
-      "title": "JUMANJI: OPEN WORLD - New Trailer (4K)",
-      "name": "JUMANJI: OPEN WORLD",
-      "published": "2026-10-28T13:00:39+00:00",
-      "channel": "Sony Pictures"
+      "id": "T00UU7IcBJY",
+      "title": "Hexed Teaser - Tickets on Sale (2026)",
+      "name": "Hexed",
+      "published": "2026-10-28T21:05:44+00:00",
+      "channel": "Rotten Tomatoes Trailers"
     },
     {
-      "id": "yb-jn97I60I",
-      "title": "BEHEMOTH! | Official Trailer | Searchlight Pictures",
-      "name": "BEHEMOTH!",
-      "published": "2026-10-28T13:00:27+00:00",
-      "channel": "Searchlight Pictures"
+      "id": "kgjQ5JmuKiY",
+      "title": "Transplant Trailer #1 (2026)",
+      "name": "Transplant",
+      "published": "2026-10-28T21:00:58+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "-A65b_I9nbw",
+      "title": "Witch on the Holy Night - Official Trailer 2 (2027)",
+      "name": "Witch on the Holy Night",
+      "published": "2026-10-28T20:56:11+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "RZmT7JiCO-s",
+      "title": "Winnie-the-Pooh: Blood and Honey 3 - Exclusive Red Band Trailer (2027) Josephine Blazier",
+      "name": "Winnie-the-Pooh: Blood and Honey 3 - Red Band",
+      "published": "2026-10-28T20:00:09+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "H_LAIV9f9rQ",
+      "title": "Way of the Warrior Kid Trailer #1 (2026)",
+      "name": "Way of the Warrior Kid",
+      "published": "2026-10-28T19:53:11+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "2h_c7HQXsTg",
+      "title": "The Host 20th Anniversary 4K Re-Release Trailer (2026)",
+      "name": "The Host 20th Anniversary 4K",
+      "published": "2026-10-28T18:53:46+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "Gv1C_VvUY6k",
+      "title": "Behemoth! - Official Trailer #2 (2026) Pedro Pascal, Olivia Wilde",
+      "name": "Behemoth!",
+      "published": "2026-10-28T16:49:24+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "DsydDc3EnBQ",
+      "title": "TEASER | Pixar Artist Short: Driving Lesson",
+      "name": "Pixar Artist Short: Driving Lesson",
+      "published": "2026-10-28T16:05:20+00:00",
+      "channel": "Pixar"
+    },
+    {
+      "id": "1g17p4iJI7c",
+      "title": "Jumanji: Open World Trailer #2 (2026)",
+      "name": "Jumanji: Open World",
+      "published": "2026-10-28T14:01:52+00:00",
+      "channel": "Rotten Tomatoes Trailers"
     },
     {
       "id": "T6wT54H-ACQ",
@@ -77,55 +126,6 @@
       "title": "Dune: Part Three - Official Trailer 2 (2026) Timothée Chalamet, Zendaya, Robert Pattinson",
       "name": "Dune: Part Three",
       "published": "2026-10-27T16:28:17+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "w-WN6C_ygQI",
-      "title": "Way of the Warrior Kid - Official Trailer (2026) Chris Pratt, Jocko Willink, Linda Cardellini",
-      "name": "Way of the Warrior Kid",
-      "published": "2026-10-27T15:11:35+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "x2FMsIFNNFg",
-      "title": "Final. Trailer. Tomorrow. Dune: Part Three only in theaters and IMAX December 18.",
-      "name": "Final.",
-      "published": "2026-10-27T02:28:48+00:00",
-      "channel": "Warner Bros."
-    },
-    {
-      "id": "hwIL4dAsfLA",
-      "title": "THE ABOMINABLE DR. PHIBES (1971) | Official Trailer | Amazon MGM",
-      "name": "THE ABOMINABLE DR. PHIBES",
-      "published": "2026-10-26T18:00:14+00:00",
-      "channel": "Amazon MGM Studios"
-    },
-    {
-      "id": "LYRmPlm6oV0",
-      "title": "Avengers: Doomsday Teaser - In Theaters December 18",
-      "name": "Avengers: Doomsday",
-      "published": "2026-10-26T14:50:38+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "V8FX3ysZ_ZU",
-      "title": "Ebenezer Exclusive Teaser - Tickets on Sale (2026)",
-      "name": "Ebenezer",
-      "published": "2026-10-26T14:00:26+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "RFSfWpQhWzA",
-      "title": "The Last Dive - Official Trailer (2026)",
-      "name": "The Last Dive",
-      "published": "2026-10-23T19:33:38+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "7W1D09xMWPk",
-      "title": "I Play Rocky - Official Trailer 2 (2026) Anthony Ippolito, AnnaSophia Robb, Matt Dillon",
-      "name": "I Play Rocky",
-      "published": "2026-10-22T20:44:41+00:00",
       "channel": "IGN Movie Trailers"
     }
   ]
