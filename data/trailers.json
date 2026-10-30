@@ -1,7 +1,42 @@
 {
-  "updated": "2026-10-29T13:45:06.317Z",
+  "updated": "2026-10-30T13:46:24.004Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "PQxHljanhdc",
+      "title": "Pendulum - Official Trailer #2 (2026) Joseph Gordon-Levitt, Phoebe Dynevor, Norman Reedus",
+      "name": "Pendulum",
+      "published": "2026-10-29T22:13:17+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "yhIuhR7b2_8",
+      "title": "Rascal Does Not Dream of a Dear Friend Trailer #1 (2027)",
+      "name": "Rascal Does Not Dream of a Dear Friend",
+      "published": "2026-10-29T21:47:09+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "7Scsh0nsDi8",
+      "title": "Eternal Return Trailer #1 (2026)",
+      "name": "Eternal Return",
+      "published": "2026-10-29T19:44:10+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "lj6-nuv23Nc",
+      "title": "Maiden Blood - Official Teaser Trailer (English Subtitles)",
+      "name": "Maiden Blood",
+      "published": "2026-10-29T16:58:45+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "AflhmtD0QHU",
+      "title": "NEW TRAILER for 'Jumanji: Open World' (2026)",
+      "name": "for 'Jumanji: Open World'",
+      "published": "2026-10-29T16:00:36+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
     {
       "id": "T00UU7IcBJY",
       "title": "Hexed Teaser - Tickets on Sale (2026)",
@@ -73,46 +108,11 @@
       "channel": "Rotten Tomatoes Trailers"
     },
     {
-      "id": "9wcY35vOcJc",
-      "title": "Words without power. Watch the final trailer for Dune: Part Three. #DuneMovie",
-      "name": "Words without power. Watch the",
-      "published": "2026-10-27T20:20:02+00:00",
-      "channel": "Warner Bros."
-    },
-    {
-      "id": "HXFPP40aCmc",
-      "title": "Running out of time. Watch the final trailer for Dune: Part Three. #DuneMovie",
-      "name": "Running out of time. Watch the",
-      "published": "2026-10-27T20:15:35+00:00",
-      "channel": "Warner Bros."
-    },
-    {
-      "id": "bbJiH-M1pBc",
-      "title": "Family protector. Watch the final trailer for Dune: Part Three. #DuneMovie",
-      "name": "Family protector. Watch the",
-      "published": "2026-10-27T20:10:01+00:00",
-      "channel": "Warner Bros."
-    },
-    {
       "id": "QrRsK8Hx8Hc",
       "title": "The Mosquito Bowl Red Band Trailer (2026)",
       "name": "The Mosquito Bowl Red Band",
       "published": "2026-10-27T20:07:58+00:00",
       "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "tC0DsjlDAv8",
-      "title": "Fremen keep their word. Watch the final trailer for Dune: Part Three. #DuneMovie",
-      "name": "Fremen keep their word. Watch the",
-      "published": "2026-10-27T20:05:03+00:00",
-      "channel": "Warner Bros."
-    },
-    {
-      "id": "N6f6ZvRUzpE",
-      "title": "The cost of power. Watch the final trailer for Dune: Part Three. #DuneMovie",
-      "name": "The cost of power. Watch the",
-      "published": "2026-10-27T20:00:26+00:00",
-      "channel": "Warner Bros."
     },
     {
       "id": "8IWD1nbgcYw",
