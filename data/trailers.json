@@ -1,7 +1,21 @@
 {
-  "updated": "2026-10-30T13:46:24.004Z",
+  "updated": "2026-10-31T13:34:31.941Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "BWq8-1RITYI",
+      "title": "How To Rob A Bank | Fortnite Announcement Trailer",
+      "name": "How To Rob A Bank | Fortnite Announcement",
+      "published": "2026-10-30T18:00:33+00:00",
+      "channel": "Amazon MGM Studios"
+    },
+    {
+      "id": "jDYOCoPuSQw",
+      "title": "Quarter Trailer #1 (2026)",
+      "name": "Quarter",
+      "published": "2026-10-30T13:44:55+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
     {
       "id": "PQxHljanhdc",
       "title": "Pendulum - Official Trailer #2 (2026) Joseph Gordon-Levitt, Phoebe Dynevor, Norman Reedus",
@@ -113,20 +127,6 @@
       "name": "The Mosquito Bowl Red Band",
       "published": "2026-10-27T20:07:58+00:00",
       "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "8IWD1nbgcYw",
-      "title": "Allen Trailer #1 (2026)",
-      "name": "Allen",
-      "published": "2026-10-27T19:50:41+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "Zr1kBsVaFkM",
-      "title": "Dune: Part Three - Official Trailer 2 (2026) Timothée Chalamet, Zendaya, Robert Pattinson",
-      "name": "Dune: Part Three",
-      "published": "2026-10-27T16:28:17+00:00",
-      "channel": "IGN Movie Trailers"
     }
   ]
 }
