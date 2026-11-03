@@ -1,7 +1,42 @@
 {
-  "updated": "2026-11-02T13:56:19.881Z",
+  "updated": "2026-11-03T13:57:48.910Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "CTNKG6x3BaA",
+      "title": "Rascal Does Not Dream of a Dear Friend - Official Trailer (2027)",
+      "name": "Rascal Does Not Dream of a Dear Friend",
+      "published": "2026-11-03T00:01:57+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "lS4ol9o10vo",
+      "title": "The Liberation - Official Trailer (2027) Carrie Coon, Lily James, Bella Ramsey",
+      "name": "The Liberation",
+      "published": "2026-11-02T23:02:18+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "gzlB06zsq9w",
+      "title": "Ramayana Teaser - Sai Pallavi as Sita (2026)",
+      "name": "Ramayana",
+      "published": "2026-11-02T21:45:08+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "6UJU4TW-eZo",
+      "title": "WILD BILL (1995) | Official Trailer | Amazon MGM",
+      "name": "WILD BILL",
+      "published": "2026-11-02T19:00:27+00:00",
+      "channel": "Amazon MGM Studios"
+    },
+    {
+      "id": "V9PJ9okEbeg",
+      "title": "The Man with the Bag Trailer #1 (2026)",
+      "name": "The Man with the Bag",
+      "published": "2026-11-02T14:13:30+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
     {
       "id": "BWq8-1RITYI",
       "title": "How To Rob A Bank | Fortnite Announcement Trailer",
@@ -22,13 +57,6 @@
       "name": "Pendulum",
       "published": "2026-10-29T22:13:17+00:00",
       "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "yhIuhR7b2_8",
-      "title": "Rascal Does Not Dream of a Dear Friend Trailer #1 (2027)",
-      "name": "Rascal Does Not Dream of a Dear Friend",
-      "published": "2026-10-29T21:47:09+00:00",
-      "channel": "Rotten Tomatoes Trailers"
     },
     {
       "id": "7Scsh0nsDi8",
@@ -99,34 +127,6 @@
       "name": "Behemoth!",
       "published": "2026-10-28T16:49:24+00:00",
       "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "DsydDc3EnBQ",
-      "title": "TEASER | Pixar Artist Short: Driving Lesson",
-      "name": "Pixar Artist Short: Driving Lesson",
-      "published": "2026-10-28T16:05:20+00:00",
-      "channel": "Pixar"
-    },
-    {
-      "id": "1g17p4iJI7c",
-      "title": "Jumanji: Open World Trailer #2 (2026)",
-      "name": "Jumanji: Open World",
-      "published": "2026-10-28T14:01:52+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "T6wT54H-ACQ",
-      "title": "The Irregular at Magic High School THE MOVIE -Yotsuba Succession Arc- Dub Trailer (2026)",
-      "name": "The Irregular at Magic High School THE MOVIE -Yotsuba Succession Arc- Dub",
-      "published": "2026-10-27T22:17:48+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "QrRsK8Hx8Hc",
-      "title": "The Mosquito Bowl Red Band Trailer (2026)",
-      "name": "The Mosquito Bowl Red Band",
-      "published": "2026-10-27T20:07:58+00:00",
-      "channel": "Rotten Tomatoes Trailers"
     }
   ]
 }
