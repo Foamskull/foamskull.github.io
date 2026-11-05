@@ -1,7 +1,21 @@
 {
-  "updated": "2026-11-04T13:55:10.151Z",
+  "updated": "2026-11-05T14:03:14.321Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "obHPGMdCyuI",
+      "title": "The Angry Birds Movie 3 - Official Trailer 2 (2026) Jason Sudeikis, Josh Gad, Emma Myers",
+      "name": "The Angry Birds Movie 3",
+      "published": "2026-11-04T18:57:43+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "uG_iSl320vo",
+      "title": "Lords of War - Official Teaser Trailer (2027) Nicholas Cage, Bill Skarsgård, Laura Harrier",
+      "name": "Lords of War",
+      "published": "2026-11-04T16:41:03+00:00",
+      "channel": "IGN Movie Trailers"
+    },
     {
       "id": "CTNKG6x3BaA",
       "title": "Rascal Does Not Dream of a Dear Friend - Official Trailer (2027)",
@@ -113,20 +127,6 @@
       "name": "Way of the Warrior Kid",
       "published": "2026-10-28T19:53:11+00:00",
       "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "2h_c7HQXsTg",
-      "title": "The Host 20th Anniversary 4K Re-Release Trailer (2026)",
-      "name": "The Host 20th Anniversary 4K",
-      "published": "2026-10-28T18:53:46+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "Gv1C_VvUY6k",
-      "title": "Behemoth! - Official Trailer #2 (2026) Pedro Pascal, Olivia Wilde",
-      "name": "Behemoth!",
-      "published": "2026-10-28T16:49:24+00:00",
-      "channel": "IGN Movie Trailers"
     }
   ]
 }
