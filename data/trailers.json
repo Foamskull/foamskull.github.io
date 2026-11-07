@@ -1,7 +1,35 @@
 {
-  "updated": "2026-11-06T13:57:42.479Z",
+  "updated": "2026-11-07T13:38:41.881Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "Rma1KLKyZWs",
+      "title": "RESIDENT EVIL Creator Deep Dive With Filmmakers - Teaser",
+      "name": "RESIDENT EVIL Creator Deep Dive With Filmmakers",
+      "published": "2026-11-06T23:50:45+00:00",
+      "channel": "Sony Pictures"
+    },
+    {
+      "id": "u0JAAMyFfu8",
+      "title": "After the Silence Trailer #1 (2026)",
+      "name": "After the Silence",
+      "published": "2026-11-06T21:41:12+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "9hGCRU41dsg",
+      "title": "Tender Loving Care Trailer #1 (2026)",
+      "name": "Tender Loving Care",
+      "published": "2026-11-06T21:28:51+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "o9WWeKSbtAo",
+      "title": "The Further Mis-Adventures of Cliff Booth Trailer #2 (2026)",
+      "name": "The Further Mis-Adventures of Cliff Booth",
+      "published": "2026-11-06T14:23:57+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
     {
       "id": "kQQW1AFj058",
       "title": "Drag - Official Trailer (2027) Lizzy Caplan, Lucy DeVito, John Stamos",
@@ -94,39 +122,11 @@
       "channel": "IGN Movie Trailers"
     },
     {
-      "id": "CTNKG6x3BaA",
-      "title": "Rascal Does Not Dream of a Dear Friend - Official Trailer (2027)",
-      "name": "Rascal Does Not Dream of a Dear Friend",
-      "published": "2026-11-03T00:01:57+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "lS4ol9o10vo",
-      "title": "The Liberation - Official Trailer (2027) Carrie Coon, Lily James, Bella Ramsey",
-      "name": "The Liberation",
-      "published": "2026-11-02T23:02:18+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "gzlB06zsq9w",
-      "title": "Ramayana Teaser - Sai Pallavi as Sita (2026)",
-      "name": "Ramayana",
-      "published": "2026-11-02T21:45:08+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
       "id": "6UJU4TW-eZo",
       "title": "WILD BILL (1995) | Official Trailer | Amazon MGM",
       "name": "WILD BILL",
       "published": "2026-11-02T19:00:27+00:00",
       "channel": "Amazon MGM Studios"
-    },
-    {
-      "id": "V9PJ9okEbeg",
-      "title": "The Man with the Bag Trailer #1 (2026)",
-      "name": "The Man with the Bag",
-      "published": "2026-11-02T14:13:30+00:00",
-      "channel": "Rotten Tomatoes Trailers"
     }
   ]
 }
