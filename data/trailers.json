@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T13:38:41.881Z",
+  "updated": "2026-11-08T13:37:56.954Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
     {
@@ -122,11 +122,11 @@
       "channel": "IGN Movie Trailers"
     },
     {
-      "id": "6UJU4TW-eZo",
-      "title": "WILD BILL (1995) | Official Trailer | Amazon MGM",
-      "name": "WILD BILL",
-      "published": "2026-11-02T19:00:27+00:00",
-      "channel": "Amazon MGM Studios"
+      "id": "jDYOCoPuSQw",
+      "title": "Quarter Trailer #1 (2026)",
+      "name": "Quarter",
+      "published": "2026-10-30T13:44:55+00:00",
+      "channel": "Rotten Tomatoes Indie"
     }
   ]
 }
