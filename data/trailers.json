@@ -1,7 +1,28 @@
 {
-  "updated": "2026-11-09T14:02:02.372Z",
+  "updated": "2026-11-10T13:56:34.704Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "fxkRyHqP9pc",
+      "title": "Dive In Wonderland - Official Trailer (2026)",
+      "name": "Dive In Wonderland",
+      "published": "2026-11-09T22:15:28+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "GNixiT6dXF4",
+      "title": "BLOWN AWAY (1994) | Official Trailer | Amazon MGM",
+      "name": "BLOWN AWAY",
+      "published": "2026-11-09T19:00:46+00:00",
+      "channel": "Amazon MGM Studios"
+    },
+    {
+      "id": "AHa0v1j4jDo",
+      "title": "Criminal - Official Teaser Trailer (2027) Charlie Hunnam, Luke Evans, Emilia Clarke",
+      "name": "Criminal",
+      "published": "2026-11-09T15:31:38+00:00",
+      "channel": "IGN Movie Trailers"
+    },
     {
       "id": "Rma1KLKyZWs",
       "title": "RESIDENT EVIL Creator Deep Dive With Filmmakers - Teaser",
@@ -106,27 +127,6 @@
       "name": "Bad Day",
       "published": "2026-11-05T15:34:18+00:00",
       "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "obHPGMdCyuI",
-      "title": "The Angry Birds Movie 3 - Official Trailer 2 (2026) Jason Sudeikis, Josh Gad, Emma Myers",
-      "name": "The Angry Birds Movie 3",
-      "published": "2026-11-04T18:57:43+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "uG_iSl320vo",
-      "title": "Lords of War - Official Teaser Trailer (2027) Nicholas Cage, Bill Skarsgård, Laura Harrier",
-      "name": "Lords of War",
-      "published": "2026-11-04T16:41:03+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "jDYOCoPuSQw",
-      "title": "Quarter Trailer #1 (2026)",
-      "name": "Quarter",
-      "published": "2026-10-30T13:44:55+00:00",
-      "channel": "Rotten Tomatoes Indie"
     }
   ]
 }
