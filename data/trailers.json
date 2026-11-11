@@ -1,7 +1,77 @@
 {
-  "updated": "2026-11-10T13:56:34.704Z",
+  "updated": "2026-11-11T14:00:03.259Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "xzX1H5ih6FI",
+      "title": "Made in Abyss: Awakening Mystery - Official Teaser Trailer (2027)",
+      "name": "Made in Abyss: Awakening Mystery",
+      "published": "2026-11-10T22:11:42+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "7SO6VhCk5l4",
+      "title": "Pendulum Trailer #1 (2027)",
+      "name": "Pendulum",
+      "published": "2026-11-10T20:07:30+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "PWlEfR200W0",
+      "title": "Fraggle Rock: A Holiday Gift - Official Trailer (2026)",
+      "name": "Fraggle Rock: A Holiday Gift",
+      "published": "2026-11-10T18:03:17+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "4e1KEMEx54k",
+      "title": "Raw Deal 4K Steelbook® Official Trailer - Arnold Schwarzenegger, Kathryn Harrold",
+      "name": "Raw Deal 4K Steelbook®",
+      "published": "2026-11-10T17:00:04+00:00",
+      "channel": "Lionsgate Movies"
+    },
+    {
+      "id": "AbRF7aSXVMU",
+      "title": "The Man Who Fell to Earth 4K Steelbook® (1976) Official Trailer - David Bowie, Rip Torn, Candy Clark",
+      "name": "The Man Who Fell to Earth 4K Steelbook®",
+      "published": "2026-11-10T17:00:02+00:00",
+      "channel": "Lionsgate Movies"
+    },
+    {
+      "id": "BSCiKV-7yPY",
+      "title": "All The Boys Love Mandy Lane: Vestron Collector’s Series (2006) Official Trailer - Amber Heard",
+      "name": "All The Boys Love Mandy Lane: Vestron Collector’s Series",
+      "published": "2026-11-10T17:00:02+00:00",
+      "channel": "Lionsgate Movies"
+    },
+    {
+      "id": "gKiWSvAjNG0",
+      "title": "Clashing Through the Snow Trailer #1 (2026)",
+      "name": "Clashing Through the Snow",
+      "published": "2026-11-10T16:50:34+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "fwEfaoHXtT8",
+      "title": "The Debut - Official Trailer 2 (2026) Julianne Moore, Jesse Eisenberg, Paul Giamatti",
+      "name": "The Debut",
+      "published": "2026-11-10T16:30:56+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "BcRglrIrH5g",
+      "title": "Ink Trailer #1 (2026)",
+      "name": "Ink",
+      "published": "2026-11-10T15:15:50+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "2YhsJ5DR5Y0",
+      "title": "Cheer Bloody Murder (2026) Official Trailer - Shawn C. Phillips, Tom Sizemore, James Duval",
+      "name": "Cheer Bloody Murder",
+      "published": "2026-11-10T15:00:00+00:00",
+      "channel": "Lionsgate Movies"
+    },
     {
       "id": "fxkRyHqP9pc",
       "title": "Dive In Wonderland - Official Trailer (2026)",
@@ -57,76 +127,6 @@
       "name": "Drag",
       "published": "2026-11-05T23:30:46+00:00",
       "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "vtvt9npx1Co",
-      "title": "WILD HORSE NINE | Official Trailer (2 Hour Loop) | Searchlight Pictures",
-      "name": "WILD HORSE NINE",
-      "published": "2026-11-05T22:39:35+00:00",
-      "channel": "Searchlight Pictures"
-    },
-    {
-      "id": "UxnIdASpy1g",
-      "title": "Fists on a Plane: Wings of Dread - Official Trailer (2026) Ashton Chen, Iko Uwais",
-      "name": "Fists on a Plane: Wings of Dread",
-      "published": "2026-11-05T21:58:25+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "hVruWIwUH0M",
-      "title": "The Gallerist - Official Trailer (2026) Natalie Portman, Zach Galifianakis, Catherine Zeta-Jones",
-      "name": "The Gallerist",
-      "published": "2026-11-05T21:44:51+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "JOBS1XCO3cQ",
-      "title": "Crawlers - Official Green Band Trailer",
-      "name": "Crawlers",
-      "published": "2026-11-05T20:47:05+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "CkLO19tB9Ys",
-      "title": "The 12 Dates of Christmas Trailer #1 (2026)",
-      "name": "The 12 Dates of Christmas",
-      "published": "2026-11-05T18:48:43+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "qoo1GTEXD1Y",
-      "title": "Godzilla Minus Zero Trailer #3 (2026)",
-      "name": "Godzilla Minus Zero",
-      "published": "2026-11-05T17:41:47+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "hHzkBmWr-tQ",
-      "title": "Karoshi - Official Trailer",
-      "name": "Karoshi",
-      "published": "2026-11-05T17:27:51+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "67TAExwgmDQ",
-      "title": "Sessions - Official Trailer",
-      "name": "Sessions",
-      "published": "2026-11-05T17:00:22+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "3tjovYGO4w4",
-      "title": "Karōshi Trailer #1 (2027)",
-      "name": "Karōshi",
-      "published": "2026-11-05T16:30:15+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "sUrsz6JiimI",
-      "title": "Bad Day Trailer #1 (2026)",
-      "name": "Bad Day",
-      "published": "2026-11-05T15:34:18+00:00",
-      "channel": "Rotten Tomatoes Trailers"
     }
   ]
 }
