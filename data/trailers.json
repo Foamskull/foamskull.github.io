@@ -1,7 +1,35 @@
 {
-  "updated": "2026-11-11T14:00:03.259Z",
+  "updated": "2026-11-12T14:02:10.775Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "IboyHfgdu0M",
+      "title": "The Thomas Crown Affair | Official Trailer",
+      "name": "The Thomas Crown Affair",
+      "published": "2026-11-12T13:00:08+00:00",
+      "channel": "Amazon MGM Studios"
+    },
+    {
+      "id": "tdUSD6kdKFg",
+      "title": "Iron Boy - Official US Teaser Trailer (2026)",
+      "name": "Iron Boy",
+      "published": "2026-11-11T21:11:44+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "SaPeW-xCfSg",
+      "title": "Lords of War - Official Teaser Trailer #2 (2027) Nicholas Cage, Bill Skarsgård, Laura Harrier",
+      "name": "Lords of War",
+      "published": "2026-11-11T16:49:22+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "CN7gb3YcBN8",
+      "title": "New Trailer drops TOMORROW. #ChildrenOfBloodAndBone - only in theatres and IMAX January 15, 2027.",
+      "name": "drops TOMORROW. #ChildrenOfBloodAndBone - only in theatres and IMAX January 15, 2027.",
+      "published": "2026-11-11T14:01:14+00:00",
+      "channel": "Paramount Pictures"
+    },
     {
       "id": "xzX1H5ih6FI",
       "title": "Made in Abyss: Awakening Mystery - Official Teaser Trailer (2027)",
@@ -99,34 +127,6 @@
       "name": "RESIDENT EVIL Creator Deep Dive With Filmmakers",
       "published": "2026-11-06T23:50:45+00:00",
       "channel": "Sony Pictures"
-    },
-    {
-      "id": "u0JAAMyFfu8",
-      "title": "After the Silence Trailer #1 (2026)",
-      "name": "After the Silence",
-      "published": "2026-11-06T21:41:12+00:00",
-      "channel": "Rotten Tomatoes Indie"
-    },
-    {
-      "id": "9hGCRU41dsg",
-      "title": "Tender Loving Care Trailer #1 (2026)",
-      "name": "Tender Loving Care",
-      "published": "2026-11-06T21:28:51+00:00",
-      "channel": "Rotten Tomatoes Indie"
-    },
-    {
-      "id": "o9WWeKSbtAo",
-      "title": "The Further Mis-Adventures of Cliff Booth Trailer #2 (2026)",
-      "name": "The Further Mis-Adventures of Cliff Booth",
-      "published": "2026-11-06T14:23:57+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "kQQW1AFj058",
-      "title": "Drag - Official Trailer (2027) Lizzy Caplan, Lucy DeVito, John Stamos",
-      "name": "Drag",
-      "published": "2026-11-05T23:30:46+00:00",
-      "channel": "IGN Movie Trailers"
     }
   ]
 }
