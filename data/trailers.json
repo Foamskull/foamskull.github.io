@@ -1,13 +1,55 @@
 {
-  "updated": "2026-11-12T14:02:10.775Z",
+  "updated": "2026-11-13T13:59:17.469Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
     {
-      "id": "IboyHfgdu0M",
-      "title": "The Thomas Crown Affair | Official Trailer",
+      "id": "zPdGy4gq9Xw",
+      "title": "Arcade Dreams - Official Trailer (2026) Documentary",
+      "name": "Arcade Dreams",
+      "published": "2026-11-12T22:11:58+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "u-liy2siD5I",
+      "title": "Killing Castro - Official Teaser Trailer (2026) Al Pacino, Xolo Maridueña",
+      "name": "Killing Castro",
+      "published": "2026-11-12T19:45:42+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "ATdTmgQbeSU",
+      "title": "Gatto - Official Trailer (2026) Mark Ruffalo, Laurence Fishburne",
+      "name": "Gatto",
+      "published": "2026-11-12T19:26:45+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "rRMJ_KGZoAk",
+      "title": "Ray Gunn - Official Trailer #2 (2026) Scarlett Johansson, Sam Rockwell",
+      "name": "Ray Gunn",
+      "published": "2026-11-12T17:56:06+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "15OCVrehwXM",
+      "title": "The Thomas Crown Affair - Official Trailer #2 (2027) Michael B. Jordan, Kenneth Branagh",
       "name": "The Thomas Crown Affair",
-      "published": "2026-11-12T13:00:08+00:00",
-      "channel": "Amazon MGM Studios"
+      "published": "2026-11-12T16:04:11+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "1Dwc7lDdKxk",
+      "title": "Children of Blood and Bone Trailer #2 (2027)",
+      "name": "Children of Blood and Bone",
+      "published": "2026-11-12T14:36:10+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "RfKnTLDiKlQ",
+      "title": "Watch the New Trailer for #ChildrenOfBloodAndBone - only in theatres and IMAX January 15, 2027.",
+      "name": "Watch the",
+      "published": "2026-11-12T14:00:02+00:00",
+      "channel": "Paramount Pictures"
     },
     {
       "id": "tdUSD6kdKFg",
@@ -85,48 +127,6 @@
       "name": "The Debut",
       "published": "2026-11-10T16:30:56+00:00",
       "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "BcRglrIrH5g",
-      "title": "Ink Trailer #1 (2026)",
-      "name": "Ink",
-      "published": "2026-11-10T15:15:50+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "2YhsJ5DR5Y0",
-      "title": "Cheer Bloody Murder (2026) Official Trailer - Shawn C. Phillips, Tom Sizemore, James Duval",
-      "name": "Cheer Bloody Murder",
-      "published": "2026-11-10T15:00:00+00:00",
-      "channel": "Lionsgate Movies"
-    },
-    {
-      "id": "fxkRyHqP9pc",
-      "title": "Dive In Wonderland - Official Trailer (2026)",
-      "name": "Dive In Wonderland",
-      "published": "2026-11-09T22:15:28+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "GNixiT6dXF4",
-      "title": "BLOWN AWAY (1994) | Official Trailer | Amazon MGM",
-      "name": "BLOWN AWAY",
-      "published": "2026-11-09T19:00:46+00:00",
-      "channel": "Amazon MGM Studios"
-    },
-    {
-      "id": "AHa0v1j4jDo",
-      "title": "Criminal - Official Teaser Trailer (2027) Charlie Hunnam, Luke Evans, Emilia Clarke",
-      "name": "Criminal",
-      "published": "2026-11-09T15:31:38+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "Rma1KLKyZWs",
-      "title": "RESIDENT EVIL Creator Deep Dive With Filmmakers - Teaser",
-      "name": "RESIDENT EVIL Creator Deep Dive With Filmmakers",
-      "published": "2026-11-06T23:50:45+00:00",
-      "channel": "Sony Pictures"
     }
   ]
 }
