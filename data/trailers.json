@@ -1,7 +1,28 @@
 {
-  "updated": "2026-11-16T15:43:57.586Z",
+  "updated": "2026-11-17T14:00:49.232Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "V7f0cMdPdCQ",
+      "title": "Close enough to touch. Watch the new trailer for #RemainMovie - only in theaters February 5.",
+      "name": "Close enough to touch. Watch the",
+      "published": "2026-11-16T23:00:05+00:00",
+      "channel": "Warner Bros."
+    },
+    {
+      "id": "m7b2briPoEk",
+      "title": "Remain - Official Trailer (2027) Jake Gyllenhaal, Phoebe Dynevor",
+      "name": "Remain",
+      "published": "2026-11-16T21:06:22+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "Q4uIgfyJjSw",
+      "title": "Family Guy: Holiday Special 2026 Exclusive Trailer",
+      "name": "Family Guy: Holiday Special 2026",
+      "published": "2026-11-16T17:30:30+00:00",
+      "channel": "IGN Movie Trailers"
+    },
     {
       "id": "8q9PUGbIzxw",
       "title": "Children of Blood and Bone - Official Trailer #2 (2027) Amandla Stenberg, Idris Elba",
@@ -87,13 +108,6 @@
       "channel": "Rotten Tomatoes Trailers"
     },
     {
-      "id": "PWlEfR200W0",
-      "title": "Fraggle Rock: A Holiday Gift - Official Trailer (2026)",
-      "name": "Fraggle Rock: A Holiday Gift",
-      "published": "2026-11-10T18:03:17+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
       "id": "4e1KEMEx54k",
       "title": "Raw Deal 4K Steelbook® Official Trailer - Arnold Schwarzenegger, Kathryn Harrold",
       "name": "Raw Deal 4K Steelbook®",
@@ -113,20 +127,6 @@
       "name": "All The Boys Love Mandy Lane: Vestron Collector’s Series",
       "published": "2026-11-10T17:00:02+00:00",
       "channel": "Lionsgate Movies"
-    },
-    {
-      "id": "gKiWSvAjNG0",
-      "title": "Clashing Through the Snow Trailer #1 (2026)",
-      "name": "Clashing Through the Snow",
-      "published": "2026-11-10T16:50:34+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "fwEfaoHXtT8",
-      "title": "The Debut - Official Trailer 2 (2026) Julianne Moore, Jesse Eisenberg, Paul Giamatti",
-      "name": "The Debut",
-      "published": "2026-11-10T16:30:56+00:00",
-      "channel": "IGN Movie Trailers"
     }
   ]
 }
