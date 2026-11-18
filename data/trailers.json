@@ -1,7 +1,70 @@
 {
-  "updated": "2026-11-17T14:00:49.232Z",
+  "updated": "2026-11-18T20:56:49.718Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "k9qG-sHnxYo",
+      "title": "Missy has entered the chat. ⭐️ Watch the trailer for The Comeback King now!",
+      "name": "Missy has entered the chat. ⭐️ Watch the",
+      "published": "2026-11-18T19:01:22+00:00",
+      "channel": "Universal Pictures"
+    },
+    {
+      "id": "SO4t-jxcMlQ",
+      "title": "Artificial - Official Trailer",
+      "name": "Artificial",
+      "published": "2026-11-18T18:17:35+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "L0GO1ZW49ns",
+      "title": "The Comeback King - Official Trailer",
+      "name": "The Comeback King",
+      "published": "2026-11-18T17:34:46+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "CwLVo_-mwec",
+      "title": "Project Hail Mary - Official Returning to Theaters Trailer",
+      "name": "Project Hail Mary",
+      "published": "2026-11-18T16:51:38+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "naGmiGQea-M",
+      "title": "The Further Mis-Adventures of Cliff Booth Teaser - Get Tickets Now (2026)",
+      "name": "The Further Mis-Adventures of Cliff Booth",
+      "published": "2026-11-18T13:45:06+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "wij_Msm64z8",
+      "title": "Mother's Pride Trailer #1 (2026)",
+      "name": "Mother's Pride",
+      "published": "2026-11-17T23:36:42+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "Zl6QDFiITUE",
+      "title": "Giant Ojosama - Official Teaser Trailer (2027)",
+      "name": "Giant Ojosama",
+      "published": "2026-11-17T22:46:01+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "Zl15-YJWuqg",
+      "title": "The Patient - Official Trailer (2026) Ryan Phillippe, Kate Beckinsale, David Cade",
+      "name": "The Patient",
+      "published": "2026-11-17T16:05:54+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "aJfcCuxCPUQ",
+      "title": "Bottoms up! Trailer tomorrow.",
+      "name": "Bottoms up!",
+      "published": "2026-11-17T16:05:21+00:00",
+      "channel": "Universal Pictures"
+    },
     {
       "id": "V7f0cMdPdCQ",
       "title": "Close enough to touch. Watch the new trailer for #RemainMovie - only in theaters February 5.",
@@ -38,32 +101,18 @@
       "channel": "IGN Movie Trailers"
     },
     {
-      "id": "u-liy2siD5I",
-      "title": "Killing Castro - Official Teaser Trailer (2026) Al Pacino, Xolo Maridueña",
+      "id": "7Aqu1IlIf6I",
+      "title": "Killing Castro Teaser Trailer (2026)",
       "name": "Killing Castro",
-      "published": "2026-11-12T19:45:42+00:00",
-      "channel": "IGN Movie Trailers"
+      "published": "2026-11-12T19:31:59+00:00",
+      "channel": "Rotten Tomatoes Trailers"
     },
     {
-      "id": "ATdTmgQbeSU",
-      "title": "Gatto - Official Trailer (2026) Mark Ruffalo, Laurence Fishburne",
+      "id": "Ivhrckwuag0",
+      "title": "Gatto Trailer #1 (2027)",
       "name": "Gatto",
-      "published": "2026-11-12T19:26:45+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "rRMJ_KGZoAk",
-      "title": "Ray Gunn - Official Trailer #2 (2026) Scarlett Johansson, Sam Rockwell",
-      "name": "Ray Gunn",
-      "published": "2026-11-12T17:56:06+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "15OCVrehwXM",
-      "title": "The Thomas Crown Affair - Official Trailer #2 (2027) Michael B. Jordan, Kenneth Branagh",
-      "name": "The Thomas Crown Affair",
-      "published": "2026-11-12T16:04:11+00:00",
-      "channel": "IGN Movie Trailers"
+      "published": "2026-11-12T17:50:37+00:00",
+      "channel": "Rotten Tomatoes Trailers"
     },
     {
       "id": "RfKnTLDiKlQ",
@@ -73,60 +122,11 @@
       "channel": "Paramount Pictures"
     },
     {
-      "id": "tdUSD6kdKFg",
-      "title": "Iron Boy - Official US Teaser Trailer (2026)",
+      "id": "emkBX8viLHI",
+      "title": "Iron Boy Trailer #1 (2027)",
       "name": "Iron Boy",
-      "published": "2026-11-11T21:11:44+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "SaPeW-xCfSg",
-      "title": "Lords of War - Official Teaser Trailer #2 (2027) Nicholas Cage, Bill Skarsgård, Laura Harrier",
-      "name": "Lords of War",
-      "published": "2026-11-11T16:49:22+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "CN7gb3YcBN8",
-      "title": "New Trailer drops TOMORROW. #ChildrenOfBloodAndBone - only in theatres and IMAX January 15, 2027.",
-      "name": "drops TOMORROW. #ChildrenOfBloodAndBone - only in theatres and IMAX January 15, 2027.",
-      "published": "2026-11-11T14:01:14+00:00",
-      "channel": "Paramount Pictures"
-    },
-    {
-      "id": "xzX1H5ih6FI",
-      "title": "Made in Abyss: Awakening Mystery - Official Teaser Trailer (2027)",
-      "name": "Made in Abyss: Awakening Mystery",
-      "published": "2026-11-10T22:11:42+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "7SO6VhCk5l4",
-      "title": "Pendulum Trailer #1 (2027)",
-      "name": "Pendulum",
-      "published": "2026-11-10T20:07:30+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "4e1KEMEx54k",
-      "title": "Raw Deal 4K Steelbook® Official Trailer - Arnold Schwarzenegger, Kathryn Harrold",
-      "name": "Raw Deal 4K Steelbook®",
-      "published": "2026-11-10T17:00:04+00:00",
-      "channel": "Lionsgate Movies"
-    },
-    {
-      "id": "AbRF7aSXVMU",
-      "title": "The Man Who Fell to Earth 4K Steelbook® (1976) Official Trailer - David Bowie, Rip Torn, Candy Clark",
-      "name": "The Man Who Fell to Earth 4K Steelbook®",
-      "published": "2026-11-10T17:00:02+00:00",
-      "channel": "Lionsgate Movies"
-    },
-    {
-      "id": "BSCiKV-7yPY",
-      "title": "All The Boys Love Mandy Lane: Vestron Collector’s Series (2006) Official Trailer - Amber Heard",
-      "name": "All The Boys Love Mandy Lane: Vestron Collector’s Series",
-      "published": "2026-11-10T17:00:02+00:00",
-      "channel": "Lionsgate Movies"
+      "published": "2026-11-11T19:34:40+00:00",
+      "channel": "Rotten Tomatoes Indie"
     }
   ]
 }
