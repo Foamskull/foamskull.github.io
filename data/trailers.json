@@ -1,7 +1,63 @@
 {
-  "updated": "2026-11-18T20:56:49.718Z",
+  "updated": "2026-11-19T21:03:13.693Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "5IBOnESUznM",
+      "title": "It’s gonna be a party. Watch the trailer for THE COMEBACK KING now!",
+      "name": "It’s gonna be a party. Watch the",
+      "published": "2026-11-19T19:51:42+00:00",
+      "channel": "Universal Pictures"
+    },
+    {
+      "id": "HLRFKN93heE",
+      "title": "Fool Night - Official Trailer (2026)",
+      "name": "Fool Night",
+      "published": "2026-11-19T19:51:03+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "S-SNLzfrUNw",
+      "title": "Ice Age: Boiling Point Trailer #1 (2027)",
+      "name": "Ice Age: Boiling Point",
+      "published": "2026-11-19T18:53:24+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "8Mm-N8o3z_c",
+      "title": "Killing Castro Trailer #1 (2026)",
+      "name": "Killing Castro",
+      "published": "2026-11-19T18:39:00+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "PHJpJQdfcxY",
+      "title": "The Nightingale - Official Teaser Trailer (2027) Elle Fanning, Dakota Fanning",
+      "name": "The Nightingale",
+      "published": "2026-11-19T18:31:30+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "VDO0A7c340U",
+      "title": "What could go wrong? Watch the trailer for The Comeback King now!",
+      "name": "What could go wrong? Watch the",
+      "published": "2026-11-19T17:39:55+00:00",
+      "channel": "Universal Pictures"
+    },
+    {
+      "id": "wz1mkkDn95U",
+      "title": "Let the energy in. Have you seen the trailer for #RemainMovie yet? Only in theaters February 5.",
+      "name": "Let the energy in. Have you seen the",
+      "published": "2026-11-19T17:30:22+00:00",
+      "channel": "Warner Bros."
+    },
+    {
+      "id": "0UEspjLkMxI",
+      "title": "Bedford Park Trailer #1 (2027)",
+      "name": "Bedford Park",
+      "published": "2026-11-19T15:53:21+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
     {
       "id": "k9qG-sHnxYo",
       "title": "Missy has entered the chat. ⭐️ Watch the trailer for The Comeback King now!",
@@ -71,62 +127,6 @@
       "name": "Close enough to touch. Watch the",
       "published": "2026-11-16T23:00:05+00:00",
       "channel": "Warner Bros."
-    },
-    {
-      "id": "m7b2briPoEk",
-      "title": "Remain - Official Trailer (2027) Jake Gyllenhaal, Phoebe Dynevor",
-      "name": "Remain",
-      "published": "2026-11-16T21:06:22+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "Q4uIgfyJjSw",
-      "title": "Family Guy: Holiday Special 2026 Exclusive Trailer",
-      "name": "Family Guy: Holiday Special 2026",
-      "published": "2026-11-16T17:30:30+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "8q9PUGbIzxw",
-      "title": "Children of Blood and Bone - Official Trailer #2 (2027) Amandla Stenberg, Idris Elba",
-      "name": "Children of Blood and Bone",
-      "published": "2026-11-13T23:55:20+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "zPdGy4gq9Xw",
-      "title": "Arcade Dreams - Official Trailer (2026) Documentary",
-      "name": "Arcade Dreams",
-      "published": "2026-11-12T22:11:58+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "7Aqu1IlIf6I",
-      "title": "Killing Castro Teaser Trailer (2026)",
-      "name": "Killing Castro",
-      "published": "2026-11-12T19:31:59+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "Ivhrckwuag0",
-      "title": "Gatto Trailer #1 (2027)",
-      "name": "Gatto",
-      "published": "2026-11-12T17:50:37+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "RfKnTLDiKlQ",
-      "title": "Watch the New Trailer for #ChildrenOfBloodAndBone - only in theatres and IMAX January 15, 2027.",
-      "name": "Watch the",
-      "published": "2026-11-12T14:00:02+00:00",
-      "channel": "Paramount Pictures"
-    },
-    {
-      "id": "emkBX8viLHI",
-      "title": "Iron Boy Trailer #1 (2027)",
-      "name": "Iron Boy",
-      "published": "2026-11-11T19:34:40+00:00",
-      "channel": "Rotten Tomatoes Indie"
     }
   ]
 }
