@@ -1,7 +1,35 @@
 {
-  "updated": "2026-11-19T21:03:13.693Z",
+  "updated": "2026-11-20T20:48:50.612Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "or0zq14GsQk",
+      "title": "Reba. Frickin. McEntire. Watch the trailer for THE COMEBACK KING now!",
+      "name": "Reba. Frickin. McEntire. Watch the",
+      "published": "2026-11-20T00:10:35+00:00",
+      "channel": "Universal Pictures"
+    },
+    {
+      "id": "0CavCJScDmo",
+      "title": "Frostbite Trailer #1 (2026)",
+      "name": "Frostbite",
+      "published": "2026-11-19T22:41:49+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "v2qvujQ-fRg",
+      "title": "Killing Castro - Official Trailer (2026) Al Pacino, Xolo Maridueña",
+      "name": "Killing Castro",
+      "published": "2026-11-19T22:07:48+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "o9XsR-jHFw4",
+      "title": "👋 Hi Aubrey King. Watch the trailer for THE COMEBACK KING now!",
+      "name": "👋 Hi Aubrey King. Watch the",
+      "published": "2026-11-19T22:02:19+00:00",
+      "channel": "Universal Pictures"
+    },
     {
       "id": "5IBOnESUznM",
       "title": "It’s gonna be a party. Watch the trailer for THE COMEBACK KING now!",
@@ -21,13 +49,6 @@
       "title": "Ice Age: Boiling Point Trailer #1 (2027)",
       "name": "Ice Age: Boiling Point",
       "published": "2026-11-19T18:53:24+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "8Mm-N8o3z_c",
-      "title": "Killing Castro Trailer #1 (2026)",
-      "name": "Killing Castro",
-      "published": "2026-11-19T18:39:00+00:00",
       "channel": "Rotten Tomatoes Trailers"
     },
     {
@@ -101,32 +122,11 @@
       "channel": "Rotten Tomatoes Indie"
     },
     {
-      "id": "Zl6QDFiITUE",
-      "title": "Giant Ojosama - Official Teaser Trailer (2027)",
-      "name": "Giant Ojosama",
-      "published": "2026-11-17T22:46:01+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "Zl15-YJWuqg",
-      "title": "The Patient - Official Trailer (2026) Ryan Phillippe, Kate Beckinsale, David Cade",
-      "name": "The Patient",
-      "published": "2026-11-17T16:05:54+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
       "id": "aJfcCuxCPUQ",
       "title": "Bottoms up! Trailer tomorrow.",
       "name": "Bottoms up!",
       "published": "2026-11-17T16:05:21+00:00",
       "channel": "Universal Pictures"
-    },
-    {
-      "id": "V7f0cMdPdCQ",
-      "title": "Close enough to touch. Watch the new trailer for #RemainMovie - only in theaters February 5.",
-      "name": "Close enough to touch. Watch the",
-      "published": "2026-11-16T23:00:05+00:00",
-      "channel": "Warner Bros."
     }
   ]
 }
