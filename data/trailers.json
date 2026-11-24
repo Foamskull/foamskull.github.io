@@ -1,7 +1,35 @@
 {
-  "updated": "2026-11-24T00:27:00.137Z",
+  "updated": "2026-11-24T22:49:42.394Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "QWzXRYJE5Dw",
+      "title": "Tender Loving Care Trailer #2 (2026)",
+      "name": "Tender Loving Care",
+      "published": "2026-11-24T21:36:31+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "3OGpbg-_HQU",
+      "title": "Paper Tiger Final Trailer (2026)",
+      "name": "Paper Tiger",
+      "published": "2026-11-24T21:17:04+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "anDMlAk2fJI",
+      "title": "Everytime Teaser Trailer (2027)",
+      "name": "Everytime",
+      "published": "2026-11-24T19:46:39+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "3mMiO1iihQA",
+      "title": "Dune: Part Three - Exclusive Teaser Trailer (2026) Timothée Chalamet, Zendaya, Robert Pattinson",
+      "name": "Dune: Part Three",
+      "published": "2026-11-24T17:00:13+00:00",
+      "channel": "IGN Movie Trailers"
+    },
     {
       "id": "fefFbhWtk3M",
       "title": "The Trust Trailer #1 (2026)",
@@ -15,6 +43,13 @@
       "name": "Mr. Irrelevant",
       "published": "2026-11-23T19:50:00+00:00",
       "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "k8AMpp3J3j0",
+      "title": "THE FRENCH LIEUTENANT'S WOMAN (1981) | Official Trailer | Amazon MGM",
+      "name": "THE FRENCH LIEUTENANT'S WOMAN",
+      "published": "2026-11-23T19:30:02+00:00",
+      "channel": "Amazon MGM Studios"
     },
     {
       "id": "YTsIvbMFi2k",
@@ -80,20 +115,6 @@
       "channel": "IGN Movie Trailers"
     },
     {
-      "id": "o9XsR-jHFw4",
-      "title": "👋 Hi Aubrey King. Watch the trailer for THE COMEBACK KING now!",
-      "name": "👋 Hi Aubrey King. Watch the",
-      "published": "2026-11-19T22:02:19+00:00",
-      "channel": "Universal Pictures"
-    },
-    {
-      "id": "5IBOnESUznM",
-      "title": "It’s gonna be a party. Watch the trailer for THE COMEBACK KING now!",
-      "name": "It’s gonna be a party. Watch the",
-      "published": "2026-11-19T19:51:42+00:00",
-      "channel": "Universal Pictures"
-    },
-    {
       "id": "HLRFKN93heE",
       "title": "Fool Night - Official Trailer (2026)",
       "name": "Fool Night",
@@ -106,27 +127,6 @@
       "name": "Ice Age: Boiling Point",
       "published": "2026-11-19T18:53:24+00:00",
       "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "PHJpJQdfcxY",
-      "title": "The Nightingale - Official Teaser Trailer (2027) Elle Fanning, Dakota Fanning",
-      "name": "The Nightingale",
-      "published": "2026-11-19T18:31:30+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "wz1mkkDn95U",
-      "title": "Let the energy in. Have you seen the trailer for #RemainMovie yet? Only in theaters February 5.",
-      "name": "Let the energy in. Have you seen the",
-      "published": "2026-11-19T17:30:22+00:00",
-      "channel": "Warner Bros."
-    },
-    {
-      "id": "0UEspjLkMxI",
-      "title": "Bedford Park Trailer #1 (2027)",
-      "name": "Bedford Park",
-      "published": "2026-11-19T15:53:21+00:00",
-      "channel": "Rotten Tomatoes Indie"
     }
   ]
 }
