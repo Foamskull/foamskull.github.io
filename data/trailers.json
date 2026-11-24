@@ -1,7 +1,63 @@
 {
-  "updated": "2026-11-22T20:00:37.938Z",
+  "updated": "2026-11-24T00:27:00.137Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "fefFbhWtk3M",
+      "title": "The Trust Trailer #1 (2026)",
+      "name": "The Trust",
+      "published": "2026-11-23T23:35:15+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "GsXHXecHHq8",
+      "title": "Mr. Irrelevant - Official Trailer #2 (2026) David Corenswet, Michael Shannon, Isabel May",
+      "name": "Mr. Irrelevant",
+      "published": "2026-11-23T19:50:00+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "YTsIvbMFi2k",
+      "title": "K-POP: THE DEBUT - Official Trailer (2027) Ji-young Yoo, Eric Nam, Tony Revolori",
+      "name": "K-POP: THE DEBUT",
+      "published": "2026-11-23T18:57:08+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "0TzjqKvA6b8",
+      "title": "Avengers Doomsday - Official Final Trailer (2026) Robert Downey Jr., Chris Evans, Chris Hemsworth",
+      "name": "Avengers Doomsday",
+      "published": "2026-11-23T14:25:59+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "5LASqq38NjM",
+      "title": "Let your voice be heard. Watch the Official Trailer for #KPopTheDebut - only in theatres February 26",
+      "name": "Let your voice be heard. Watch the",
+      "published": "2026-11-23T14:00:21+00:00",
+      "channel": "Paramount Pictures"
+    },
+    {
+      "id": "fFLln6tyjbA",
+      "title": "Ji-young said it best! Don’t miss the #KPopTheDebut trailer TOMORROW!",
+      "name": "Ji-young said it best! Don’t miss the #KPopTheDebut",
+      "published": "2026-11-23T00:42:34+00:00",
+      "channel": "Paramount Pictures"
+    },
+    {
+      "id": "mSZCTpw_HYc",
+      "title": "An unforgettable way to see your own trailer debut! 🥹 #KPopTheDebut",
+      "name": "An unforgettable way to see your own",
+      "published": "2026-11-23T00:31:01+00:00",
+      "channel": "Paramount Pictures"
+    },
+    {
+      "id": "XwTEMSMFj7c",
+      "title": "Trust us, you don’t want to miss this trailer tomorrow. 👀 #KPopTheDebut",
+      "name": "Trust us, you don’t want to miss this",
+      "published": "2026-11-23T00:27:41+00:00",
+      "channel": "Paramount Pictures"
+    },
     {
       "id": "or0zq14GsQk",
       "title": "Reba. Frickin. McEntire. Watch the trailer for THE COMEBACK KING now!",
@@ -59,13 +115,6 @@
       "channel": "IGN Movie Trailers"
     },
     {
-      "id": "VDO0A7c340U",
-      "title": "What could go wrong? Watch the trailer for The Comeback King now!",
-      "name": "What could go wrong? Watch the",
-      "published": "2026-11-19T17:39:55+00:00",
-      "channel": "Universal Pictures"
-    },
-    {
       "id": "wz1mkkDn95U",
       "title": "Let the energy in. Have you seen the trailer for #RemainMovie yet? Only in theaters February 5.",
       "name": "Let the energy in. Have you seen the",
@@ -78,55 +127,6 @@
       "name": "Bedford Park",
       "published": "2026-11-19T15:53:21+00:00",
       "channel": "Rotten Tomatoes Indie"
-    },
-    {
-      "id": "k9qG-sHnxYo",
-      "title": "Missy has entered the chat. ⭐️ Watch the trailer for The Comeback King now!",
-      "name": "Missy has entered the chat. ⭐️ Watch the",
-      "published": "2026-11-18T19:01:22+00:00",
-      "channel": "Universal Pictures"
-    },
-    {
-      "id": "SO4t-jxcMlQ",
-      "title": "Artificial - Official Trailer (2027) Andrew Garfield, Monica Barbaro, Jason Schwartzman",
-      "name": "Artificial",
-      "published": "2026-11-18T18:17:35+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "L0GO1ZW49ns",
-      "title": "The Comeback King - Official Trailer",
-      "name": "The Comeback King",
-      "published": "2026-11-18T17:34:46+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "CwLVo_-mwec",
-      "title": "Project Hail Mary - Official Returning to Theaters Trailer",
-      "name": "Project Hail Mary",
-      "published": "2026-11-18T16:51:38+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "naGmiGQea-M",
-      "title": "The Further Mis-Adventures of Cliff Booth Teaser - Get Tickets Now (2026)",
-      "name": "The Further Mis-Adventures of Cliff Booth",
-      "published": "2026-11-18T13:45:06+00:00",
-      "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "wij_Msm64z8",
-      "title": "Mother's Pride Trailer #1 (2026)",
-      "name": "Mother's Pride",
-      "published": "2026-11-17T23:36:42+00:00",
-      "channel": "Rotten Tomatoes Indie"
-    },
-    {
-      "id": "aJfcCuxCPUQ",
-      "title": "Bottoms up! Trailer tomorrow.",
-      "name": "Bottoms up!",
-      "published": "2026-11-17T16:05:21+00:00",
-      "channel": "Universal Pictures"
     }
   ]
 }
