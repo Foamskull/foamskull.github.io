@@ -1,7 +1,28 @@
 {
-  "updated": "2026-11-24T22:49:42.394Z",
+  "updated": "2026-11-25T22:01:37.844Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
+    {
+      "id": "TbG1i13rR-Q",
+      "title": "The Mark - Official Trailer (2027) Jessica Alba, Tom Hopper, Rena Owen",
+      "name": "The Mark",
+      "published": "2026-11-25T20:07:21+00:00",
+      "channel": "IGN Movie Trailers"
+    },
+    {
+      "id": "MPxbZdHlIto",
+      "title": "American Dollhouse Trailer #1 (2027)",
+      "name": "American Dollhouse",
+      "published": "2026-11-25T17:47:46+00:00",
+      "channel": "Rotten Tomatoes Indie"
+    },
+    {
+      "id": "lgchJrHfIDw",
+      "title": "Lords of War Trailer #2 (2027)",
+      "name": "Lords of War",
+      "published": "2026-11-25T16:39:13+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
     {
       "id": "QWzXRYJE5Dw",
       "title": "Tender Loving Care Trailer #2 (2026)",
@@ -94,13 +115,6 @@
       "channel": "Paramount Pictures"
     },
     {
-      "id": "or0zq14GsQk",
-      "title": "Reba. Frickin. McEntire. Watch the trailer for THE COMEBACK KING now!",
-      "name": "Reba. Frickin. McEntire. Watch the",
-      "published": "2026-11-20T00:10:35+00:00",
-      "channel": "Universal Pictures"
-    },
-    {
       "id": "0CavCJScDmo",
       "title": "Frostbite Trailer #1 (2026)",
       "name": "Frostbite",
@@ -113,20 +127,6 @@
       "name": "Killing Castro",
       "published": "2026-11-19T22:07:48+00:00",
       "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "HLRFKN93heE",
-      "title": "Fool Night - Official Trailer (2026)",
-      "name": "Fool Night",
-      "published": "2026-11-19T19:51:03+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "S-SNLzfrUNw",
-      "title": "Ice Age: Boiling Point Trailer #1 (2027)",
-      "name": "Ice Age: Boiling Point",
-      "published": "2026-11-19T18:53:24+00:00",
-      "channel": "Rotten Tomatoes Trailers"
     }
   ]
 }
