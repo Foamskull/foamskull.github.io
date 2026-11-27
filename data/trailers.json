@@ -1,34 +1,13 @@
 {
-  "updated": "2026-11-26T21:59:49.193Z",
+  "updated": "2026-11-27T21:42:19.805Z",
   "source": "YouTube RSS from film studios, IGN Movie Trailers, and Rotten Tomatoes Trailers",
   "trailers": [
-    {
-      "id": "TbG1i13rR-Q",
-      "title": "The Mark - Official Trailer (2027) Jessica Alba, Tom Hopper, Rena Owen",
-      "name": "The Mark",
-      "published": "2026-11-25T20:07:21+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
-      "id": "MPxbZdHlIto",
-      "title": "American Dollhouse Trailer #1 (2027)",
-      "name": "American Dollhouse",
-      "published": "2026-11-25T17:47:46+00:00",
-      "channel": "Rotten Tomatoes Indie"
-    },
     {
       "id": "lgchJrHfIDw",
       "title": "Lords of War Trailer #2 (2027)",
       "name": "Lords of War",
       "published": "2026-11-25T16:39:13+00:00",
       "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "QWzXRYJE5Dw",
-      "title": "Tender Loving Care Trailer #2 (2026)",
-      "name": "Tender Loving Care",
-      "published": "2026-11-24T21:36:31+00:00",
-      "channel": "Rotten Tomatoes Indie"
     },
     {
       "id": "3OGpbg-_HQU",
@@ -38,32 +17,11 @@
       "channel": "Rotten Tomatoes Trailers"
     },
     {
-      "id": "anDMlAk2fJI",
-      "title": "Everytime Teaser Trailer (2027)",
-      "name": "Everytime",
-      "published": "2026-11-24T19:46:39+00:00",
-      "channel": "Rotten Tomatoes Indie"
-    },
-    {
-      "id": "3mMiO1iihQA",
-      "title": "Dune: Part Three - Exclusive Teaser Trailer (2026) Timothée Chalamet, Zendaya, Robert Pattinson",
-      "name": "Dune: Part Three",
-      "published": "2026-11-24T17:00:13+00:00",
-      "channel": "IGN Movie Trailers"
-    },
-    {
       "id": "fefFbhWtk3M",
       "title": "The Trust Trailer #1 (2026)",
       "name": "The Trust",
       "published": "2026-11-23T23:35:15+00:00",
       "channel": "Rotten Tomatoes Trailers"
-    },
-    {
-      "id": "GsXHXecHHq8",
-      "title": "Mr. Irrelevant - Official Trailer #2 (2026) David Corenswet, Michael Shannon, Isabel May",
-      "name": "Mr. Irrelevant",
-      "published": "2026-11-23T19:50:00+00:00",
-      "channel": "IGN Movie Trailers"
     },
     {
       "id": "k8AMpp3J3j0",
@@ -73,18 +31,25 @@
       "channel": "Amazon MGM Studios"
     },
     {
-      "id": "YTsIvbMFi2k",
-      "title": "K-POP: THE DEBUT - Official Trailer (2027) Ji-young Yoo, Eric Nam, Tony Revolori",
-      "name": "K-POP: THE DEBUT",
-      "published": "2026-11-23T18:57:08+00:00",
-      "channel": "IGN Movie Trailers"
+      "id": "dotg5b0oOSk",
+      "title": "K-Pop: The Debut Trailer #1 (2027)",
+      "name": "K-Pop: The Debut",
+      "published": "2026-11-23T18:41:55+00:00",
+      "channel": "Rotten Tomatoes Trailers"
     },
     {
-      "id": "0TzjqKvA6b8",
-      "title": "Avengers Doomsday - Official Final Trailer (2026) Robert Downey Jr., Chris Evans, Chris Hemsworth",
-      "name": "Avengers Doomsday",
-      "published": "2026-11-23T14:25:59+00:00",
-      "channel": "IGN Movie Trailers"
+      "id": "nnliYPIV8PY",
+      "title": "Mr. Irrelevant New Trailer (2026)",
+      "name": "Mr. Irrelevant",
+      "published": "2026-11-23T18:09:09+00:00",
+      "channel": "Rotten Tomatoes Trailers"
+    },
+    {
+      "id": "EVpDHKCbmlQ",
+      "title": "Avengers: Doomsday Final Trailer (2026)",
+      "name": "Avengers: Doomsday",
+      "published": "2026-11-23T14:17:28+00:00",
+      "channel": "Rotten Tomatoes Trailers"
     },
     {
       "id": "5LASqq38NjM",
@@ -115,18 +80,53 @@
       "channel": "Paramount Pictures"
     },
     {
-      "id": "0CavCJScDmo",
-      "title": "Frostbite Trailer #1 (2026)",
-      "name": "Frostbite",
-      "published": "2026-11-19T22:41:49+00:00",
-      "channel": "Rotten Tomatoes Indie"
+      "id": "wz1mkkDn95U",
+      "title": "Let the energy in. Have you seen the trailer for #RemainMovie yet? Only in theaters February 5.",
+      "name": "Let the energy in. Have you seen the",
+      "published": "2026-11-19T17:30:22+00:00",
+      "channel": "Warner Bros."
     },
     {
-      "id": "v2qvujQ-fRg",
-      "title": "Killing Castro - Official Trailer (2026) Al Pacino, Xolo Maridueña",
-      "name": "Killing Castro",
-      "published": "2026-11-19T22:07:48+00:00",
-      "channel": "IGN Movie Trailers"
+      "id": "gNHr2-JjKRM",
+      "title": "THE NIGHTINGALE – Official Teaser Trailer (4K)",
+      "name": "THE NIGHTINGALE",
+      "published": "2026-11-19T14:17:16+00:00",
+      "channel": "Sony Pictures"
+    },
+    {
+      "id": "fq7Q-dtIZeM",
+      "title": "Gatto | Official Trailer | In Theaters March 5, 2027",
+      "name": "Gatto",
+      "published": "2026-11-12T17:00:37+00:00",
+      "channel": "Pixar"
+    },
+    {
+      "id": "lF9n06SMDPU",
+      "title": "The Debut | Official Trailer 2 HD | A24",
+      "name": "The Debut",
+      "published": "2026-11-10T14:00:15+00:00",
+      "channel": "A24"
+    },
+    {
+      "id": "Rma1KLKyZWs",
+      "title": "RESIDENT EVIL Creator Deep Dive With Filmmakers - Teaser",
+      "name": "RESIDENT EVIL Creator Deep Dive With Filmmakers",
+      "published": "2026-11-06T23:50:45+00:00",
+      "channel": "Sony Pictures"
+    },
+    {
+      "id": "nIw1O3zvOfE",
+      "title": "JUMANJI: OPEN WORLD - New Trailer (4K)",
+      "name": "JUMANJI: OPEN WORLD",
+      "published": "2026-10-28T13:00:39+00:00",
+      "channel": "Sony Pictures"
+    },
+    {
+      "id": "NLVLsyE4uUA",
+      "title": "The Holiday 20th Anniversary Trailer",
+      "name": "The Holiday 20th Anniversary",
+      "published": "2026-10-21T16:00:38+00:00",
+      "channel": "Sony Pictures"
     }
   ]
 }
